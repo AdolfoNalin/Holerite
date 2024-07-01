@@ -12,7 +12,7 @@ namespace Holerite.Helpers
         #region Message
         public static void Message(string message, string title)
         {
-            title = title.ToUpper();
+            title.ToUpper();
             MessageBox.Show(message, title, MessageBoxButtons.OK);
         }
         #endregion
