@@ -206,7 +206,7 @@
             // mtbTelephoneNumber
             // 
             this.mtbTelephoneNumber.Location = new System.Drawing.Point(271, 97);
-            this.mtbTelephoneNumber.Mask = "(99) 00000-9999";
+            this.mtbTelephoneNumber.Mask = "(99) 0000-9999";
             this.mtbTelephoneNumber.Name = "mtbTelephoneNumber";
             this.mtbTelephoneNumber.Size = new System.Drawing.Size(86, 20);
             this.mtbTelephoneNumber.TabIndex = 14;
@@ -401,36 +401,35 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtCod;
-        private System.Windows.Forms.MaskedTextBox mtbCPF;
         private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.MaskedTextBox mtbPhoneNumber;
         private System.Windows.Forms.Label lblCod;
-        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label lblCPF;
         private System.Windows.Forms.Button btnInsert;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnNovo;
         private System.Windows.Forms.Label lblEmail;
-        private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label lblPhoneNumber;
         private System.Windows.Forms.Label lblTelephoneNumber;
-        private System.Windows.Forms.MaskedTextBox mtbTelephoneNumber;
         private System.Windows.Forms.Label lblUF;
         public System.Windows.Forms.ComboBox cbUF;
-        private System.Windows.Forms.TextBox txtCity;
         private System.Windows.Forms.Label lblCity;
-        private System.Windows.Forms.TextBox txtNeighborhood;
         private System.Windows.Forms.Label lblNeighborhood;
         private System.Windows.Forms.Label lblCEP;
-        private System.Windows.Forms.MaskedTextBox mtbCEP;
-        private System.Windows.Forms.TextBox txtStreet;
         private System.Windows.Forms.Label lblStreet;
-        private System.Windows.Forms.TextBox txtHomeNumber;
         private System.Windows.Forms.Label lblNumber;
-        private System.Windows.Forms.TextBox txtComplement;
         private System.Windows.Forms.Label lblComplement;
+        public System.Windows.Forms.TextBox txtName;
+        public System.Windows.Forms.TextBox txtCod;
+        public System.Windows.Forms.MaskedTextBox mtbCPF;
+        public System.Windows.Forms.MaskedTextBox mtbPhoneNumber;
+        public System.Windows.Forms.TextBox txtEmail;
+        public System.Windows.Forms.MaskedTextBox mtbTelephoneNumber;
+        public System.Windows.Forms.TextBox txtCity;
+        public System.Windows.Forms.TextBox txtNeighborhood;
+        public System.Windows.Forms.MaskedTextBox mtbCEP;
+        public System.Windows.Forms.TextBox txtStreet;
+        public System.Windows.Forms.TextBox txtHomeNumber;
+        public System.Windows.Forms.TextBox txtComplement;
     }
 }

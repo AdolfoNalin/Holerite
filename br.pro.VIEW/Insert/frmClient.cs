@@ -1,5 +1,6 @@
 ﻿using Holerite.br.pro.DAO;
 using Holerite.br.pro.MODEL;
+using Holerite.br.pro.VIEW.Consult;
 using Holerite.Helpers;
 using System;
 using System.Collections.Generic;
@@ -42,13 +43,20 @@ namespace Holerite.br.pro.VIEW
                 TelephoneNumber = mtbTelephoneNumber.Text,
                 PhoneNumber = mtbPhoneNumber.Text,
                 Email = txtEmail.Text,
-                CEP = mtbCEP.Text,
                 State = cbUF.Text,
+                City = txtCity.Text,
+                Neighborhood = txtNeighborhood.Text,
+                Street = txtStreet.Text,
                 HomeNumber = int.Parse(txtHomeNumber.Text),
+                CEP = mtbCEP.Text,
                 Complement = txtComplement.Text
             };
 
-            ClientDAO.Insert(obj);
+            ClientDAO da = new ClientDAO();
+            da.Insert(obj);
+
+            frmConsultarClient tela = new frmConsultarClient();
+            tela.dgClient.DataSource = da.Consult();
         }
         #endregion
 
@@ -62,18 +70,26 @@ namespace Holerite.br.pro.VIEW
         {
             Client obj = new Client()
             {
+                Cod = int.Parse(txtCod.Text),
                 Name = txtName.Text,
-                CPF = mtbCEP.Text,
+                CPF = mtbCPF.Text,
                 TelephoneNumber = mtbTelephoneNumber.Text,
                 PhoneNumber = mtbPhoneNumber.Text,
                 Email = txtEmail.Text,
-                CEP = mtbCEP.Text,
                 State = cbUF.Text,
+                City = txtCity.Text,
+                Neighborhood = txtNeighborhood.Text,
+                Street = txtStreet.Text,
                 HomeNumber = int.Parse(txtHomeNumber.Text),
+                CEP = mtbCEP.Text,
                 Complement = txtComplement.Text
             };
 
-            ClientDAO.Update(obj);
+            ClientDAO da = new ClientDAO();
+            da.Update(obj);
+
+            frmConsultarClient tela = new frmConsultarClient();
+            tela.dgClient.DataSource = da.Consult();
         }
         #endregion
 
@@ -89,7 +105,11 @@ namespace Holerite.br.pro.VIEW
 
             if(cod > 0)
             {
-                ClientDAO.Delete(cod);
+                ClientDAO da = new ClientDAO();
+                da.Delete(cod);
+
+                frmConsultarClient tela = new frmConsultarClient();
+                tela.dgClient.DataSource = da.Consult();
             }
             else
             {
@@ -129,5 +149,6 @@ namespace Holerite.br.pro.VIEW
             }
         }
         #endregion
+
     }
 }

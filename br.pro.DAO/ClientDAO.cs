@@ -14,7 +14,7 @@ namespace Holerite.br.pro.DAO
 {
     public class ClientDAO
     {
-        private static MySqlConnection _connection;
+        private MySqlConnection _connection;
 
         public ClientDAO()
         {
@@ -26,12 +26,12 @@ namespace Holerite.br.pro.DAO
         /// Cadastra o cliente no banco de dados
         /// </summary>
         /// <param name="obj">Objeto Cliente</param>
-        public static void Insert(Client obj)
+        public void Insert(Client obj)
         {
             try
             {
-                string sql = @"INSERT INTO client(name, cpf, email, telephone_number, phone_number, state, city, neighborhood, street, home_number, cep)
-                VALUE(@name, @cpf, @email, @telephone_number, @phone_number, @state, @city, @neighborhood, @street, @home_number, @cep";
+                string sql = @"INSERT INTO dbholerite.client(name, cpf, email, telephone_number, phone_number, state, city, neighborhood, street, home_number, cep)
+                VALUES(@name, @cpf, @email, @telephone_number, @phone_number, @state, @city, @neighborhood, @street, @home_number, @cep)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@name", obj.Name);
@@ -49,11 +49,11 @@ namespace Holerite.br.pro.DAO
                 _connection.Open();
                 cmd.ExecuteNonQuery();
 
-                Dialog.Message("sucesso", $"O cliente {obj.Name} foi cadastrado com sucesso!");
+                Dialog.Message("O cliente foi cadastrado com sucesso!", "sucesso");
             }
             catch (Exception ex)
             {
-                Dialog.Message("atençao", $"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}"); 
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção"); 
             }
             finally
             {
@@ -67,12 +67,12 @@ namespace Holerite.br.pro.DAO
         /// Atualiza os dados do Cliente no banco de dados
         /// </summary>
         /// <param name="obj"></param>
-        public static void Update(Client obj)
+        public void Update(Client obj)
         {
             try
             {
-                string sql = @"UPDATE client SET name=@name, cpf=@cpf, email=@email, telephone_phone=@telephone_number, phone_number=@phone_number, 
-                state=@state, city=@city, neighborhood=@neighborhood, street=@street, home_number=@home_number, cep=@cep";
+                string sql = @"UPDATE client SET name=@name, cpf=@cpf, email=@email, telephone_number=@telephone_number, phone_number=@phone_number, 
+                state=@state, city=@city, neighborhood=@neighborhood, street=@street, home_number=@home_number, cep=@cep WHERE cod=@cod";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@name", obj.Name);
@@ -86,15 +86,16 @@ namespace Holerite.br.pro.DAO
                 cmd.Parameters.AddWithValue("@street", obj.Street);
                 cmd.Parameters.AddWithValue("@home_number", obj.HomeNumber);
                 cmd.Parameters.AddWithValue("@cep", obj.CEP);
+                cmd.Parameters.AddWithValue("@cod", obj.Cod);
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();
 
-                Dialog.Message("sucesso", $"O cliente {obj.Name} foi editado com sucesso!");
+                Dialog.Message("Cliente foi atualizado com sucesso", "Sucesso");
             }
             catch (Exception ex)
             {
-                Dialog.Message("atenção", $"Aconteceu um erro do tipo {ex.Message} com caminho para {ex.StackTrace}");
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com caminho para {ex.StackTrace}", "atenção");
             }
             finally
             {
@@ -108,11 +109,11 @@ namespace Holerite.br.pro.DAO
         /// Deleta o cliente do banco de dados
         /// </summary>
         /// <param name="cod"></param>
-        public static void Delete(int cod)
+        public void Delete(int cod)
         {
             try
             {
-                string sql = "DELETE client where cod=@cod";
+                string sql = "DELETE FROM client where cod=@cod";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cod", cod);
@@ -120,11 +121,11 @@ namespace Holerite.br.pro.DAO
                 _connection.Open();
                 cmd.ExecuteNonQuery();
 
-                Dialog.Message("sucesso", "Cliente deletado com seucesso!");
+                Dialog.Message("Cliente deletado com seucesso!", "sucesso");
             }
             catch (Exception ex)
             {
-                Dialog.Message("atenção", $"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}");
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
             }
             finally
             { _connection.Close(); }    
@@ -136,7 +137,7 @@ namespace Holerite.br.pro.DAO
         /// Conulta todos os clientes que estão no banco de dados
         /// </summary>
         /// <returns></returns>
-        public static DataTable Consult()
+        public DataTable Consult()
         {
             DataTable dt = new DataTable();
 
@@ -156,7 +157,7 @@ namespace Holerite.br.pro.DAO
             }
             catch (Exception ex)
             {
-                Dialog.Message("atenção", $"Aconteceu um erro do tipo {ex.Message} com caminho para {ex.StackTrace}");
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com caminho para {ex.StackTrace}", "atenção");
                 return null;
             }
         }
@@ -168,12 +169,13 @@ namespace Holerite.br.pro.DAO
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static DataTable ConsultName(string name)
+        public DataTable ConsultName(string name)
         {
             DataTable dt = new  DataTable();
             try
             {
-                string sql = "SELECT * FROM client  name LIKE @name";
+                name = "%" + name + "%";    
+                string sql = "SELECT * FROM client WHERE name LIKE @name";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@name", name);
@@ -188,7 +190,7 @@ namespace Holerite.br.pro.DAO
             }
             catch (Exception ex)
             {
-                Dialog.Message("atenção", $"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}");
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
                 return null;
             }
         }
@@ -200,7 +202,7 @@ namespace Holerite.br.pro.DAO
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static DataTable Search(string name)
+        public DataTable Search(string name)
         {
             DataTable dt = new DataTable();
             try
@@ -216,7 +218,7 @@ namespace Holerite.br.pro.DAO
             }
             catch (Exception ex)
             {
-                Dialog.Message("atenção", $"Acoteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}");
+                Dialog.Message($"Acoteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
                 return null;
             }
             finally
