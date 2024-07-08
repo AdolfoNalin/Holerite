@@ -52,7 +52,7 @@ namespace Holerite.br.pro.DAO
                 cmd.Parameters.AddWithValue("@street", obj.Street);
                 cmd.Parameters.AddWithValue("@home_number", obj.HomeNumber);
                 cmd.Parameters.AddWithValue("@cep", obj.CEP);
-                cmd.Parameters.AddWithValue("@emp_function", obj.CEP);
+                cmd.Parameters.AddWithValue("@emp_function", obj.Function);
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();
@@ -247,6 +247,42 @@ namespace Holerite.br.pro.DAO
                 Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
                 return null;
             }
+        }
+        #endregion
+
+        #region Search
+        /// <summary>
+        /// Busca o Funcionário no banco de dados
+        /// </summary>
+        /// <param name="cod">Codigo do funcionário</param>
+        /// <returns></returns>
+        public string Search(int cod)
+        {
+            string name = "";
+            try
+            {
+                string sql = "SELECT name FROM severce WHERE cod=@cod";
+
+                MySqlCommand cmd = new MySqlCommand( sql, _connection);
+                cmd.Parameters.AddWithValue("@cod", cod);
+
+                _connection.Open();
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    name = dr.GetString("name");
+                }
+                return name;
+            }
+            catch (Exception ex)
+            {
+                Dialog.Message("Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "Atenção");
+                return null;
+            }
+            finally
+            { _connection.Close(); }
         }
         #endregion
     }

@@ -178,5 +178,41 @@ namespace Holerite.br.pro.DAO
             }
         }
         #endregion
+
+        #region Search
+        /// <summary>
+        /// Busca o serviço button click
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public DataTable Search(string name)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string sql = "SELECT * FROM severce WHERE short_description=@short_description";
+
+                MySqlCommand cmd = new MySqlCommand( sql, _connection);
+                cmd.Parameters.AddWithValue("short_description", name);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                da.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
+                throw;
+            }
+            finally
+            { _connection.Close(); }
+        }
+        #endregion
+
+        
     }
 }

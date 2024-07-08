@@ -163,7 +163,7 @@ namespace Holerite.br.pro.DAO
         /// <returns></returns>
         public int EndBudget()
         {
-            int cod;
+            int cod = 0;
             try
             {
                 string sql = "SELECT MAX(cod) FROM budget";
