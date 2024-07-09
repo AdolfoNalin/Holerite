@@ -1,4 +1,6 @@
 ﻿using Holerite.br.pro.VIEW;
+using Holerite.br.pro.VIEW.Consult;
+using Holerite.br.pro.VIEW.Insert;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +19,7 @@ namespace Holerite
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmClient());
+            Application.Run(new frmConsultComapany());
         }
     }
 }

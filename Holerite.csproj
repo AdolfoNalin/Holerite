@@ -102,6 +102,12 @@
     <Reference Include="MySql.Data.EntityFrameworkCore, Version=8.0.22.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>packages\MySql.Data.EntityFrameworkCore.8.0.22\lib\netstandard2.0\MySql.Data.EntityFrameworkCore.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -121,12 +127,16 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Diagnostics.DiagnosticSource.7.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.IO.Pipelines, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.IO.Pipelines.5.0.2\lib\net461\System.IO.Pipelines.dll</HintPath>
     </Reference>
     <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Client.6.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -148,19 +158,100 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="ViaCep, Version=4.1.511.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\ViaCep.4.1.511\lib\netstandard2.0\ViaCep.dll</HintPath>
+    </Reference>
     <Reference Include="ZstdSharp, Version=0.7.1.0, Culture=neutral, PublicKeyToken=8d151af33a4ad5cf, processorArchitecture=MSIL">
       <HintPath>packages\ZstdSharp.Port.0.7.1\lib\net461\ZstdSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="br.pro.Connection\ConnectionFactory.cs" />
+    <Compile Include="br.pro.DAO\BudgetDAO.cs" />
     <Compile Include="br.pro.DAO\ClientDAO.cs" />
+    <Compile Include="br.pro.DAO\CompanyDAO.cs" />
+    <Compile Include="br.pro.DAO\EmployeeDAO.cs" />
+    <Compile Include="br.pro.DAO\SeverceDAO.cs" />
+    <Compile Include="br.pro.DAO\SupplierDAO.cs" />
+    <Compile Include="br.pro.MODEL\Address.cs" />
+    <Compile Include="br.pro.MODEL\Budget.cs" />
     <Compile Include="br.pro.MODEL\Client.cs" />
+    <Compile Include="br.pro.MODEL\Company.cs" />
+    <Compile Include="br.pro.MODEL\Employee.cs" />
+    <Compile Include="br.pro.MODEL\ItemBudget.cs" />
+    <Compile Include="br.pro.MODEL\Severce.cs" />
+    <Compile Include="br.pro.MODEL\Supplier.cs" />
+    <Compile Include="br.pro.VIEW\Consult\frmConsultarClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Consult\frmConsultarClient.Designer.cs">
+      <DependentUpon>frmConsultarClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Consult\frmConsultComapany.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Consult\frmConsultComapany.Designer.cs">
+      <DependentUpon>frmConsultComapany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Consult\frmConsultEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Consult\frmConsultEmployee.Designer.cs">
+      <DependentUpon>frmConsultEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Consult\frmConsultSeverce.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Consult\frmConsultSeverce.Designer.cs">
+      <DependentUpon>frmConsultSeverce.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Consult\frmConsultSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Consult\frmConsultSupplier.Designer.cs">
+      <DependentUpon>frmConsultSupplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="br.pro.VIEW\Insert\frmClient.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="br.pro.VIEW\Insert\frmClient.Designer.cs">
       <DependentUpon>frmClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Insert\frmCompany.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Insert\frmCompany.Designer.cs">
+      <DependentUpon>frmCompany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Insert\frmEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Insert\frmEmployee.Designer.cs">
+      <DependentUpon>frmEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Insert\frmInsertBudget.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Insert\frmInsertBudget.Designer.cs">
+      <DependentUpon>frmInsertBudget.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Insert\frmInsertSeverce.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Insert\frmInsertSeverce.Designer.cs">
+      <DependentUpon>frmInsertSeverce.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Insert\frmSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Insert\frmSupplier.Designer.cs">
+      <DependentUpon>frmSupplier.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -168,11 +259,45 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ConsultCEP.cs" />
     <Compile Include="Helpers\Dialog.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="br.pro.VIEW\Consult\frmConsultarClient.resx">
+      <DependentUpon>frmConsultarClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Consult\frmConsultComapany.resx">
+      <DependentUpon>frmConsultComapany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Consult\frmConsultEmployee.resx">
+      <DependentUpon>frmConsultEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Consult\frmConsultSeverce.resx">
+      <DependentUpon>frmConsultSeverce.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Consult\frmConsultSupplier.resx">
+      <DependentUpon>frmConsultSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="br.pro.VIEW\Insert\frmClient.resx">
       <DependentUpon>frmClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Insert\frmCompany.resx">
+      <DependentUpon>frmCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Insert\frmEmployee.resx">
+      <DependentUpon>frmEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Insert\frmInsertBudget.resx">
+      <DependentUpon>frmInsertBudget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Insert\frmInsertSeverce.resx">
+      <DependentUpon>frmInsertSeverce.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Insert\frmSupplier.resx">
+      <DependentUpon>frmSupplier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
