@@ -39,7 +39,7 @@ namespace Holerite.br.pro.VIEW
             Client obj = new Client()
             {
                 Name = txtName.Text,
-                CPF = mtbCEP.Text,
+                CPF = mtbCPF.Text,
                 TelephoneNumber = mtbTelephoneNumber.Text,
                 PhoneNumber = mtbPhoneNumber.Text,
                 Email = txtEmail.Text,
@@ -130,17 +130,15 @@ namespace Holerite.br.pro.VIEW
             {
                 if(e.KeyChar == 13)
                 {
-                    string cep = mtbCEP.Text;
-                    string url = "https://viacep.com.br/ws/" + cep + "/xml/";
+                    Address obj = new Address();
+                    obj = ConsultCEP.Consult(mtbCEP.Text);
 
-                    DataSet ds = new DataSet();
-                    ds.ReadXml(url);
-
-                    txtStreet.Text = ds.Tables[0].Rows[0]["logradouro"].ToString();
-                    txtNeighborhood.Text = ds.Tables[0].Rows[0]["bairro"].ToString();
-                    txtCity.Text = ds.Tables[0].Rows[0]["localidade"].ToString();
-                    txtComplement.Text = ds.Tables[0].Rows[0]["complemento"].ToString();
-                    cbUF.Text = ds.Tables[0].Rows[0]["uf"].ToString();
+                    cbUF.Text = obj.State;
+                    txtCity.Text = obj.City;
+                    txtNeighborhood.Text = obj.Neighborhood;
+                    txtStreet.Text = obj.Street;
+                    txtHomeNumber.Text = obj.HomeNumber;
+                    txtComplement.Text = obj.Complement;
                 }
             }
             catch (Exception ex)
