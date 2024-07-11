@@ -24,9 +24,11 @@ namespace Holerite.br.pro.VIEW
         }
         #endregion
 
+        #region btnLogar
         private void btnLogar_Click(object sender, EventArgs e)
         {
 
         }
+        #endregion
     }
 }
