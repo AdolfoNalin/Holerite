@@ -12,7 +12,7 @@ namespace Holerite.br.pro.MODEL
         public int CodEmp { get; set; }
         public string ShortDescription { get; set; }
         public string FullDescription { get; set; }
-        public float SportPrice{ get; set; }
+        public float SpotPrice{ get; set; }
         public float TermPrice { get; set; }
         public string Observation { get; set; }
     }
