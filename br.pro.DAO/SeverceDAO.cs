@@ -37,7 +37,7 @@ namespace Holerite.br.pro.DAO
                 cmd.Parameters.AddWithValue("@cod_emp", obj.CodEmp);
                 cmd.Parameters.AddWithValue("@short_descrition", obj.ShortDescription);
                 cmd.Parameters.AddWithValue("@full_descrition", obj.FullDescription);
-                cmd.Parameters.AddWithValue("@spot_price", obj.SportPrice);
+                cmd.Parameters.AddWithValue("@spot_price", obj.SpotPrice);
                 cmd.Parameters.AddWithValue("@term_price", obj.TermPrice);
                 cmd.Parameters.AddWithValue("@obs", obj.Observation);
 
@@ -73,7 +73,7 @@ namespace Holerite.br.pro.DAO
                 cmd.Parameters.AddWithValue("@cod_emp", obj.CodEmp);
                 cmd.Parameters.AddWithValue("@short_descrition", obj.ShortDescription);
                 cmd.Parameters.AddWithValue("@full_descrition", obj.FullDescription);
-                cmd.Parameters.AddWithValue("@spot_price", obj.SportPrice);
+                cmd.Parameters.AddWithValue("@spot_price", obj.SpotPrice);
                 cmd.Parameters.AddWithValue("@term_price", obj.TermPrice);
                 cmd.Parameters.AddWithValue("@obs", obj.Observation);
 
