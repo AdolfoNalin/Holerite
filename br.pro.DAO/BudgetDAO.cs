@@ -2,6 +2,7 @@
 using Holerite.br.pro.MODEL;
 using Holerite.Helpers;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Crypto.Engines;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -156,6 +157,126 @@ namespace Holerite.br.pro.DAO
         }
         #endregion
 
+        #region ConsultId
+        /// <summary>
+        /// Consulta o orçamento pelo cod
+        /// </summary>
+        /// <param name="cod">Cod do orçamento</param>
+        /// <returns></returns>
+        public DataTable Consult(int cod)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string sql = @"SELECT 
+                b.cod AS 'Código', 
+                c.name AS 'Nome', 
+                b.date AS 'Data', b.total FROM budget AS b
+                JOIN client AS c on (b.cod_client = c.cod) WHERE b.cod=@cod";
+
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+                cmd.Parameters.AddWithValue("@cod", cod);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho {ex.StackTrace}", "atenção");
+                throw;
+            }
+            finally
+            { _connection.Close(); }
+        }
+        #endregion
+
+        #region ConsultStartDateAndEndData
+        /// <summary>
+        /// Consulta os orçamentos pelo intervado de datas
+        /// </summary>
+        /// <param name="startDate">Data inicio</param>
+        /// <param name="endDate">Data Fim</param>
+        /// <returns></returns>
+        public DataTable Consult(DateTime startDate, DateTime endDate)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string sql = @"SELECT 
+                b.cod AS 'Código', 
+                c.name AS 'Nome', 
+                b.date AS 'Data', b.total FROM budget AS b
+                JOIN client AS c on (b.cod_client = c.cod) WHERE date between @startdate AND @enddate";
+
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+                cmd.Parameters.AddWithValue("@startdate", startDate);
+                cmd.Parameters.AddWithValue("@endate", endDate);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+
+                MySqlDataAdapter dr = new MySqlDataAdapter(cmd);
+                dr.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
+                return null;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        #endregion
+
+        #region ConsultNameClient
+        /// <summary>
+        /// Consulta todos os dados do orçamento do banco de dados
+        /// </summary>
+        /// <returns></returns>
+        public DataTable Consult(string name)
+        {
+            name = "%" + name + "%";
+            DataTable dt = new DataTable();
+            try
+            {
+                string sql = @"SELECT 
+                b.cod AS 'Código', 
+                c.name AS 'Nome', 
+                b.date AS 'Data', b.total FROM budget AS b
+                JOIN client AS c on (b.cod_client = c.cod) WHERE c.name=@name";
+
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+                cmd.Parameters.AddWithValue("@name", name);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
+                return null;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        #endregion
+
         #region EndBudget
         /// <summary>
         /// Retorna o ultimo orçamento do banco de dados
@@ -187,5 +308,6 @@ namespace Holerite.br.pro.DAO
             }
         }
         #endregion
+
     }
 }
