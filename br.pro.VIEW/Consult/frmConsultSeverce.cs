@@ -62,7 +62,7 @@ namespace Holerite.br.pro.VIEW.Consult
             obj.Cod = int.Parse(dgSeverce.CurrentRow.Cells[0].Value.ToString());
             obj.ShortDescription = dgSeverce.CurrentRow.Cells[1].Value.ToString();
             obj.FullDescription = dgSeverce.CurrentRow.Cells[1].Value.ToString();
-            obj.SportPrice = float.Parse(dgSeverce.CurrentRow.Cells[1].Value.ToString());
+            obj.SpotPrice = float.Parse(dgSeverce.CurrentRow.Cells[1].Value.ToString());
             obj.TermPrice = float.Parse(dgSeverce.CurrentRow.Cells[1].Value.ToString());
             obj.Observation = dgSeverce.CurrentRow.Cells[1].Value.ToString();
 
@@ -70,7 +70,7 @@ namespace Holerite.br.pro.VIEW.Consult
             tela.cbEmployee.Text = new EmployeeDAO().Search(obj.Cod);
             tela.txtFullDescription.Text = obj.FullDescription.ToString();
             tela.txtShortDescription.Text = obj.ShortDescription.ToString();
-            tela.txtSpotPrice.Text = obj.SportPrice.ToString();
+            tela.txtSpotPrice.Text = obj.SpotPrice.ToString();
             tela.txtTerm.Text = obj.TermPrice.ToString();
 
             tela.ShowDialog();

@@ -32,7 +32,7 @@ namespace Holerite.br.pro.VIEW.Insert
                 CodEmp = int.Parse(cbEmployee.SelectedValue.ToString()),
                 ShortDescription = txtShortDescription.Text,
                 FullDescription = txtFullDescription.Text,
-                SportPrice = float.Parse(txtSpotPrice.Text),
+                SpotPrice = float.Parse(txtSpotPrice.Text),
                 TermPrice = float.Parse(txtTerm.Text),
                 Observation = txtOBS.Text
             };
@@ -79,7 +79,7 @@ namespace Holerite.br.pro.VIEW.Insert
                 CodEmp = int.Parse(cbEmployee.SelectedValue.ToString()),
                 ShortDescription = txtShortDescription.Text,
                 FullDescription = txtFullDescription.Text,
-                SportPrice = float.Parse(txtSpotPrice.Text),
+                SpotPrice = float.Parse(txtSpotPrice.Text),
                 TermPrice = float.Parse(txtTerm.Text),
                 Observation = txtOBS.Text
             };
