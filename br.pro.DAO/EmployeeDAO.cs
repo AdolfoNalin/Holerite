@@ -218,7 +218,7 @@ namespace Holerite.br.pro.DAO
         }
         #endregion
 
-        #region Search
+        #region SearchName
         /// <summary>
         /// Buscar o funcionário pelo nome
         /// </summary>
@@ -250,7 +250,7 @@ namespace Holerite.br.pro.DAO
         }
         #endregion
 
-        #region Search
+        #region SearchCod
         /// <summary>
         /// Busca o Funcionário no banco de dados
         /// </summary>
