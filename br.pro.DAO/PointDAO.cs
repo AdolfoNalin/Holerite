@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Holerite.br.pro.DAO
 {
@@ -123,7 +124,10 @@ namespace Holerite.br.pro.DAO
             DataTable dt = new DataTable();
             try
             {
-                string sql = "SELECT * FROM point";
+                string sql = @"SELECT p.cod AS 'Código', u.emp_name AS 'Colaborador', c.name AS 'Empregador'  FROM point AS p
+                JOIN company AS c on (p.cod_company = c.cod)
+                JOIN user_employee AS u on (p.cod_emp = u.cod)";
+
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
 
                 _connection.Open();
@@ -157,10 +161,49 @@ namespace Holerite.br.pro.DAO
             DataTable dt = new DataTable();
             try
             {
-                string sql = "SELECT * FROM point AS p JOIN user_employee AS u ON (p.cod_emp = u.cod) WHERE u.emp_name=@emp_name";
+                string sql = @"SELECT p.cod AS 'Código', u.emp_name AS 'Colaborador', c.name AS 'Empregador'  FROM point AS p
+                JOIN company AS c on (p.cod_company = c.cod)
+                JOIN user_employee AS u on (p.cod_emp = u.cod) WHERE u.emp_name LIKE @emp_name";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@emp_name", emp_name);
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                Dialog.Message("Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
+                return null;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        #endregion
+
+        #region Search
+        /// <summary>
+        /// Busca pointo pelo nome do funcionário
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public DataTable Search(string name)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string sql = @"SELECT p.cod AS 'Código', u.emp_name AS 'Colaborador', c.name AS 'Empregador'  FROM point AS p
+                JOIN company AS c on (p.cod_company = c.cod)
+                JOIN user_employee AS u on (p.cod_emp = u.cod) WHERE u.emp_name=@emp_name";
+
+                MySqlCommand cmd = new MySqlCommand( sql, _connection);
+
                 _connection.Open();
                 cmd.ExecuteNonQuery();
 
@@ -217,6 +260,5 @@ namespace Holerite.br.pro.DAO
             }
         }
         #endregion
-
     }
 }
