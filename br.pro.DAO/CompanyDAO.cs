@@ -241,5 +241,41 @@ namespace Holerite.br.pro.DAO
             { _connection.Close(); }
         }
         #endregion
+
+        #region SearchCNPJ
+        /// <summary>
+        /// Consulta a empresa pelo nome e cnpj
+        /// </summary>
+        /// <param name="cnpj"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public int Search(string cnpj, string name)
+        {
+            int cod = 0;
+            try
+            {
+                string sql = "SELECT cod FROM company WHERE cnpj=@cnpj AND name=@name";
+                MySqlCommand cmd = new MySqlCommand( sql, _connection);
+                cmd.Parameters.AddWithValue("@cnpj", cnpj);
+                cmd.Parameters.AddWithValue("@name", name);
+
+                _connection.Open();
+                MySqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    cod = dr.GetInt32("cod");
+                }
+
+                return cod;
+            }
+            catch (Exception ex)
+            {
+                Dialog.Message("Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
+                return 0; 
+            }
+            finally { _connection.Close(); }
+        }
+        #endregion
     }
 }
