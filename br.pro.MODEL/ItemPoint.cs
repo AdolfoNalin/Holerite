@@ -14,6 +14,7 @@ namespace Holerite.br.pro.MODEL
         public DateTime Date { get; set; }
         public DateTime EntryTime { get; set; }
         public DateTime LunchDeparture { get; set; }
+        public DateTime LunchEntrance{ get; set; }
         public DateTime ExitTime { get; set; }
         public DateTime ExtraEntry { get; set; }
         public DateTime ExtraOutput { get; set; }
