@@ -180,5 +180,43 @@ namespace Holerite.br.pro.DAO
             }
         }
         #endregion
+
+        #region EndPoint
+        /// <summary>
+        /// Retorna o cod do ultimo ponto que foi cadastrado
+        /// </summary>
+        /// <returns></returns>
+        public int EndPoint()
+        {
+            int cod = 0;
+            try
+            {
+                string sql = "SELECT MAX(cod) FROM point";
+
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+
+                _connection.Open();
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    cod = dr.GetInt32("cod");
+                }
+
+                return cod;
+            }
+            catch (Exception ex)
+            {
+                Dialog.Message("Acoenteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
+                return 0;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        #endregion
+
     }
 }
