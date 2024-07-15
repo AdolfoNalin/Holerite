@@ -285,5 +285,40 @@ namespace Holerite.br.pro.DAO
             { _connection.Close(); }
         }
         #endregion
+
+        #region SearchCPFName
+        /// <summary>
+        /// Busca um Funcioário pelo cpf e pelo nome
+        /// </summary>
+        /// <param name="cpf"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public int Search(string cpf, string name)
+        {
+            int cod = 0;
+            try
+            {
+                string sql = "SELECT cod user_emlpoyee WHERE cpf=@cpf AND user_name=@name";
+
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+                cmd.Parameters.AddWithValue("@cpf", cpf);
+                cmd.Parameters.AddWithValue("@name", name);
+
+                _connection.Open();
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    cod = dr.GetInt32("cod");
+                }
+                return cod;
+            }
+                catch (Exception ex)
+            {
+                Dialog.Message("Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
+                return 0;
+            }
+            finally { _connection.Close(); }
+        }
+        #endregion
     }
 }
