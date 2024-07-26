@@ -13,5 +13,6 @@ namespace Holerite.br.pro.MODEL
         public string Function { get; set; }
         public float Wage { get; set; }
         public List<string> Permissions { get; set; }
+        public string CTPS { get; set; }
     }
 }
