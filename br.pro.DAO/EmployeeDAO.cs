@@ -3,6 +3,7 @@ using Holerite.br.pro.MODEL;
 using Holerite.br.pro.VIEW.Consult;
 using Holerite.Helpers;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -318,6 +319,49 @@ namespace Holerite.br.pro.DAO
                 return 0;
             }
             finally { _connection.Close(); }
+        }
+        #endregion
+
+        #region GetSearchName
+        public Employee GetSearch(string cpf)
+        {
+            Employee emp = new Employee();  
+            try
+            {
+                string sql = "SELECT * FROM user_employee WHERE cpf=@cpf";
+
+                MySqlCommand cmd = new MySqlCommand( sql, _connection);
+                cmd.Parameters.AddWithValue("@cpf", cpf );
+
+                _connection.Open();
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    emp.Name = dr.GetString("emp_name");
+                    emp.Function = dr.GetString("emp_function");
+                    emp.CEP = dr.GetString("cep");
+                    emp.State = dr.GetString("state");
+                    emp.City = dr.GetString("city");
+                    emp.Neighborhood = dr.GetString("neighborhood");
+                    emp.Street = dr.GetString("street");
+                    emp.HomeNumber = dr.GetInt32("home_number");
+                }
+                else
+                {
+                    Dialog.Message("Funcionário não encontrado", "atenção");
+                }
+
+                return emp;
+            }
+            catch (Exception ex)
+            {
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} como o caminho para {ex.StackTrace}", "Atenção");
+                return null;
+            }
+            finally 
+            { 
+                _connection.Close(); 
+            }
         }
         #endregion
     }
