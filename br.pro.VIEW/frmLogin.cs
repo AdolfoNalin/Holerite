@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Holerite.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,9 +26,15 @@ namespace Holerite.br.pro.VIEW
         #endregion
 
         #region btnLogar
+        /// <summary>
+        /// Button of login
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLogar_Click(object sender, EventArgs e)
         {
-
+            this.Close();
+            Verification.Login(txtUserName.Text, txtPassword.Text);
         }
         #endregion
     }
