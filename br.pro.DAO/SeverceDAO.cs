@@ -128,7 +128,7 @@ namespace Holerite.br.pro.DAO
             DataTable dt = new DataTable();
             try
             {
-                string sql = "SELECT * FROM severce";
+                string sql = "SELECT * FROM user_employee";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
 
