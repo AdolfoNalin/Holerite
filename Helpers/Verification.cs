@@ -62,5 +62,20 @@ namespace Holerite.Helpers
             }
         }
         #endregion
+
+        #region Verification CPF
+        /// <summary>
+        /// Consult employee in databese for CPF
+        /// </summary>
+        /// <param name="cpf"></param>
+        /// <returns></returns>
+        public Employee ToCheck(string cpf)
+        {
+            EmployeeDAO dao = new EmployeeDAO();
+            Employee obj = dao.GetSearch(cpf);
+
+            return obj;
+        }
+        #endregion
     }
 }
