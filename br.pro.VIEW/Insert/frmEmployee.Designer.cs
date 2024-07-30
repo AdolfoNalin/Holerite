@@ -62,13 +62,14 @@
             this.lblUserName = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
-            this.cbFunction = new System.Windows.Forms.ComboBox();
             this.lblFunction = new System.Windows.Forms.Label();
             this.txtPermissions = new System.Windows.Forms.TextBox();
             this.lblPermissions = new System.Windows.Forms.Label();
             this.btnPermissions = new System.Windows.Forms.Button();
-            this.txtWage = new System.Windows.Forms.TextBox();
-            this.lblWage = new System.Windows.Forms.Label();
+            this.txtDaily = new System.Windows.Forms.TextBox();
+            this.lblDaily = new System.Windows.Forms.Label();
+            this.cbFunction = new System.Windows.Forms.ComboBox();
+            this.txtFunction = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtComplement
@@ -400,18 +401,10 @@
             this.lblPassword.TabIndex = 66;
             this.lblPassword.Text = "Senha:";
             // 
-            // cbFunction
-            // 
-            this.cbFunction.FormattingEnabled = true;
-            this.cbFunction.Location = new System.Drawing.Point(81, 147);
-            this.cbFunction.Name = "cbFunction";
-            this.cbFunction.Size = new System.Drawing.Size(121, 21);
-            this.cbFunction.TabIndex = 68;
-            // 
             // lblFunction
             // 
             this.lblFunction.AutoSize = true;
-            this.lblFunction.Location = new System.Drawing.Point(42, 151);
+            this.lblFunction.Location = new System.Drawing.Point(31, 151);
             this.lblFunction.Name = "lblFunction";
             this.lblFunction.Size = new System.Drawing.Size(38, 13);
             this.lblFunction.TabIndex = 69;
@@ -419,7 +412,7 @@
             // 
             // txtPermissions
             // 
-            this.txtPermissions.Location = new System.Drawing.Point(307, 147);
+            this.txtPermissions.Location = new System.Drawing.Point(281, 147);
             this.txtPermissions.Multiline = true;
             this.txtPermissions.Name = "txtPermissions";
             this.txtPermissions.Size = new System.Drawing.Size(334, 44);
@@ -428,7 +421,7 @@
             // lblPermissions
             // 
             this.lblPermissions.AutoSize = true;
-            this.lblPermissions.Location = new System.Drawing.Point(237, 151);
+            this.lblPermissions.Location = new System.Drawing.Point(211, 151);
             this.lblPermissions.Name = "lblPermissions";
             this.lblPermissions.Size = new System.Drawing.Size(69, 13);
             this.lblPermissions.TabIndex = 70;
@@ -436,40 +429,58 @@
             // 
             // btnPermissions
             // 
-            this.btnPermissions.Location = new System.Drawing.Point(648, 145);
+            this.btnPermissions.Location = new System.Drawing.Point(622, 145);
             this.btnPermissions.Name = "btnPermissions";
             this.btnPermissions.Size = new System.Drawing.Size(30, 23);
             this.btnPermissions.TabIndex = 72;
             this.btnPermissions.UseVisualStyleBackColor = true;
             // 
-            // txtWage
+            // txtDaily
             // 
-            this.txtWage.Location = new System.Drawing.Point(738, 147);
-            this.txtWage.Name = "txtWage";
-            this.txtWage.Size = new System.Drawing.Size(50, 20);
-            this.txtWage.TabIndex = 74;
+            this.txtDaily.Location = new System.Drawing.Point(721, 147);
+            this.txtDaily.Name = "txtDaily";
+            this.txtDaily.Size = new System.Drawing.Size(50, 20);
+            this.txtDaily.TabIndex = 74;
             // 
-            // lblWage
+            // lblDaily
             // 
-            this.lblWage.AutoSize = true;
-            this.lblWage.Location = new System.Drawing.Point(693, 149);
-            this.lblWage.Name = "lblWage";
-            this.lblWage.Size = new System.Drawing.Size(42, 13);
-            this.lblWage.TabIndex = 73;
-            this.lblWage.Text = "Salário:";
+            this.lblDaily.AutoSize = true;
+            this.lblDaily.Location = new System.Drawing.Point(681, 150);
+            this.lblDaily.Name = "lblDaily";
+            this.lblDaily.Size = new System.Drawing.Size(37, 13);
+            this.lblDaily.TabIndex = 73;
+            this.lblDaily.Text = "Diária:";
+            // 
+            // cbFunction
+            // 
+            this.cbFunction.FormattingEnabled = true;
+            this.cbFunction.Location = new System.Drawing.Point(72, 149);
+            this.cbFunction.Name = "cbFunction";
+            this.cbFunction.Size = new System.Drawing.Size(121, 21);
+            this.cbFunction.TabIndex = 75;
+            this.cbFunction.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbFunction_KeyPress);
+            // 
+            // txtFunction
+            // 
+            this.txtFunction.Location = new System.Drawing.Point(72, 150);
+            this.txtFunction.Name = "txtFunction";
+            this.txtFunction.Size = new System.Drawing.Size(121, 20);
+            this.txtFunction.TabIndex = 76;
+            this.txtFunction.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFunction_KeyPress);
             // 
             // frmEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.txtWage);
-            this.Controls.Add(this.lblWage);
+            this.Controls.Add(this.txtFunction);
+            this.Controls.Add(this.cbFunction);
+            this.Controls.Add(this.txtDaily);
+            this.Controls.Add(this.lblDaily);
             this.Controls.Add(this.btnPermissions);
             this.Controls.Add(this.txtPermissions);
             this.Controls.Add(this.lblPermissions);
             this.Controls.Add(this.lblFunction);
-            this.Controls.Add(this.cbFunction);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.txtUserName);
@@ -506,6 +517,7 @@
             this.Controls.Add(this.txtCod);
             this.Name = "frmEmployee";
             this.Text = "Cadastrar Funcionário";
+            this.Load += new System.EventHandler(this.frmEmployee_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -551,8 +563,9 @@
         public System.Windows.Forms.TextBox txtPermissions;
         private System.Windows.Forms.Label lblPermissions;
         private System.Windows.Forms.Button btnPermissions;
-        public System.Windows.Forms.TextBox txtWage;
-        private System.Windows.Forms.Label lblWage;
-        public System.Windows.Forms.ComboBox cbFunction;
+        public System.Windows.Forms.TextBox txtDaily;
+        private System.Windows.Forms.Label lblDaily;
+        private System.Windows.Forms.ComboBox cbFunction;
+        public System.Windows.Forms.TextBox txtFunction;
     }
 }

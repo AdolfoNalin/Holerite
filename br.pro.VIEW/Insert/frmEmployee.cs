@@ -35,7 +35,7 @@ namespace Holerite.br.pro.VIEW.Insert
                 UserName = txtUserName.Text,
                 Password = txtPassword.Text,
                 Function = cbFunction.Text,
-                Wage = float.Parse(txtWage.Text),
+                Wage = float.Parse(txtDaily.Text),
                 //Permissions = txtPermissions.Text,
                 CPF = mtbCEP.Text,
                 TelephoneNumber = mtbTelephoneNumber.Text,
@@ -91,7 +91,7 @@ namespace Holerite.br.pro.VIEW.Insert
                 UserName = txtUserName.Text,
                 Password = txtPassword.Text,
                 Function = cbFunction.Text,
-                Wage = float.Parse(txtWage.Text),
+                Wage = float.Parse(txtDaily.Text),
                 //Permissions = txtPermissions.Text,
                 CPF = mtbCPF.Text,
                 TelephoneNumber = mtbTelephoneNumber.Text,
@@ -129,7 +129,53 @@ namespace Holerite.br.pro.VIEW.Insert
                 txtHomeNumber.Text = obj.HomeNumber;
                 txtComplement.Text = obj.Complement;
             }
+        }
+        #endregion
 
+        #region Load
+        private void frmEmployee_Load(object sender, EventArgs e)
+        {
+            FunctionDAO dao = new FunctionDAO();
+            cbFunction.DataSource = dao.Consult();
+            cbFunction.DisplayMember = "function_emp";
+            cbFunction.ValueMember = "cod";
+
+            txtFunction.Visible = false;
+        }
+        #endregion
+
+        #region cbFunction_KeyPress
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cbFunction_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13 && cbFunction.Text == "Outros")
+            {
+                cbFunction.Visible = false;
+                txtFunction.Visible = true;
+                txtFunction.Focus();
+            }
+        }
+        #endregion
+
+        #region txtFunction_KeyPress
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtFunction_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == 13)
+            {
+                Function obj = new Function();
+                FunctionDAO dao = new FunctionDAO();
+                obj.Fun = cbFunction.Text;
+                dao.Insert(obj);
+            }
         }
         #endregion
     }
