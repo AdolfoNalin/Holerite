@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -299,13 +300,14 @@ namespace Holerite.br.pro.DAO
             int cod = 0;
             try
             {
-                string sql = "SELECT cod user_emlpoyee WHERE cpf=@cpf AND user_name=@name";
+                string sql = "SELECT cod FROM user_employee WHERE cpf=@cpf AND user_name=@name";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cpf", cpf);
                 cmd.Parameters.AddWithValue("@name", name);
 
                 _connection.Open();
+
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
                 {
@@ -315,7 +317,7 @@ namespace Holerite.br.pro.DAO
             }
                 catch (Exception ex)
             {
-                Dialog.Message("Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
                 return 0;
             }
             finally { _connection.Close(); }
@@ -361,6 +363,42 @@ namespace Holerite.br.pro.DAO
             finally 
             { 
                 _connection.Close(); 
+            }
+        }
+        #endregion
+
+        #region Login
+        /// <summary>
+        /// Verification if username and password is true in the database
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="passWord"></param>
+        /// <returns></returns>
+        public bool Login(string userName, string passWord)
+        {
+            try
+            {
+                string sql = "SELECT * FROM user_employee WHERE user_name=@user_name AND user_password=@password";
+
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+                cmd.Parameters.AddWithValue("@user_name", userName);
+                cmd.Parameters.AddWithValue("password", passWord);
+
+                _connection.Open();
+                cmd?.ExecuteNonQuery();
+
+                Dialog.Message($"Seja bem vindo {userName}!", "Sucesso");
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
+                return false;
+            }
+            finally
+            {
+                _connection.Close();
             }
         }
         #endregion
