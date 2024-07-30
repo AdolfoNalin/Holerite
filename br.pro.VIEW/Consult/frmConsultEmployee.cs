@@ -66,7 +66,7 @@ namespace Holerite.br.pro.VIEW.Consult
             tela.txtUserName.Text = dgEmployee.CurrentRow.Cells[2].Value.ToString();
             tela.txtPassword.Text = dgEmployee.CurrentRow.Cells[3].Value.ToString();
             tela.txtPermissions.Text = dgEmployee.CurrentRow.Cells[4].Value.ToString();
-            tela.txtWage.Text = dgEmployee.CurrentRow.Cells[5].Value.ToString();
+            tela.txtDaily.Text = dgEmployee.CurrentRow.Cells[5].Value.ToString();
             tela.mtbCPF.Text = dgEmployee.CurrentRow.Cells[6].Value.ToString();
             tela.txtEmail.Text = dgEmployee.CurrentRow.Cells[7].Value.ToString();
             tela.mtbPhoneNumber.Text = dgEmployee.CurrentRow.Cells[8].Value.ToString();
