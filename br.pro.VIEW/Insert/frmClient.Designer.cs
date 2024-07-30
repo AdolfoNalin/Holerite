@@ -392,7 +392,9 @@
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.mtbCPF);
             this.Controls.Add(this.txtCod);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmClient";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cliente";
             this.Load += new System.EventHandler(this.frmClient_Load);
             this.ResumeLayout(false);

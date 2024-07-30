@@ -25,8 +25,8 @@ namespace Holerite.br.pro.VIEW.Insert
         {
             EmployeeDAO dao = new EmployeeDAO();
             cbEmployee.DataSource = dao.Consult();
-            cbEmployee.SelectedValue = "id";
-            cbEmployee.DisplayMember = "Name";
+            cbEmployee.DisplayMember = "emp_name";
+            cbEmployee.SelectedValue = "cod";
         }
         #endregion
 
@@ -36,10 +36,6 @@ namespace Holerite.br.pro.VIEW.Insert
             if (rbSpot.Checked == false && rbTerm.Checked == false)
             {
                 Dialog.Message("Por favor selecione a forma de pagamento!", "atenção");
-            }
-            else
-            {
-                
             }
         }
 

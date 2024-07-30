@@ -28,8 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgPoint = new System.Windows.Forms.DataGridView();
+            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.entryTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lunchDeparture = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lunchEntrance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.exitTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.extraEntry = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.extraOutput = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbEmployee = new System.Windows.Forms.GroupBox();
             this.txtFunction = new System.Windows.Forms.TextBox();
             this.lblFunction = new System.Windows.Forms.Label();
@@ -44,13 +51,6 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnPrntOut = new System.Windows.Forms.Button();
             this.btnInsert = new System.Windows.Forms.Button();
-            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.entryTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lunchDeparture = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lunchEntrance = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.exitTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.extraEntry = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.extraOutput = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtCod = new System.Windows.Forms.TextBox();
             this.lblCod = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -76,6 +76,46 @@
             this.dgPoint.Name = "dgPoint";
             this.dgPoint.Size = new System.Drawing.Size(793, 317);
             this.dgPoint.TabIndex = 0;
+            // 
+            // date
+            // 
+            dataGridViewCellStyle1.Format = "d";
+            dataGridViewCellStyle1.NullValue = null;
+            this.date.DefaultCellStyle = dataGridViewCellStyle1;
+            this.date.HeaderText = "Data";
+            this.date.Name = "date";
+            this.date.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // entryTime
+            // 
+            this.entryTime.HeaderText = "Hora Entrada";
+            this.entryTime.Name = "entryTime";
+            // 
+            // lunchDeparture
+            // 
+            this.lunchDeparture.HeaderText = "Saida Almoço";
+            this.lunchDeparture.Name = "lunchDeparture";
+            // 
+            // lunchEntrance
+            // 
+            this.lunchEntrance.HeaderText = "Entrada  Almoço";
+            this.lunchEntrance.Name = "lunchEntrance";
+            this.lunchEntrance.Width = 150;
+            // 
+            // exitTime
+            // 
+            this.exitTime.HeaderText = "Hora Saida";
+            this.exitTime.Name = "exitTime";
+            // 
+            // extraEntry
+            // 
+            this.extraEntry.HeaderText = "Entrada Extra";
+            this.extraEntry.Name = "extraEntry";
+            // 
+            // extraOutput
+            // 
+            this.extraOutput.HeaderText = "Saida Extra";
+            this.extraOutput.Name = "extraOutput";
             // 
             // gbEmployee
             // 
@@ -215,46 +255,6 @@
             this.btnInsert.UseVisualStyleBackColor = true;
             this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
             // 
-            // date
-            // 
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            this.date.DefaultCellStyle = dataGridViewCellStyle2;
-            this.date.HeaderText = "Data";
-            this.date.Name = "date";
-            this.date.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // entryTime
-            // 
-            this.entryTime.HeaderText = "Hora Entrada";
-            this.entryTime.Name = "entryTime";
-            // 
-            // lunchDeparture
-            // 
-            this.lunchDeparture.HeaderText = "Saida Almoço";
-            this.lunchDeparture.Name = "lunchDeparture";
-            // 
-            // lunchEntrance
-            // 
-            this.lunchEntrance.HeaderText = "Entrada  Almoço";
-            this.lunchEntrance.Name = "lunchEntrance";
-            this.lunchEntrance.Width = 150;
-            // 
-            // exitTime
-            // 
-            this.exitTime.HeaderText = "Hora Saida";
-            this.exitTime.Name = "exitTime";
-            // 
-            // extraEntry
-            // 
-            this.extraEntry.HeaderText = "Entrada Extra";
-            this.extraEntry.Name = "extraEntry";
-            // 
-            // extraOutput
-            // 
-            this.extraOutput.HeaderText = "Saida Extra";
-            this.extraOutput.Name = "extraOutput";
-            // 
             // txtCod
             // 
             this.txtCod.Location = new System.Drawing.Point(71, 8);
@@ -304,7 +304,7 @@
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.gbEmployee);
             this.Controls.Add(this.dgPoint);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmInsertPoint";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

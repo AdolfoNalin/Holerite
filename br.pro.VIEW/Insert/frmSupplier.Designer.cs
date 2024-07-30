@@ -412,7 +412,9 @@
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.mtbCNPJ);
             this.Controls.Add(this.txtCod);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmSupplier";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastrar Funcionário";
             this.ResumeLayout(false);
             this.PerformLayout();

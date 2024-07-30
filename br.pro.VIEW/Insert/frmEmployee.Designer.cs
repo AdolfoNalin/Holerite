@@ -454,7 +454,7 @@
             // cbFunction
             // 
             this.cbFunction.FormattingEnabled = true;
-            this.cbFunction.Location = new System.Drawing.Point(72, 149);
+            this.cbFunction.Location = new System.Drawing.Point(72, 148);
             this.cbFunction.Name = "cbFunction";
             this.cbFunction.Size = new System.Drawing.Size(121, 21);
             this.cbFunction.TabIndex = 75;
@@ -462,7 +462,7 @@
             // 
             // txtFunction
             // 
-            this.txtFunction.Location = new System.Drawing.Point(72, 150);
+            this.txtFunction.Location = new System.Drawing.Point(72, 148);
             this.txtFunction.Name = "txtFunction";
             this.txtFunction.Size = new System.Drawing.Size(121, 20);
             this.txtFunction.TabIndex = 76;
@@ -567,7 +567,7 @@
         private System.Windows.Forms.Button btnPermissions;
         public System.Windows.Forms.TextBox txtDaily;
         private System.Windows.Forms.Label lblDaily;
-        private System.Windows.Forms.ComboBox cbFunction;
         public System.Windows.Forms.TextBox txtFunction;
+        public System.Windows.Forms.ComboBox cbFunction;
     }
 }

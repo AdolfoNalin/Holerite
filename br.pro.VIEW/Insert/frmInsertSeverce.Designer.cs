@@ -262,7 +262,9 @@
             this.Controls.Add(this.lblAmountFD);
             this.Controls.Add(this.txtFullDescription);
             this.Controls.Add(this.lblFullDescription);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmInsertSeverce";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmInsertSeverce";
             this.Load += new System.EventHandler(this.frmInsertSeverce_Load);
             this.ResumeLayout(false);
