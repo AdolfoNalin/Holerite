@@ -45,9 +45,10 @@ namespace Holerite.br.pro.VIEW.Insert
         #region Load
         private void frmInsertSeverce_Load(object sender, EventArgs e)
         {
-            cbEmployee.DataSource = new SeverceDAO().Consult();
+            SeverceDAO dao = new SeverceDAO();
+            cbEmployee.DataSource = dao.Consult();
+            cbEmployee.DisplayMember = "emp_name";
             cbEmployee.ValueMember = "cod";
-            cbEmployee.DisplayMember = "name";
         }
         #endregion
 
