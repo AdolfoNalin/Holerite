@@ -157,7 +157,9 @@
             this.Controls.Add(this.dgBudget);
             this.Controls.Add(this.txtCod);
             this.Controls.Add(this.lblCod);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmConsultBudget";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta Orçamento";
             this.Load += new System.EventHandler(this.frmConsultBudget_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgBudget)).EndInit();

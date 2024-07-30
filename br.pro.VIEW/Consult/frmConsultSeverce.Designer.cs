@@ -85,7 +85,9 @@
             this.Controls.Add(this.dgSeverce);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.txtName);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmConsultSeverce";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta Serviço";
             ((System.ComponentModel.ISupportInitialize)(this.dgSeverce)).EndInit();
             this.ResumeLayout(false);

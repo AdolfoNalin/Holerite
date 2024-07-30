@@ -84,7 +84,9 @@
             this.Controls.Add(this.dgClient);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.txtName);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmConsultarClient";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consultar Cliente";
             this.Load += new System.EventHandler(this.frmConsultarClient_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgClient)).EndInit();

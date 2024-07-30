@@ -84,7 +84,9 @@
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblName);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmConsultEmployee";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastrar Funcionário";
             this.Load += new System.EventHandler(this.frmInsertEmployee_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgEmployee)).EndInit();

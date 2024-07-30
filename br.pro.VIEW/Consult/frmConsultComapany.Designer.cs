@@ -84,7 +84,9 @@
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.dgCompany);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmConsultComapany";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta Empresa";
             this.Load += new System.EventHandler(this.frmConsultComapany_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgCompany)).EndInit();
