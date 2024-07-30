@@ -158,6 +158,14 @@ namespace Holerite.br.pro.VIEW.Insert
                 txtFunction.Visible = true;
                 txtFunction.Focus();
             }
+            else if(e.KeyChar == 13 && cbFunction.Text != "Outros")
+            {
+                FunctionDAO dao = new FunctionDAO();
+                cbFunction.DataSource = dao.Consult(cbFunction.Text);
+                cbFunction.DisplayMember = "function_emp";
+                cbFunction.ValueMember = "cod";
+
+            }
         }
         #endregion
 

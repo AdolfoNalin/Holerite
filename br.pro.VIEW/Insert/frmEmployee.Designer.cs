@@ -515,7 +515,9 @@
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.mtbCPF);
             this.Controls.Add(this.txtCod);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmEmployee";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastrar Funcionário";
             this.Load += new System.EventHandler(this.frmEmployee_Load);
             this.ResumeLayout(false);
