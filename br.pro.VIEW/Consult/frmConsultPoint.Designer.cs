@@ -63,6 +63,7 @@
             this.dgPoint.ReadOnly = true;
             this.dgPoint.Size = new System.Drawing.Size(745, 332);
             this.dgPoint.TabIndex = 2;
+            this.dgPoint.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgPoint_CellContentClick);
             // 
             // btnSearch
             // 
@@ -82,7 +83,9 @@
             this.Controls.Add(this.dgPoint);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblName);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmConsultPoint";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta Ponto";
             this.Load += new System.EventHandler(this.frmConsultPoint_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgPoint)).EndInit();
