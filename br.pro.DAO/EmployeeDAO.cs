@@ -33,9 +33,9 @@ namespace Holerite.br.pro.DAO
         {
             try
             {
-                string sql = @"INSERT INTO user_employee(emp_name, user_name, user_password, permissions, wage, cpf, email, telephone_number, phone_number, state, city, neighborhood, 
+                string sql = @"INSERT INTO user_employee(emp_name, user_name, user_password, permissions, daily, cpf, email, telephone_number, phone_number, state, city, neighborhood, 
                 street, home_number, cep, emp_function)
-                VALUES(@emp_name, @user_name, @user_password, @permissions, @wage, @cpf, @email, @telephone_number, @phone_number, @state, @city, @neighborhood, 
+                VALUES(@emp_name, @user_name, @user_password, @permissions, @daily, @cpf, @email, @telephone_number, @phone_number, @state, @city, @neighborhood, 
                 @street, @home_number, @cep, @emp_function)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
@@ -43,7 +43,7 @@ namespace Holerite.br.pro.DAO
                 cmd.Parameters.AddWithValue("@user_name", obj.UserName);
                 cmd.Parameters.AddWithValue("@user_password", obj.Password);
                 cmd.Parameters.AddWithValue("@permissions", obj.Permissions);
-                cmd.Parameters.AddWithValue("@wage", obj.Daily);
+                cmd.Parameters.AddWithValue("@daily", obj.Daily);
                 cmd.Parameters.AddWithValue("@cpf", obj.CPF);
                 cmd.Parameters.AddWithValue("@email", obj.Email);
                 cmd.Parameters.AddWithValue("@telephone_number", obj.TelephoneNumber);
@@ -81,7 +81,7 @@ namespace Holerite.br.pro.DAO
         {
             try
             {
-                string sql = @"UPDATE user_employee SET emp_name=@emp_name, user_name=@user_name, user_password=@user_password, permissions=@permissions, wage=@wage, cpf=@cpf, email=@email, 
+                string sql = @"UPDATE user_employee SET emp_name=@emp_name, user_name=@user_name, user_password=@user_password, permissions=@permissions, daily=@daily, cpf=@cpf, email=@email, 
                 telephone_number=@telephone_number, phone_number=@phone_number, state=@state, city=@city, neighborhood=@neighborhood, street=@street, home_number=@home_number, cep=@cep, 
                 emp_function=@emp_function WHERE cod=@cod";
 
@@ -90,7 +90,7 @@ namespace Holerite.br.pro.DAO
                 cmd.Parameters.AddWithValue("@user_name", obj.UserName);
                 cmd.Parameters.AddWithValue("@user_password", obj.Password);
                 cmd.Parameters.AddWithValue("@permissions", obj.Permissions);
-                cmd.Parameters.AddWithValue("@wage", obj.Daily);
+                cmd.Parameters.AddWithValue("@daily", obj.Daily);
                 cmd.Parameters.AddWithValue("@cpf", obj.CPF);
                 cmd.Parameters.AddWithValue("@email", obj.Email);
                 cmd.Parameters.AddWithValue("@telephone_number", obj.TelephoneNumber);
