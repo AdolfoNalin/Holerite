@@ -28,6 +28,12 @@ namespace Holerite.br.pro.VIEW.Consult
         }
         #endregion
 
+        #region dgClient_CellDoubleClick
+        /// <summary>
+        /// Passa os dados para tela de cadastro de funcionário
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgClient_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             frmClient tela = new frmClient();
@@ -61,10 +67,17 @@ namespace Holerite.br.pro.VIEW.Consult
             tela.mtbCEP.Text = obj.CEP.ToString();
             tela.txtComplement.Text = obj.Complement.ToString();
 
+            this.Hide();
             tela.ShowDialog();
         }
+        #endregion
 
-        #region
+        #region txtName_KeyPress
+        /// <summary>
+        /// Filtra o cliente conforme a digitação
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtName_KeyPress(object sender, KeyPressEventArgs e)
         {
             ClientDAO dao = new ClientDAO();
@@ -72,7 +85,12 @@ namespace Holerite.br.pro.VIEW.Consult
         }
         #endregion
 
-        #region
+        #region btnSearch_click
+        /// <summary>
+        /// Filtra o cliente pelo click do btnSearch_click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
             ClientDAO dao = new ClientDAO();
