@@ -143,7 +143,21 @@ namespace Holerite.br.pro.DAO
 
             try
             {
-                string sql = "SELECT * FROM client";
+                string sql = @"SELECT 
+                c.cod AS 'Código',
+                c.name AS 'Nome',
+                c.cpf AS 'CPF',
+                c.email AS 'Email',
+                c.telephone_number AS 'Número de Telefone',
+                c.phone_number AS 'Número de Celular',
+                c.cep AS 'CEP',
+                c.state AS 'Estado',
+                c.city AS 'Cidade',
+                c.neighborhood AS 'Bairro',
+                c.street AS 'Rua',
+                c.home_number AS 'Número da casa',
+                c.complement AS 'Complemento'
+                FROM client AS c";
 
                 MySqlCommand cmd = new MySqlCommand( sql, _connection);
 
@@ -175,7 +189,21 @@ namespace Holerite.br.pro.DAO
             try
             {
                 name = "%" + name + "%";    
-                string sql = "SELECT * FROM client WHERE name LIKE @name";
+                string sql = @"SELECT 
+                c.cod AS 'Código',
+                c.name AS 'Nome',
+                c.cpf AS 'CPF',
+                c.email AS 'Email',
+                c.telephone_number AS 'Número de Telefone',
+                c.phone_number AS 'Número de Celular',
+                c.cep AS 'CEP',
+                c.state AS 'Estado',
+                c.city AS 'Cidade',
+                c.neighborhood AS 'Bairro',
+                c.street AS 'Rua',
+                c.home_number AS 'Número da casa',
+                c.complement AS 'Complemento'
+                FROM client AS c where name LIKE @name";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@name", name);
@@ -207,7 +235,22 @@ namespace Holerite.br.pro.DAO
             DataTable dt = new DataTable();
             try
             {
-                string sql = "SELECT * FROM client where name=@name";
+                string sql = @"SELECT 
+                c.cod AS 'Código',
+                c.name AS 'Nome',
+                c.cpf AS 'CPF',
+                c.email AS 'Email',
+                c.telephone_number AS 'Número de Telefone',
+                c.phone_number AS 'Número de Celular',
+                c.cep AS 'CEP',
+                c.state AS 'Estado',
+                c.city AS 'Cidade',
+                c.neighborhood AS 'Bairro',
+                c.street AS 'Rua',
+                c.home_number AS 'Número da casa',
+                c.complement AS 'Complemento'
+                FROM client AS c where name=@name";
+
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@name", name);
 
