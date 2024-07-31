@@ -90,6 +90,9 @@ namespace Holerite.br.pro.VIEW
 
             frmConsultarClient tela = new frmConsultarClient();
             tela.dgClient.DataSource = da.Consult();
+            this.Hide();
+            tela.ShowDialog();
+            
         }
         #endregion
 
@@ -110,6 +113,8 @@ namespace Holerite.br.pro.VIEW
 
                 frmConsultarClient tela = new frmConsultarClient();
                 tela.dgClient.DataSource = da.Consult();
+                this.Hide();
+                tela.ShowDialog();
             }
             else
             {
