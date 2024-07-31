@@ -160,7 +160,26 @@ namespace Holerite.br.pro.DAO
             DataTable dt = new DataTable();
             try
             {
-                string sql = "SELECT * FROM user_employee";
+                string sql = @"SELECT 
+	            e.cod AS 'Código',
+	            e.emp_name AS 'Nome',
+                e.user_name AS 'Nome do Usuário',
+                e.user_password AS 'Senha',
+                e.permissions AS 'Permissoões',
+                e.daily AS 'Daily',
+	            e.cpf AS 'CPF',
+	            e.email AS 'Email',
+	            e.telephone_number AS 'Número de Telefone',
+	            e.phone_number AS 'Número de Celular',
+	            e.cep AS 'CEP',
+	            e.state AS 'Estado',
+	            e.city AS 'Cidade',
+	            e.neighborhood AS 'Bairro',
+	            e.street AS 'Rua',
+	            e.home_number AS 'Número da casa',
+	            e.complement AS 'Complemento',
+                e.emp_function AS 'Funções'
+	            FROM user_employee AS e";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
 
@@ -192,10 +211,30 @@ namespace Holerite.br.pro.DAO
         /// <returns></returns>
         public DataTable Consult(string name)
         {
+            name = "%" + name + "%";
             DataTable dt = new DataTable();
             try
             {
-                string sql = "SELECT * FROM user_employee name LIKE @name";
+                string sql = @"SELECT 
+	            e.cod AS 'Código',
+	            e.emp_name AS 'Nome',
+                e.user_name AS 'Nome do Usuário',
+                e.user_password AS 'Senha',
+                e.permissions AS 'Permissoões',
+                e.daily AS 'Daily',
+	            e.cpf AS 'CPF',
+	            e.email AS 'Email',
+	            e.telephone_number AS 'Número de Telefone',
+	            e.phone_number AS 'Número de Celular',
+	            e.cep AS 'CEP',
+	            e.state AS 'Estado',
+	            e.city AS 'Cidade',
+	            e.neighborhood AS 'Bairro',
+	            e.street AS 'Rua',
+	            e.home_number AS 'Número da casa',
+	            e.complement AS 'Complemento',
+                e.emp_function AS 'Funções'
+	            FROM user_employee AS e WHERE e.emp_name LIKE @name";
 
                 MySqlCommand cmd = new MySqlCommand( sql, _connection);
                 cmd.Parameters.AddWithValue("@name", name);
@@ -231,7 +270,26 @@ namespace Holerite.br.pro.DAO
             DataTable dt = new DataTable();
             try
             {
-                string sql = "SELECT * FROM employee WHERE name=@name";
+                string sql = @"SELECT 
+	            e.cod AS 'Código',
+	            e.emp_name AS 'Nome',
+                e.user_name AS 'Nome do Usuário',
+                e.user_password AS 'Senha',
+                e.permissions AS 'Permissoões',
+                e.daily AS 'Daily',
+	            e.cpf AS 'CPF',
+	            e.email AS 'Email',
+	            e.telephone_number AS 'Número de Telefone',
+	            e.phone_number AS 'Número de Celular',
+	            e.cep AS 'CEP',
+	            e.state AS 'Estado',
+	            e.city AS 'Cidade',
+	            e.neighborhood AS 'Bairro',
+	            e.street AS 'Rua',
+	            e.home_number AS 'Número da casa',
+	            e.complement AS 'Complemento',
+                e.emp_function AS 'Funções'
+	            FROM user_employee AS e WHERE e.emp_name=@name";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@name", name);
@@ -263,7 +321,7 @@ namespace Holerite.br.pro.DAO
             string name = "";
             try
             {
-                string sql = "SELECT name FROM severce WHERE cod=@cod";
+                string sql = "SELECT name FROM user_employee WHERE cod=@cod";
 
                 MySqlCommand cmd = new MySqlCommand( sql, _connection);
                 cmd.Parameters.AddWithValue("@cod", cod);
@@ -274,13 +332,13 @@ namespace Holerite.br.pro.DAO
 
                 if (dr.Read())
                 {
-                    name = dr.GetString("name");
+                    name = dr.GetString("emp_name");
                 }
                 return name;
             }
             catch (Exception ex)
             {
-                Dialog.Message("Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "Atenção");
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "Atenção");
                 return null;
             }
             finally
@@ -300,7 +358,7 @@ namespace Holerite.br.pro.DAO
             int cod = 0;
             try
             {
-                string sql = "SELECT cod FROM user_employee WHERE cpf=@cpf AND user_name=@name";
+                string sql = "SELECT cod FROM user_employee WHERE cpf=@cpf AND emp_name=@name";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cpf", cpf);
