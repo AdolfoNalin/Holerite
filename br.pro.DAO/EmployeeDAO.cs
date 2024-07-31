@@ -43,7 +43,7 @@ namespace Holerite.br.pro.DAO
                 cmd.Parameters.AddWithValue("@user_name", obj.UserName);
                 cmd.Parameters.AddWithValue("@user_password", obj.Password);
                 cmd.Parameters.AddWithValue("@permissions", obj.Permissions);
-                cmd.Parameters.AddWithValue("@wage", obj.Wage);
+                cmd.Parameters.AddWithValue("@wage", obj.Daily);
                 cmd.Parameters.AddWithValue("@cpf", obj.CPF);
                 cmd.Parameters.AddWithValue("@email", obj.Email);
                 cmd.Parameters.AddWithValue("@telephone_number", obj.TelephoneNumber);
@@ -90,7 +90,7 @@ namespace Holerite.br.pro.DAO
                 cmd.Parameters.AddWithValue("@user_name", obj.UserName);
                 cmd.Parameters.AddWithValue("@user_password", obj.Password);
                 cmd.Parameters.AddWithValue("@permissions", obj.Permissions);
-                cmd.Parameters.AddWithValue("@wage", obj.Wage);
+                cmd.Parameters.AddWithValue("@wage", obj.Daily);
                 cmd.Parameters.AddWithValue("@cpf", obj.CPF);
                 cmd.Parameters.AddWithValue("@email", obj.Email);
                 cmd.Parameters.AddWithValue("@telephone_number", obj.TelephoneNumber);
