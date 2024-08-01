@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Holerite.Helpers;
+using Holerite.br.pro.VIEW.Consult;
 
 namespace Holerite.br.pro.VIEW.Insert
 {
@@ -42,6 +43,15 @@ namespace Holerite.br.pro.VIEW.Insert
 
             SupplierDAO dao = new SupplierDAO();
             dao.Insert(obj);
+
+            DialogResult resp = MessageBox.Show("Deseja cadastrar outro Fornecedor", "atenção", MessageBoxButtons.YesNo);
+
+            if(resp == DialogResult.No)
+            {
+                frmConsultSupplier tela = new frmConsultSupplier();
+                this.Hide();
+                tela.ShowDialog();
+            }
         }
         #endregion
 
@@ -69,6 +79,7 @@ namespace Holerite.br.pro.VIEW.Insert
         }
         #endregion
 
+        #region btnUpdate_click
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             Supplier obj = new Supplier()
@@ -91,15 +102,32 @@ namespace Holerite.br.pro.VIEW.Insert
 
             SupplierDAO dao = new SupplierDAO();
             dao.Upadate(obj);
+
+            frmConsultSupplier tela = new frmConsultSupplier();
+            this.Hide();
+            tela.ShowDialog();
         }
+        #endregion
 
         #region
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int cod = int.Parse(txtCod.Text);
 
-            SupplierDAO dao = new SupplierDAO();
-            dao.Delete(cod);
+            if (cod > 0)
+            {
+                SupplierDAO dao = new SupplierDAO();
+                dao.Delete(cod);
+
+                frmConsultSupplier tela = new frmConsultSupplier();
+                this.Hide();
+                tela.ShowDialog();
+            }
+            else
+            {
+                Dialog.Message("Código não encontrado", "atenção");
+            }
+            
         }
         #endregion
     }
