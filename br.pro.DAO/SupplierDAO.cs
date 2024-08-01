@@ -149,7 +149,22 @@ namespace Holerite.br.pro.DAO
             DataTable dt = new DataTable();
             try
             {
-                string sql = "SELECT * FROM supplier";
+                string sql = @"SELECT 
+	            s.cod AS 'Código',
+	            s.name AS 'Nome',
+                s.fantasy_name AS 'Nome do Usuário',
+	            s.cnpj AS 'Senha',
+	            s.email AS 'Email',
+	            s.telephone_number AS 'Número de Telefone',
+	            s.phone_number AS 'Número de Celular',
+	            s.cep AS 'CEP',
+	            s.state AS 'Estado',
+	            s.city AS 'Cidade',
+	            s.neighborhood AS 'Bairro',
+	            s.street AS 'Rua',
+	            s.home_number AS 'Número da casa',
+	            s.complement AS 'Complemento'
+	            FROM supplier AS s";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
 
@@ -182,7 +197,22 @@ namespace Holerite.br.pro.DAO
             DataTable dt = new DataTable();
             try
             {
-                string sql = "SELECT * FROM supplier WHERE name LIKE @name";
+                string sql = @"SELECT 
+	            s.cod AS 'Código',
+	            s.name AS 'Nome',
+                s.fantasy_name AS 'Nome do Usuário',
+	            s.cnpj AS 'Senha',
+	            s.email AS 'Email',
+	            s.telephone_number AS 'Número de Telefone',
+	            s.phone_number AS 'Número de Celular',
+	            s.cep AS 'CEP',
+	            s.state AS 'Estado',
+	            s.city AS 'Cidade',
+	            s.neighborhood AS 'Bairro',
+	            s.street AS 'Rua',
+	            s.home_number AS 'Número da casa',
+	            s.complement AS 'Complemento'
+	            FROM supplier AS s WHERE name LIKE @name";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@name", name);
@@ -218,7 +248,22 @@ namespace Holerite.br.pro.DAO
             DataTable dt = new DataTable();
             try
             {
-                string sql = "SELECT * FROM supplier WHERE name=@name";
+                string sql = @"SELECT 
+	            s.cod AS 'Código',
+	            s.name AS 'Nome',
+                s.fantasy_name AS 'Nome do Usuário',
+	            s.cnpj AS 'CNPJ',
+	            s.email AS 'Email',
+	            s.telephone_number AS 'Número de Telefone',
+	            s.phone_number AS 'Número de Celular',
+	            s.cep AS 'CEP',
+	            s.state AS 'Estado',
+	            s.city AS 'Cidade',
+	            s.neighborhood AS 'Bairro',
+	            s.street AS 'Rua',
+	            s.home_number AS 'Número da casa',
+	            s.complement AS 'Complemento'
+	            FROM supplier AS s WHERE name=@name";
 
                 MySqlCommand cmd = new MySqlCommand( sql, _connection);
                 cmd.Parameters.AddWithValue("@name", name );
