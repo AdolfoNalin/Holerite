@@ -45,12 +45,12 @@ namespace Holerite.br.pro.VIEW.Consult
             obj.Email = dgClient.CurrentRow.Cells[3].Value.ToString();
             obj.TelephoneNumber = dgClient.CurrentRow.Cells[4].Value.ToString();
             obj.PhoneNumber = dgClient.CurrentRow.Cells[5].Value.ToString();
-            obj.State = dgClient.CurrentRow.Cells[6].Value.ToString();
-            obj.City = dgClient.CurrentRow.Cells[7].Value.ToString();
-            obj.Neighborhood = dgClient.CurrentRow.Cells[8].Value.ToString();
-            obj.Street = dgClient.CurrentRow.Cells[9].Value.ToString();
-            obj.HomeNumber = int.Parse(dgClient.CurrentRow.Cells[10].Value.ToString());
-            obj.CEP = dgClient.CurrentRow.Cells[11].Value.ToString();
+            obj.CEP = dgClient.CurrentRow.Cells[6].Value.ToString();
+            obj.State = dgClient.CurrentRow.Cells[7].Value.ToString();
+            obj.City = dgClient.CurrentRow.Cells[8].Value.ToString();
+            obj.Neighborhood = dgClient.CurrentRow.Cells[9].Value.ToString();
+            obj.Street = dgClient.CurrentRow.Cells[10].Value.ToString();
+            obj.HomeNumber = int.Parse(dgClient.CurrentRow.Cells[11].Value.ToString());
             obj.Complement = dgClient.CurrentRow.Cells[12].Value.ToString();
 
             tela.txtCod.Text = obj.Cod.ToString();
