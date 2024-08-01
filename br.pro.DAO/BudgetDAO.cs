@@ -133,7 +133,14 @@ namespace Holerite.br.pro.DAO
             DataTable dt = new DataTable();
             try
             {
-                string sql = "SELECT * FROM budget";
+                string sql = @"SELECT 
+                b.cod AS 'Código',
+                u.emp_name AS 'Nome Funcionário',
+                c.name AS 'Nome Cliente',
+                b.subtotal AS 'Subtotal'
+                FROM budget AS b
+                JOIN user_employee AS u ON (u.cod = b.cod_emp)
+                JOIN client AS c ON (c.cod = b.cod_client)";
 
                 MySqlCommand cmd = new MySqlCommand( sql, _connection);
 
@@ -169,10 +176,14 @@ namespace Holerite.br.pro.DAO
             try
             {
                 string sql = @"SELECT 
-                b.cod AS 'Código', 
-                c.name AS 'Nome', 
-                b.date AS 'Data', b.total FROM budget AS b
-                JOIN client AS c on (b.cod_client = c.cod) WHERE b.cod=@cod";
+                b.cod AS 'Código',
+                u.emp_name AS 'Nome Funcionário',
+                c.name AS 'Nome Cliente',
+                b.date AS 'Data',
+                b.subtotal AS 'Subtotal'
+                FROM budget AS b
+                JOIN user_employee AS u ON (u.cod = b.cod_emp)
+                JOIN client AS c ON (c.cod = b.cod_client) WHERE b.cod=@cod";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cod", cod);
@@ -208,10 +219,15 @@ namespace Holerite.br.pro.DAO
             try
             {
                 string sql = @"SELECT 
-                b.cod AS 'Código', 
-                c.name AS 'Nome', 
-                b.date AS 'Data', b.total FROM budget AS b
-                JOIN client AS c on (b.cod_client = c.cod) WHERE date between @startdate AND @enddate";
+                b.cod AS 'Código',
+                u.emp_name AS 'Nome Funcionário',
+                c.name AS 'Nome Cliente',
+                b.date AS 'Data',
+                b.subtotal AS 'Subtotal'
+                FROM budget AS b
+                JOIN user_employee AS u ON (u.cod = b.cod_emp)
+                JOIN client AS c ON (c.cod = b.cod_client) 
+                WHERE date between @startdate AND @enddate";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@startdate", startDate);
@@ -249,10 +265,14 @@ namespace Holerite.br.pro.DAO
             try
             {
                 string sql = @"SELECT 
-                b.cod AS 'Código', 
-                c.name AS 'Nome', 
-                b.date AS 'Data', b.total FROM budget AS b
-                JOIN client AS c on (b.cod_client = c.cod) WHERE c.name=@name";
+                b.cod AS 'Código',
+                u.emp_name AS 'Nome Funcionário',
+                c.name AS 'Nome Cliente',
+                b.date AS 'Data',
+                b.subtotal AS 'Subtotal'
+                FROM budget AS b
+                JOIN user_employee AS u ON (u.cod = b.cod_emp)
+                JOIN client AS c ON (c.cod = b.cod_client); WHERE c.name=@name";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@name", name);
