@@ -53,8 +53,15 @@ namespace Holerite.br.pro.VIEW.Insert
             EmployeeDAO da = new EmployeeDAO();
             da.Insert(obj);
 
-            frmConsultEmployee tela = new frmConsultEmployee();
-            tela.dgEmployee.DataSource = da.Consult();
+            DialogResult resp = MessageBox.Show("Deseja cadastrar outro funcionário?", "atenção", MessageBoxButtons.YesNo);
+
+            if(resp == DialogResult.No)
+            {
+                frmConsultEmployee tela = new frmConsultEmployee();
+                tela.dgEmployee.DataSource = da.Consult();
+                this.Hide();
+                tela.ShowDialog();
+            }
         }
         #endregion
 
@@ -72,6 +79,10 @@ namespace Holerite.br.pro.VIEW.Insert
             {
                 EmployeeDAO dao = new EmployeeDAO();
                 dao.Delete(cod);
+
+                frmConsultEmployee tela = new frmConsultEmployee();
+                this.Hide();
+                tela.ShowDialog();
             }
             else
             {
@@ -111,6 +122,8 @@ namespace Holerite.br.pro.VIEW.Insert
 
             frmConsultEmployee tela = new frmConsultEmployee();
             tela.dgEmployee.DataSource = da.Consult();
+            this.Hide();
+            tela.ShowDialog();
         }
         #endregion
 
