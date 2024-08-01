@@ -71,14 +71,16 @@ namespace Holerite.br.pro.VIEW.Consult
             tela.txtEmail.Text = dgEmployee.CurrentRow.Cells[7].Value.ToString();
             tela.mtbPhoneNumber.Text = dgEmployee.CurrentRow.Cells[8].Value.ToString();
             tela.mtbTelephoneNumber.Text = dgEmployee.CurrentRow.Cells[9].Value.ToString();
-            tela.txtCity.Text = dgEmployee.CurrentRow.Cells[10].Value.ToString();
-            tela.txtNeighborhood.Text = dgEmployee.CurrentRow.Cells[11].Value.ToString();
-            tela.txtHomeNumber.Text = dgEmployee.CurrentRow.Cells[12].Value.ToString();
-            tela.cbUF.Text = dgEmployee.CurrentRow.Cells[13].Value.ToString();
+            tela.mtbCEP.Text = dgEmployee.CurrentRow.Cells[10].Value.ToString();
+            tela.cbUF.Text = dgEmployee.CurrentRow.Cells[11].Value.ToString();
+            tela.txtCity.Text = dgEmployee.CurrentRow.Cells[12].Value.ToString();
+            tela.txtNeighborhood.Text = dgEmployee.CurrentRow.Cells[13].Value.ToString();
             tela.txtStreet.Text = dgEmployee.CurrentRow.Cells[14].Value.ToString();
-            tela.mtbCEP.Text = dgEmployee.CurrentRow.Cells[15].Value.ToString();
-            tela.cbFunction.Text = dgEmployee.CurrentRow.Cells[16].Value.ToString();
+            tela.txtHomeNumber.Text = dgEmployee.CurrentRow.Cells[15].Value.ToString();
+            tela.txtComplement.Text = dgEmployee.CurrentRow.Cells[16].Value.ToString();
+            tela.cbFunction.Text = dgEmployee.CurrentRow.Cells[17].Value.ToString();
 
+            this.Hide();
             tela.ShowDialog();
         }
         #endregion
