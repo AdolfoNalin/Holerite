@@ -30,8 +30,8 @@ namespace Holerite.br.pro.DAO
         {
             try
             {
-                string sql = @"INSERT INTO severce (cod_employee, short_description, full_description, spot_price, term_price, obs)
-                VALUES (@cod_emp, @short_descrition, @full_descrition, @spot_price, @term_price, @obs)";
+                string sql = @"INSERT INTO servece (cod_employee, short_description, full_description, spot_price, term_price, obs, um)
+                VALUES (@cod_emp, @short_descrition, @full_descrition, @spot_price, @term_price, @obs, um)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cod_emp", obj.CodEmp);
@@ -40,6 +40,7 @@ namespace Holerite.br.pro.DAO
                 cmd.Parameters.AddWithValue("@spot_price", obj.SpotPrice);
                 cmd.Parameters.AddWithValue("@term_price", obj.TermPrice);
                 cmd.Parameters.AddWithValue("@obs", obj.Observation);
+                cmd.Parameters.AddWithValue("@um", obj.UM);
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();
@@ -48,7 +49,7 @@ namespace Holerite.br.pro.DAO
             }
             catch (Exception ex)
             {
-                Dialog.Message("Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
             }
             finally
             {
@@ -66,16 +67,18 @@ namespace Holerite.br.pro.DAO
         {
             try
             {
-                string sql = @"UPDATE severce SET cod_employee=@cod_emp, cod_client=@cod_client, short_description=@short_description, full_descriotion=@full_description, spot_price=@spot_price, 
-                term_price=@term_price, obs=@obs";
+                string sql = @"UPDATE servece SET cod_employee=@cod_emp, short_description=@short_description, full_description=@full_description, spot_price=@spot_price, 
+                term_price=@term_price, obs=@obs, um=@um WHERE cod = @cod;";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cod_emp", obj.CodEmp);
-                cmd.Parameters.AddWithValue("@short_descrition", obj.ShortDescription);
-                cmd.Parameters.AddWithValue("@full_descrition", obj.FullDescription);
+                cmd.Parameters.AddWithValue("@short_description", obj.ShortDescription);
+                cmd.Parameters.AddWithValue("@full_description", obj.FullDescription);
                 cmd.Parameters.AddWithValue("@spot_price", obj.SpotPrice);
                 cmd.Parameters.AddWithValue("@term_price", obj.TermPrice);
                 cmd.Parameters.AddWithValue("@obs", obj.Observation);
+                cmd.Parameters.AddWithValue("@um", obj.UM);
+                cmd.Parameters.AddWithValue("@cod", obj.Cod);
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();
@@ -128,7 +131,17 @@ namespace Holerite.br.pro.DAO
             DataTable dt = new DataTable();
             try
             {
-                string sql = "SELECT * FROM user_employee";
+                string sql = @"SELECT 
+                s.cod AS 'Código',
+                u.emp_name AS 'Nome Funcionário',
+                s.short_description AS 'Descrição resumida',
+                s.full_description AS 'Descrição resumida',
+                s.um AS 'Unidade de Medida',
+                s.spot_price AS 'Preço á vista',
+                s.term_price AS 'Preço á Prazo',
+                s.obs AS 'Observação'
+                FROM servece AS s
+                JOIN user_employee AS u ON (u.cod = s.cod_employee);";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
 
@@ -212,7 +225,5 @@ namespace Holerite.br.pro.DAO
             { _connection.Close(); }
         }
         #endregion
-
-        
     }
 }
