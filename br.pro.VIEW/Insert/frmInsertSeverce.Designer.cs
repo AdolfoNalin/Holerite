@@ -30,8 +30,6 @@
         {
             this.lblFullDescription = new System.Windows.Forms.Label();
             this.txtFullDescription = new System.Windows.Forms.TextBox();
-            this.lblAmountFD = new System.Windows.Forms.Label();
-            this.lblAmountSD = new System.Windows.Forms.Label();
             this.txtShortDescription = new System.Windows.Forms.TextBox();
             this.lblShortDescription = new System.Windows.Forms.Label();
             this.txtSpotPrice = new System.Windows.Forms.TextBox();
@@ -40,7 +38,6 @@
             this.lblTermPrice = new System.Windows.Forms.Label();
             this.txtOBS = new System.Windows.Forms.TextBox();
             this.lblObservation = new System.Windows.Forms.Label();
-            this.lblAmountOBS = new System.Windows.Forms.Label();
             this.btnInset = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
@@ -49,6 +46,8 @@
             this.lblEmployee = new System.Windows.Forms.Label();
             this.txtCod = new System.Windows.Forms.TextBox();
             this.lblCod = new System.Windows.Forms.Label();
+            this.lblUM = new System.Windows.Forms.Label();
+            this.cbUM = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lblFullDescription
@@ -67,24 +66,6 @@
             this.txtFullDescription.Name = "txtFullDescription";
             this.txtFullDescription.Size = new System.Drawing.Size(233, 39);
             this.txtFullDescription.TabIndex = 1;
-            // 
-            // lblAmountFD
-            // 
-            this.lblAmountFD.AutoSize = true;
-            this.lblAmountFD.Location = new System.Drawing.Point(381, 44);
-            this.lblAmountFD.Name = "lblAmountFD";
-            this.lblAmountFD.Size = new System.Drawing.Size(19, 13);
-            this.lblAmountFD.TabIndex = 2;
-            this.lblAmountFD.Text = "__";
-            // 
-            // lblAmountSD
-            // 
-            this.lblAmountSD.AutoSize = true;
-            this.lblAmountSD.Location = new System.Drawing.Point(380, 107);
-            this.lblAmountSD.Name = "lblAmountSD";
-            this.lblAmountSD.Size = new System.Drawing.Size(19, 13);
-            this.lblAmountSD.TabIndex = 5;
-            this.lblAmountSD.Text = "__";
             // 
             // txtShortDescription
             // 
@@ -153,15 +134,6 @@
             this.lblObservation.Size = new System.Drawing.Size(68, 13);
             this.lblObservation.TabIndex = 10;
             this.lblObservation.Text = "Observação:";
-            // 
-            // lblAmountOBS
-            // 
-            this.lblAmountOBS.AutoSize = true;
-            this.lblAmountOBS.Location = new System.Drawing.Point(600, 247);
-            this.lblAmountOBS.Name = "lblAmountOBS";
-            this.lblAmountOBS.Size = new System.Drawing.Size(19, 13);
-            this.lblAmountOBS.TabIndex = 12;
-            this.lblAmountOBS.Text = "__";
             // 
             // btnInset
             // 
@@ -236,11 +208,33 @@
             this.lblCod.TabIndex = 19;
             this.lblCod.Text = "Código:";
             // 
+            // lblUM
+            // 
+            this.lblUM.AutoSize = true;
+            this.lblUM.Location = new System.Drawing.Point(518, 74);
+            this.lblUM.Name = "lblUM";
+            this.lblUM.Size = new System.Drawing.Size(67, 13);
+            this.lblUM.TabIndex = 22;
+            this.lblUM.Text = "Uni. Medida:";
+            // 
+            // cbUM
+            // 
+            this.cbUM.FormattingEnabled = true;
+            this.cbUM.Items.AddRange(new object[] {
+            "M3",
+            "M2"});
+            this.cbUM.Location = new System.Drawing.Point(586, 71);
+            this.cbUM.Name = "cbUM";
+            this.cbUM.Size = new System.Drawing.Size(134, 21);
+            this.cbUM.TabIndex = 21;
+            // 
             // frmInsertSeverce
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblUM);
+            this.Controls.Add(this.cbUM);
             this.Controls.Add(this.txtCod);
             this.Controls.Add(this.lblCod);
             this.Controls.Add(this.lblEmployee);
@@ -249,17 +243,14 @@
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnInset);
-            this.Controls.Add(this.lblAmountOBS);
             this.Controls.Add(this.txtOBS);
             this.Controls.Add(this.lblObservation);
             this.Controls.Add(this.txtTerm);
             this.Controls.Add(this.lblTermPrice);
             this.Controls.Add(this.txtSpotPrice);
             this.Controls.Add(this.lblSpotPrice);
-            this.Controls.Add(this.lblAmountSD);
             this.Controls.Add(this.txtShortDescription);
             this.Controls.Add(this.lblShortDescription);
-            this.Controls.Add(this.lblAmountFD);
             this.Controls.Add(this.txtFullDescription);
             this.Controls.Add(this.lblFullDescription);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -275,13 +266,10 @@
         #endregion
 
         private System.Windows.Forms.Label lblFullDescription;
-        private System.Windows.Forms.Label lblAmountFD;
-        private System.Windows.Forms.Label lblAmountSD;
         private System.Windows.Forms.Label lblShortDescription;
         private System.Windows.Forms.Label lblSpotPrice;
         private System.Windows.Forms.Label lblTermPrice;
         private System.Windows.Forms.Label lblObservation;
-        private System.Windows.Forms.Label lblAmountOBS;
         private System.Windows.Forms.Button btnInset;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
@@ -295,5 +283,7 @@
         public System.Windows.Forms.TextBox txtOBS;
         public System.Windows.Forms.ComboBox cbEmployee;
         public System.Windows.Forms.TextBox txtCod;
+        private System.Windows.Forms.Label lblUM;
+        public System.Windows.Forms.ComboBox cbUM;
     }
 }

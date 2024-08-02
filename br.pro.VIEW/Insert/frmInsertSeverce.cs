@@ -1,5 +1,6 @@
 ﻿using Holerite.br.pro.DAO;
 using Holerite.br.pro.MODEL;
+using Holerite.br.pro.VIEW.Consult;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,15 +28,15 @@ namespace Holerite.br.pro.VIEW.Insert
         /// <param name="e"></param>
         private void btnInset_Click(object sender, EventArgs e)
         {
-            Severce obj = new Severce()
-            {
-                CodEmp = int.Parse(cbEmployee.SelectedValue.ToString()),
-                ShortDescription = txtShortDescription.Text,
-                FullDescription = txtFullDescription.Text,
-                SpotPrice = float.Parse(txtSpotPrice.Text),
-                TermPrice = float.Parse(txtTerm.Text),
-                Observation = txtOBS.Text
-            };
+            Severce obj = new Severce();
+            
+            obj.CodEmp = int.Parse(cbEmployee.SelectedValue.ToString());
+            obj.ShortDescription = txtShortDescription.Text;
+            obj.UM = cbUM.Text;
+            obj.FullDescription = txtFullDescription.Text;
+            obj.SpotPrice = float.Parse(txtSpotPrice.Text);
+            obj.TermPrice = float.Parse(txtTerm.Text);
+            obj.Observation = txtOBS.Text;
 
             SeverceDAO dao = new SeverceDAO();   
             dao.Insert(obj);
@@ -45,10 +46,19 @@ namespace Holerite.br.pro.VIEW.Insert
         #region Load
         private void frmInsertSeverce_Load(object sender, EventArgs e)
         {
-            SeverceDAO dao = new SeverceDAO();
-            cbEmployee.DataSource = dao.Consult();
-            cbEmployee.DisplayMember = "emp_name";
-            cbEmployee.ValueMember = "cod";
+            EmployeeDAO dao = new EmployeeDAO();
+
+            if (txtCod.Text == "")
+            {
+                cbEmployee.DataSource = dao.Consult();
+            }
+            else
+            {
+               cbEmployee.DataSource = dao.Consult(cbEmployee.Text);
+            }
+
+            cbEmployee.DisplayMember = "Nome";
+            cbEmployee.ValueMember = "Código";
         }
         #endregion
 
@@ -62,8 +72,18 @@ namespace Holerite.br.pro.VIEW.Insert
         {
             int cod = int.Parse(txtCod.Text);
 
-            SeverceDAO dao = new SeverceDAO();
-            dao.Delete(cod);
+            if(cod > 0)
+            {
+                SeverceDAO dao = new SeverceDAO();
+                dao.Delete(cod);
+
+                frmConsultSeverce tela = new frmConsultSeverce();
+                tela.dgSeverce.DataSource = dao.Consult();
+                this.Hide();
+                tela.ShowDialog();
+            }
+
+            
         }
         #endregion
 
@@ -75,18 +95,24 @@ namespace Holerite.br.pro.VIEW.Insert
         /// <param name="e"></param>
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            Severce obj = new Severce()
-            {
-                CodEmp = int.Parse(cbEmployee.SelectedValue.ToString()),
-                ShortDescription = txtShortDescription.Text,
-                FullDescription = txtFullDescription.Text,
-                SpotPrice = float.Parse(txtSpotPrice.Text),
-                TermPrice = float.Parse(txtTerm.Text),
-                Observation = txtOBS.Text
-            };
+            Severce obj = new Severce();
+
+            obj.Cod = int.Parse(txtCod.Text);
+            obj.CodEmp = int.Parse(cbEmployee.SelectedValue.ToString());
+            obj.ShortDescription = txtShortDescription.Text;
+            obj.UM = cbUM.Text;
+            obj.FullDescription = txtFullDescription.Text;
+            obj.SpotPrice = float.Parse(txtSpotPrice.Text);
+            obj.TermPrice = float.Parse(txtTerm.Text);
+            obj.Observation = txtOBS.Text;
 
             SeverceDAO dao = new SeverceDAO();
             dao.Update(obj);
+
+            frmConsultSeverce tela = new frmConsultSeverce();
+            tela.dgSeverce.DataSource = dao.Consult();
+            this.Hide();
+            tela.ShowDialog();
         }
         #endregion
     }
