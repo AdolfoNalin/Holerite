@@ -161,7 +161,7 @@ namespace Holerite.br.pro.DAO
         }
         #endregion
 
-        #region Consult
+        #region Consult ShortDescription
         /// <summary>
         /// Filtra o serviço pela descrição resumida
         /// </summary>
@@ -223,6 +223,51 @@ namespace Holerite.br.pro.DAO
             }
             finally
             { _connection.Close(); }
+        }
+        #endregion
+
+        #region Search Id
+        public Severce Search(int cod)
+        {
+            Severce obj = new Severce();
+            try
+            {
+                string sql = @"SELECT 
+                s.cod AS 'Código',
+                s.short_description AS 'Descrição resumida',
+                s.um AS 'Unidade de Medida',
+                s.spot_price AS 'Preço á vista',
+                s.term_price AS 'Preço á Prazo'
+                FROM servece AS s
+                WHERE cod=@cod";
+
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+                cmd.Parameters.AddWithValue("@cod", cod);
+
+                _connection.Open();
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    obj.Cod = dr.GetInt32("Código");
+                    obj.ShortDescription = dr.GetString("Descrição resumida");
+                    obj.UM = dr.GetString("Unidade de Medida");
+                    obj.SpotPrice = dr.GetFloat("Preço á vista");
+                    obj.TermPrice = dr.GetFloat("Preço á Prazo");
+                }
+
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "Atenção");
+                return null;
+            }
+            finally
+            {
+                _connection.Close();
+            }
         }
         #endregion
     }
