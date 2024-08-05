@@ -10,10 +10,14 @@ namespace Holerite.Helpers
     public class Dialog
     {
         #region Message
+        /// <summary>
+        /// MessageBox simples
+        /// </summary>
+        /// <param name="message">Mensagem que vai ser mostrada</param>
+        /// <param name="title">Titulo da Mensagem</param>
         public static void Message(string message, string title)
         {
-            title.ToUpper();
-            MessageBox.Show(message, title, MessageBoxButtons.OK);
+            MessageBox.Show(message, title.ToUpper(), MessageBoxButtons.OK);
         }
         #endregion
     }
