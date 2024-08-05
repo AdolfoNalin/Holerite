@@ -321,7 +321,7 @@ namespace Holerite.br.pro.DAO
             string name = "";
             try
             {
-                string sql = "SELECT name FROM user_employee WHERE cod=@cod";
+                string sql = "SELECT emp_name FROM user_employee WHERE cod=@cod";
 
                 MySqlCommand cmd = new MySqlCommand( sql, _connection);
                 cmd.Parameters.AddWithValue("@cod", cod);

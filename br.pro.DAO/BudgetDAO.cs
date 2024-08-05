@@ -328,6 +328,5 @@ namespace Holerite.br.pro.DAO
             }
         }
         #endregion
-
     }
 }
