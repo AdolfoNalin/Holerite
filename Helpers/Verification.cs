@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Holerite.Helpers
 {
@@ -69,12 +70,40 @@ namespace Holerite.Helpers
         /// </summary>
         /// <param name="cpf"></param>
         /// <returns></returns>
-        public Employee ToCheck(string cpf)
+        public static Employee ToCheck(string cpf)
         {
             EmployeeDAO dao = new EmployeeDAO();
             Employee obj = dao.GetSearch(cpf);
 
             return obj;
+        }
+        #endregion
+
+        #region ToCheck
+        /// <summary>
+        /// Virifica e faz o calculo do subtotal
+        /// </summary>
+        /// <param name="price"></param>
+        /// <param name="um"></param>
+        /// <returns></returns>
+        public static float ToCheck(float price, string um, int amount)
+        {
+            float subtotal = 0;
+            
+            switch (um.ToUpper())
+            {
+                case "M3":
+                    subtotal = price * amount;
+                    break;
+                case "M2":
+                    subtotal = price * amount;
+                    break;
+                default:
+                    Dialog.Message("Unidade de Medida não foi cadastrada", "atemçao");
+                    break;
+            }
+
+            return subtotal;
         }
         #endregion
     }
