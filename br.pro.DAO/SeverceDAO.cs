@@ -135,7 +135,7 @@ namespace Holerite.br.pro.DAO
                 s.cod AS 'Código',
                 u.emp_name AS 'Nome Funcionário',
                 s.short_description AS 'Descrição resumida',
-                s.full_description AS 'Descrição resumida',
+                s.full_description AS 'Descrição Completa',
                 s.um AS 'Unidade de Medida',
                 s.spot_price AS 'Preço á vista',
                 s.term_price AS 'Preço á Prazo',
@@ -169,12 +169,14 @@ namespace Holerite.br.pro.DAO
         /// <returns></returns>
         public DataTable Consult(string sd)
         {
+            sd = "%" + sd + "%";
             DataTable dt = new DataTable();
             try
             {
-                string sql = "SELECT * FROM severce WHERE short_description LIKE short_decription";
+                string sql = "SELECT * FROM servece WHERE short_description LIKE @short_description";
+
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
-                cmd.Parameters.AddWithValue("@short_descrition", sd);
+                cmd.Parameters.AddWithValue("@short_description", sd);
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();
@@ -187,7 +189,11 @@ namespace Holerite.br.pro.DAO
             catch (Exception ex)
             {
                 Dialog.Message($"Acontceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "Atenção");
-                throw;
+                return null;
+            }
+            finally
+            {
+                _connection.Close();
             }
         }
         #endregion
@@ -262,6 +268,56 @@ namespace Holerite.br.pro.DAO
             catch (Exception ex)
             {
                 Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "Atenção");
+                return null;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        #endregion
+
+        #region Search short_description
+        /// <summary>
+        /// Busca o serviço no banco de dados pela descrição resumida
+        /// </summary>
+        /// <param name="sd"></param>
+        /// <returns></returns>
+        public Severce GetSeverce(string sd)
+        {
+            Severce obj = new Severce();
+            try
+            {
+                string sql = @"SELECT 
+                s.cod AS 'Código',
+                s.short_description AS 'Descrição resumida',
+                s.um AS 'Unidade de Medida',
+                s.spot_price AS 'Preço á vista',
+                s.term_price AS 'Preço á Prazo'
+                FROM servece AS s
+                WHERE short_description=@sd";
+
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+                cmd.Parameters.AddWithValue("@sd", sd);
+
+                _connection.Open();
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    obj.Cod = dr.GetInt32("Código");
+                    obj.ShortDescription = dr.GetString("Descrição resumida");
+                    obj.UM = dr.GetString("Unidade de Medida");
+                    obj.SpotPrice = dr.GetFloat("Preço á vista");
+                    obj.TermPrice = dr.GetFloat("Preço á Prazo");
+                }
+
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                Dialog.Message($"Aconteceu um erro od tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
                 return null;
             }
             finally
