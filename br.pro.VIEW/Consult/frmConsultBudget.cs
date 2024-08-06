@@ -1,5 +1,6 @@
 ﻿using Holerite.br.pro.DAO;
 using Holerite.br.pro.MODEL;
+using Holerite.br.pro.VIEW.Insert;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,7 +34,8 @@ namespace Holerite.br.pro.VIEW.Consult
         {
             if (e.KeyChar == 13)
             {
-                dgBudget.DataSource = new BudgetDAO().Consult(int.Parse(txtCod.Text));
+                BudgetDAO dao = new BudgetDAO();
+                dgBudget.DataSource = dao.Consult(int.Parse(txtCod.Text));
             }
         }
         #endregion
@@ -41,7 +43,8 @@ namespace Holerite.br.pro.VIEW.Consult
         #region tbnNameClient_keypress
         private void txtNameClient_KeyPress(object sender, KeyPressEventArgs e)
         {
-            dgBudget.DataSource = new BudgetDAO().Consult(txtNameClient.Text);
+            BudgetDAO dao = new BudgetDAO();
+            dgBudget.DataSource = dao.Consult(txtNameClient.Text);
         }
         #endregion
 
@@ -51,7 +54,40 @@ namespace Holerite.br.pro.VIEW.Consult
             DateTime startDate = DateTime.Parse(dtpStart.Text);
             DateTime endtDate = DateTime.Parse(dtpEnd.Text);
 
-            dgBudget.DataSource = new BudgetDAO().Consult(startDate, endtDate);
+            BudgetDAO dao = new BudgetDAO();
+            dgBudget.DataSource = dao.Consult(startDate, endtDate);
+        }
+        #endregion
+
+        #region dgBudget_CellClick
+        private void dgBudget_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataTable dt = new DataTable();
+            ItemBudgetDAO dao = new ItemBudgetDAO();
+
+            dt = dao.Consult(int.Parse(dgBudget.CurrentRow.Cells[0].Value.ToString()));
+
+            frmInsertBudget tela = new frmInsertBudget();
+            tela.txtCodBudget.Text = dgBudget.CurrentRow.Cells[0].Value.ToString();
+            tela.mtbDate.Text = dgBudget.CurrentRow.Cells[1].Value.ToString();
+            string payment = dgBudget.CurrentRow.Cells[2].Value.ToString();
+            tela.dgBudget.DataSource = dt;
+            tela.cbEmployee.Text = dgBudget.CurrentRow.Cells[3].Value.ToString();
+            tela.cbClient.Text = dgBudget.CurrentRow.Cells[4].Value.ToString();
+            tela.txtSubtotal.Text = dgBudget.CurrentRow.Cells[5].Value.ToString();
+            tela.txtTotal.Text = dgBudget.CurrentRow.Cells[5].Value.ToString();
+            tela.txtObs.Text = dgBudget.CurrentRow.Cells[5].Value.ToString();
+
+            if (payment == "Vista")
+            {
+                tela.rbSpot.Checked = true;
+            }
+            else
+            {
+                tela.rbTerm.Checked = true;
+            }
+
+            tela.ShowDialog();
         }
         #endregion
     }

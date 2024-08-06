@@ -64,7 +64,6 @@
             this.dgSeverce.ReadOnly = true;
             this.dgSeverce.Size = new System.Drawing.Size(776, 281);
             this.dgSeverce.TabIndex = 2;
-            this.dgSeverce.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSeverce_CellContentClick);
             // 
             // btnSearch
             // 
@@ -89,6 +88,7 @@
             this.Name = "frmConsultSeverce";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta Serviço";
+            this.Load += new System.EventHandler(this.frmConsultSeverce_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgSeverce)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -99,7 +99,7 @@
 
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.DataGridView dgSeverce;
         private System.Windows.Forms.Button btnSearch;
+        public System.Windows.Forms.DataGridView dgSeverce;
     }
 }

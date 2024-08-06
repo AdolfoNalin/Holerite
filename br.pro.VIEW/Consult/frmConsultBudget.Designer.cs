@@ -70,6 +70,7 @@
             this.dgBudget.ReadOnly = true;
             this.dgBudget.Size = new System.Drawing.Size(776, 304);
             this.dgBudget.TabIndex = 2;
+            this.dgBudget.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgBudget_CellClick);
             // 
             // txtNameClient
             // 
