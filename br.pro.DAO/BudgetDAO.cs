@@ -30,8 +30,8 @@ namespace Holerite.br.pro.DAO
         {
             try
             {
-                string sql = @"INSERT INTO budget (cod_emp, cod_client, payment, subtotal, total, observation)
-                VALUES(@cod_emp, @cod_client, @payment, @subtotal, @total, @observation)";
+                string sql = @"INSERT INTO budget (emp_cod, client_cod, payment, subtotal, total, obs, date)
+                VALUES(@cod_emp, @cod_client, @payment, @subtotal, @total, @obs, @date)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cod_emp", obj.CodEmp);
@@ -39,7 +39,8 @@ namespace Holerite.br.pro.DAO
                 cmd.Parameters.AddWithValue("@payment", obj.Payment);
                 cmd.Parameters.AddWithValue("@subtotal", obj.Subtotal);
                 cmd.Parameters.AddWithValue("@total", obj.Total);
-                cmd.Parameters.AddWithValue("@observation", obj.Observation);
+                cmd.Parameters.AddWithValue("@obs", obj.Observation);
+                cmd.Parameters.AddWithValue("@date", obj.Date);
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();
@@ -48,7 +49,7 @@ namespace Holerite.br.pro.DAO
             }
             catch (Exception ex)
             {
-                Dialog.Message("Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
             }
             finally
             {
@@ -135,12 +136,14 @@ namespace Holerite.br.pro.DAO
             {
                 string sql = @"SELECT 
                 b.cod AS 'Código',
+                b.date AS 'Data',
+                b.payment AS 'Forma de pagamento',
                 u.emp_name AS 'Nome Funcionário',
                 c.name AS 'Nome Cliente',
                 b.subtotal AS 'Subtotal'
                 FROM budget AS b
-                JOIN user_employee AS u ON (u.cod = b.cod_emp)
-                JOIN client AS c ON (c.cod = b.cod_client)";
+                JOIN user_employee AS u ON (u.cod = b.emp_cod)
+                JOIN client AS c ON (c.cod = b.client_cod)";
 
                 MySqlCommand cmd = new MySqlCommand( sql, _connection);
 
@@ -177,13 +180,14 @@ namespace Holerite.br.pro.DAO
             {
                 string sql = @"SELECT 
                 b.cod AS 'Código',
+                b.date AS 'Data',
+                b.payment AS 'Forma de pagamento',
                 u.emp_name AS 'Nome Funcionário',
                 c.name AS 'Nome Cliente',
-                b.date AS 'Data',
                 b.subtotal AS 'Subtotal'
                 FROM budget AS b
-                JOIN user_employee AS u ON (u.cod = b.cod_emp)
-                JOIN client AS c ON (c.cod = b.cod_client) WHERE b.cod=@cod";
+                JOIN user_employee AS u ON (u.cod = b.emp_cod)
+                JOIN client AS c ON (c.cod = b.client_cod) WHERE b.cod=@cod";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cod", cod);
@@ -199,10 +203,12 @@ namespace Holerite.br.pro.DAO
             catch (Exception ex)
             {
                 Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho {ex.StackTrace}", "atenção");
-                throw;
+                return null;
             }
             finally
-            { _connection.Close(); }
+            { 
+                _connection.Close(); 
+            }
         }
         #endregion
 
@@ -220,18 +226,18 @@ namespace Holerite.br.pro.DAO
             {
                 string sql = @"SELECT 
                 b.cod AS 'Código',
+                b.date AS 'Data',
+                b.payment AS 'Forma de pagamento',
                 u.emp_name AS 'Nome Funcionário',
                 c.name AS 'Nome Cliente',
-                b.date AS 'Data',
                 b.subtotal AS 'Subtotal'
                 FROM budget AS b
-                JOIN user_employee AS u ON (u.cod = b.cod_emp)
-                JOIN client AS c ON (c.cod = b.cod_client) 
-                WHERE date between @startdate AND @enddate";
+                JOIN user_employee AS u ON (u.cod = b.emp_cod)
+                JOIN client AS c ON (c.cod = b.client_cod) WHERE b.date between @startdate AND @enddate";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@startdate", startDate);
-                cmd.Parameters.AddWithValue("@endate", endDate);
+                cmd.Parameters.AddWithValue("@enddate", endDate);
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();
@@ -266,13 +272,14 @@ namespace Holerite.br.pro.DAO
             {
                 string sql = @"SELECT 
                 b.cod AS 'Código',
+                b.date AS 'Data',
+                b.payment AS 'Forma de pagamento',
                 u.emp_name AS 'Nome Funcionário',
                 c.name AS 'Nome Cliente',
-                b.date AS 'Data',
                 b.subtotal AS 'Subtotal'
                 FROM budget AS b
-                JOIN user_employee AS u ON (u.cod = b.cod_emp)
-                JOIN client AS c ON (c.cod = b.cod_client); WHERE c.name=@name";
+                JOIN user_employee AS u ON (u.cod = b.emp_cod)
+                JOIN client AS c ON (c.cod = b.client_cod) WHERE c.name LIKE @name";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@name", name);
@@ -297,6 +304,46 @@ namespace Holerite.br.pro.DAO
         }
         #endregion
 
+        #region Search
+        public DataTable Search(string name)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string sql = @"SELECT 
+                b.cod AS 'Código',
+                b.date AS 'Data',
+                b.payment AS 'Forma de pagamento',
+                u.emp_name AS 'Nome Funcionário',
+                c.name AS 'Nome Cliente',
+                b.subtotal AS 'Subtotal'
+                FROM budget AS b
+                JOIN user_employee AS u ON (u.cod = b.emp_cod)
+                JOIN client AS c ON (c.cod = b.client_cod) WHERE c.name=@name";
+
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+                cmd.Parameters.AddWithValue("@nome", name);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
+                return null ;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        #endregion
+
         #region EndBudget
         /// <summary>
         /// Retorna o ultimo orçamento do banco de dados
@@ -307,7 +354,7 @@ namespace Holerite.br.pro.DAO
             int cod = 0;
             try
             {
-                string sql = "SELECT MAX(cod) FROM budget";
+                string sql = "SELECT MAX(cod) cod FROM budget";
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
 
                 _connection.Open();
@@ -318,7 +365,10 @@ namespace Holerite.br.pro.DAO
                 {
                     cod = dr.GetInt32("cod");
                 }
-
+                else
+                {
+                    Dialog.Message("Elemento não encontrado!", "atenção");
+                }
                 return cod;
             }
             catch (Exception ex)
