@@ -140,7 +140,8 @@ namespace Holerite.br.pro.DAO
                 b.payment AS 'Forma de pagamento',
                 u.emp_name AS 'Nome Funcionário',
                 c.name AS 'Nome Cliente',
-                b.subtotal AS 'Subtotal'
+                b.subtotal AS 'Subtotal',
+                b.obs AS 'Observação'
                 FROM budget AS b
                 JOIN user_employee AS u ON (u.cod = b.emp_cod)
                 JOIN client AS c ON (c.cod = b.client_cod)";
@@ -184,7 +185,8 @@ namespace Holerite.br.pro.DAO
                 b.payment AS 'Forma de pagamento',
                 u.emp_name AS 'Nome Funcionário',
                 c.name AS 'Nome Cliente',
-                b.subtotal AS 'Subtotal'
+                b.subtotal AS 'Subtotal',
+                b.obs AS 'Observação'
                 FROM budget AS b
                 JOIN user_employee AS u ON (u.cod = b.emp_cod)
                 JOIN client AS c ON (c.cod = b.client_cod) WHERE b.cod=@cod";
@@ -230,10 +232,11 @@ namespace Holerite.br.pro.DAO
                 b.payment AS 'Forma de pagamento',
                 u.emp_name AS 'Nome Funcionário',
                 c.name AS 'Nome Cliente',
-                b.subtotal AS 'Subtotal'
+                b.subtotal AS 'Subtotal',
+                b.obs AS 'Observação'
                 FROM budget AS b
                 JOIN user_employee AS u ON (u.cod = b.emp_cod)
-                JOIN client AS c ON (c.cod = b.client_cod) WHERE b.date between @startdate AND @enddate";
+                JOIN client AS c ON (c.cod = b.client_cod)) WHERE b.date between @startdate AND @enddate";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@startdate", startDate);
@@ -276,7 +279,8 @@ namespace Holerite.br.pro.DAO
                 b.payment AS 'Forma de pagamento',
                 u.emp_name AS 'Nome Funcionário',
                 c.name AS 'Nome Cliente',
-                b.subtotal AS 'Subtotal'
+                b.subtotal AS 'Subtotal',
+                b.obs AS 'Observação'
                 FROM budget AS b
                 JOIN user_employee AS u ON (u.cod = b.emp_cod)
                 JOIN client AS c ON (c.cod = b.client_cod) WHERE c.name LIKE @name";
@@ -316,7 +320,8 @@ namespace Holerite.br.pro.DAO
                 b.payment AS 'Forma de pagamento',
                 u.emp_name AS 'Nome Funcionário',
                 c.name AS 'Nome Cliente',
-                b.subtotal AS 'Subtotal'
+                b.subtotal AS 'Subtotal',
+                b.obs AS 'Observação'
                 FROM budget AS b
                 JOIN user_employee AS u ON (u.cod = b.emp_cod)
                 JOIN client AS c ON (c.cod = b.client_cod) WHERE c.name=@name";
