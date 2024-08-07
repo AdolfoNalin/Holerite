@@ -31,11 +31,12 @@ namespace Holerite.br.pro.DAO
         {
             try
             {
-                string sql = "INSERT INTO point (cod_company, cod_emp) VALUES(@cod_company, cod_emp)";
+                string sql = "INSERT INTO point (cod_company, cod_emp, date) VALUES(@cod_company, @cod_emp, @date)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cod_company", obj.CodCompany);
                 cmd.Parameters.AddWithValue("@cod_emp", obj.CodEmp);
+                cmd.Parameters.AddWithValue("@date", obj.Month);
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();
@@ -124,9 +125,12 @@ namespace Holerite.br.pro.DAO
             DataTable dt = new DataTable();
             try
             {
-                string sql = @"SELECT p.cod AS 'Código', u.emp_name AS 'Colaborador', c.name AS 'Empregador'  FROM point AS p
-                JOIN company AS c on (p.cod_company = c.cod)
-                JOIN user_employee AS u on (p.cod_emp = u.cod)";
+                string sql = @"SELECT  
+                p.cod AS 'Código', 
+                u.emp_name AS 'Colaborador', 
+                p.date AS 'Mês'  
+                FROM point AS p        
+                JOIN user_employee AS u on (p.cod_emp = u.cod);";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
 
@@ -161,9 +165,12 @@ namespace Holerite.br.pro.DAO
             DataTable dt = new DataTable();
             try
             {
-                string sql = @"SELECT p.cod AS 'Código', u.emp_name AS 'Colaborador', c.name AS 'Empregador'  FROM point AS p
-                JOIN company AS c on (p.cod_company = c.cod)
-                JOIN user_employee AS u on (p.cod_emp = u.cod) WHERE u.emp_name LIKE @emp_name";
+                string sql = @"SELECT  
+                p.cod AS 'Código', 
+                u.emp_name AS 'Colaborador', 
+                p.date AS 'Mês'  
+                FROM point AS p        
+                JOIN user_employee AS u on (p.cod_emp = u.cod);WHERE u.emp_name LIKE @emp_name";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@emp_name", emp_name);
@@ -198,9 +205,12 @@ namespace Holerite.br.pro.DAO
             DataTable dt = new DataTable();
             try
             {
-                string sql = @"SELECT p.cod AS 'Código', u.emp_name AS 'Colaborador', c.name AS 'Empregador'  FROM point AS p
-                JOIN company AS c on (p.cod_company = c.cod)
-                JOIN user_employee AS u on (p.cod_emp = u.cod) WHERE u.emp_name=@emp_name";
+                string sql = @"SELECT  
+                p.cod AS 'Código', 
+                u.emp_name AS 'Colaborador', 
+                p.date AS 'Mês'  
+                FROM point AS p        
+                JOIN user_employee AS u on (p.cod_emp = u.cod); WHERE u.emp_name=@emp_name";
 
                 MySqlCommand cmd = new MySqlCommand( sql, _connection);
 
