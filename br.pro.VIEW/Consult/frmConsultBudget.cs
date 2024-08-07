@@ -26,7 +26,6 @@ namespace Holerite.br.pro.VIEW.Consult
             BudgetDAO dao = new BudgetDAO();
             dgBudget.DataSource = dao.Consult();
         }
-
         #endregion
 
         #region txtCod_keypress
@@ -76,7 +75,7 @@ namespace Holerite.br.pro.VIEW.Consult
             tela.cbClient.Text = dgBudget.CurrentRow.Cells[4].Value.ToString();
             tela.txtSubtotal.Text = dgBudget.CurrentRow.Cells[5].Value.ToString();
             tela.txtTotal.Text = dgBudget.CurrentRow.Cells[5].Value.ToString();
-            tela.txtObs.Text = dgBudget.CurrentRow.Cells[5].Value.ToString();
+            tela.txtObs.Text = dgBudget.CurrentRow.Cells[6].Value.ToString();
 
             if (payment == "Vista")
             {
