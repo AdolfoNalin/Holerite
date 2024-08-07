@@ -89,7 +89,7 @@ namespace Holerite.Helpers
         public static float ToCheck(float price, string um, int amount)
         {
             float subtotal = 0;
-            
+
             switch (um.ToUpper())
             {
                 case "M3":
@@ -104,6 +104,40 @@ namespace Holerite.Helpers
             }
 
             return subtotal;
+        }
+        #endregion
+
+        #region Clean the Screen
+        /// <summary>
+        /// Limpa os campos txt, cb, mtb e uma tela
+        /// </summary>
+        /// <param name="tela"></param>
+        public static void Clean(Form tela)
+        {
+            foreach (Control ctrPai in tela.Controls)
+            {
+                foreach (Control ctr1 in ctrPai.Controls)
+                {
+                    if (ctr1 is TabPage)
+                    {
+                        foreach (Control ctr2 in ctr1.Controls)
+                        {
+                            if (ctr2 is TextBox)
+                            {
+                                (ctr2 as TextBox).Text = String.Empty;
+                            }
+                            else if (ctr2 is MaskedTextBox)
+                            {
+                                (ctr2 as MaskedTextBox).Text = String.Empty;
+                            }
+                            else if (ctr2 is ComboBox)
+                            {
+                                (ctr2 as ComboBox).Text = String.Empty;
+                            }
+                        }
+                    }
+                }
+            }
         }
         #endregion
     }
