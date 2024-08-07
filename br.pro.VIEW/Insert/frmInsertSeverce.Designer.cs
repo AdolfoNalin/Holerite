@@ -256,7 +256,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmInsertSeverce";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmInsertSeverce";
+            this.Text = "Cadastrar Serviço";
             this.Load += new System.EventHandler(this.frmInsertSeverce_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
