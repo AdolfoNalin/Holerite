@@ -3,6 +3,7 @@ using Holerite.br.pro.MODEL;
 using Holerite.Helpers;
 using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Asn1.Mozilla;
+using Org.BouncyCastle.Pqc.Crypto.Crystals.Dilithium;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -197,6 +198,40 @@ namespace Holerite.br.pro.DAO
             finally
             {
                 _connection.Close();
+            }
+        }
+        #endregion
+
+        #region SearchCod
+        public DataTable Search(int cod)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string sql = @"SELECT 
+                p.cod AS 'Código',
+                p.short_description AS 'Descrição Resumida',
+                u.spot_price AS 'Preço',
+                p.amount AS 'Quantidade'
+                FROM epi AS e
+                JOIN product AS p ON (p.cod = e.cod_prod)
+                JOIN user_employee AS u ON (u.cod = e.cod_emp) WHERE e.cod=@cod";
+
+                MySqlCommand cmd = new MySqlCommand( sql, _connection);
+                cmd.Parameters.AddWithValue("@cod", cod);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                da.Fill(dt);
+
+               return dt;
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+                return null;
             }
         }
         #endregion
