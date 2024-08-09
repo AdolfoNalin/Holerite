@@ -50,5 +50,13 @@ namespace Holerite.Helpers
             return resp;
         }
         #endregion
+
+        #region MessageDeleteOthers
+        public static DialogResult MessageDeleteOthers(string objects, string title = "atenção")
+        {
+            DialogResult resp = MessageBox.Show($"Deseja Deletetar outro {objects}?", title.ToUpper(), MessageBoxButtons.YesNo);
+            return resp;
+        }
+        #endregion
     }
 }
