@@ -63,11 +63,11 @@ namespace Holerite.br.pro.DAO
             }
             catch (Exception ex)
             {
-                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");  
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
             }
             finally
             {
-                _connection.Close(); 
+                _connection.Close();
             }
         }
         #endregion
@@ -236,11 +236,11 @@ namespace Holerite.br.pro.DAO
                 e.emp_function AS 'Funções'
 	            FROM user_employee AS e WHERE e.emp_name LIKE @name";
 
-                MySqlCommand cmd = new MySqlCommand( sql, _connection);
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@name", name);
 
                 _connection.Open();
-                cmd.ExecuteNonQuery(); 
+                cmd.ExecuteNonQuery();
 
                 MySqlDataAdapter d = new MySqlDataAdapter(cmd);
                 d.Fill(dt);
@@ -323,7 +323,7 @@ namespace Holerite.br.pro.DAO
             {
                 string sql = "SELECT emp_name FROM user_employee WHERE cod=@cod";
 
-                MySqlCommand cmd = new MySqlCommand( sql, _connection);
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cod", cod);
 
                 _connection.Open();
@@ -373,7 +373,7 @@ namespace Holerite.br.pro.DAO
                 }
                 return cod;
             }
-                catch (Exception ex)
+            catch (Exception ex)
             {
                 Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
                 return 0;
@@ -385,13 +385,13 @@ namespace Holerite.br.pro.DAO
         #region GetSearchName
         public Employee GetSearch(string cpf)
         {
-            Employee emp = new Employee();  
+            Employee emp = new Employee();
             try
             {
                 string sql = "SELECT * FROM user_employee WHERE cpf=@cpf";
 
-                MySqlCommand cmd = new MySqlCommand( sql, _connection);
-                cmd.Parameters.AddWithValue("@cpf", cpf );
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+                cmd.Parameters.AddWithValue("@cpf", cpf);
 
                 _connection.Open();
                 MySqlDataReader dr = cmd.ExecuteReader();
@@ -418,21 +418,52 @@ namespace Holerite.br.pro.DAO
                 Dialog.Message($"Aconteceu um erro do tipo {ex.Message} como o caminho para {ex.StackTrace}", "Atenção");
                 return null;
             }
-            finally 
-            { 
-                _connection.Close(); 
+            finally
+            {
+                _connection.Close();
             }
         }
         #endregion
 
-        #region Login
-        /// <summary>
-        /// Verification if username and password is true in the database
-        /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="passWord"></param>
-        /// <returns></returns>
-        public bool Login(string userName, string passWord)
+        #region GetSearch   
+        public string GetSearch(int cod)
+        {
+            string name = "";
+            try
+            {
+                string sql = "SELECT emp_name FROM user_employee WHERE cod=@cod";
+                MySqlCommand cmd = new MySqlCommand( sql, _connection);
+                cmd.Parameters.AddWithValue("@cod", cod);
+
+                _connection.Open();
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    name = dr.GetString("emp_name");
+                }
+                return name;
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+                return null;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+    #endregion
+
+    #region Login
+    /// <summary>
+    /// Verification if username and password is true in the database
+    /// </summary>
+    /// <param name="userName"></param>
+    /// <param name="passWord"></param>
+    /// <returns></returns>
+    public bool Login(string userName, string passWord)
         {
             try
             {
