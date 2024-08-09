@@ -56,34 +56,6 @@ namespace Holerite.br.pro.DAO
 
         #endregion
 
-        #region Update
-        public void Update(ItemBudget obj)
-        {
-            try
-            {
-                string sql = "UPDATE item_budget SET severce_cod=@cod_severce, amount=@amount, price=@price, subtotal=@subtotal WHERE budget_cod = @budget_cod";
-
-                MySqlCommand cmd = new MySqlCommand( sql, _connection);
-                cmd.Parameters.AddWithValue("@cod_severce", obj.CodSeverce);
-                cmd.Parameters.AddWithValue("@amount", obj.Amount);
-                cmd.Parameters.AddWithValue("@price", obj.Price);
-                cmd.Parameters.AddWithValue("@subtotal", obj.Subtotal);
-                cmd.Parameters.AddWithValue("@budget_cod", obj.CodSeverce);
-
-                _connection.Open();
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o camiho {ex.StackTrace}", "atenção");
-            }
-            finally
-            {
-                _connection.Close();
-            }
-        }
-        #endregion
-
         #region Delete
         /// <summary>
         /// Deleta os item do orçamento pai
