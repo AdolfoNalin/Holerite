@@ -25,8 +25,8 @@ namespace Holerite.br.pro.VIEW.Consult
             dgPoint.DataSource = dao.Consult();
         }
         #endregion
-        
-        #region
+
+        #region  dgPoint_CellContentClick
         /// <summary>
         /// Show the Insert point
         /// </summary>
