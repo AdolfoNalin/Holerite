@@ -31,8 +31,8 @@ namespace Holerite.br.pro.DAO
         {
             try
             {
-                string sql = @"INSERT INTO item_budget (budget_cod, severce_cod, amount, price, subtotal)
-                VALUES(@cod_bud, @cod_severce, @amount, @price, @subtotal)";
+                string sql = @"INSERT INTO item_budget (severce_cod, amount, price, subtotal)
+                VALUES(@cod_bud, @cod_severce, @amount, @price, @subtotal) WHERE budget_cod=@cod_bud";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cod_bud", obj.CodBudget);
@@ -79,20 +79,24 @@ namespace Holerite.br.pro.DAO
             }
             finally
             {
-                _connection?.Close();
+                _connection.Close();
             }
         }
         #endregion
 
         #region Delete
+        /// <summary>
+        /// Deleta os item do orçamento pai
+        /// </summary>
+        /// <param name="cod"></param>
         public void Delete(int cod)
         {
             try
             {
-                string sql = "DELETE FROM item_budget WHERE cod_budget=@cod_budget";
+                string sql = "DELETE FROM item_budget WHERE budget_cod=@budget_cod";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
-                cmd.Parameters.AddWithValue("@cod_budget", cod);
+                cmd.Parameters.AddWithValue("@budget_cod", cod);
 
                 _connection?.Open();
                 cmd.ExecuteNonQuery();
@@ -106,7 +110,12 @@ namespace Holerite.br.pro.DAO
         #endregion
 
         #region Consult
-        public DataTable Consult()
+        /// <summary>
+        /// Consulta 
+        /// </summary>
+        /// <param name="cod"></param>
+        /// <returns></returns>
+        public DataTable Consult(int cod)
         {
             DataTable dt = new DataTable();
             try
@@ -114,14 +123,14 @@ namespace Holerite.br.pro.DAO
                 string sql = @"SELECT 
                 s.cod AS 'Código',
                 s.short_description AS 'Descrição Resumida',
-                s.spot_price AS 'Preço á Vista',
-                s.term_price AS 'Preço á Prazo',
+                i.price AS 'Preço',
                 i.amount AS 'Quantidade',
                 i.subtotal AS 'Subtotal'
                 FROM item_budget AS i
-                JOIN servece AS s ON (s.cod = i.severce_cod)";
+                JOIN servece AS s ON (s.cod = i.severce_cod) WHERE i.budget_cod = @cod";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
+                cmd.Parameters.AddWithValue("@cod", cod);
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();
