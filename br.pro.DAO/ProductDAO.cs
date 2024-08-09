@@ -240,5 +240,44 @@ namespace Holerite.br.pro.DAO
             }
         }
         #endregion
+
+        #region SearchCod
+        /// <summary>
+        /// Pesquisa o Produto pelo código
+        /// </summary>
+        /// <param name="cod">Código do produto</param>
+        /// <returns>Short Description</returns>
+        public String Search(int cod)
+        {
+            string shortDescription = "";
+            try
+            {
+                string sql = "SELECT short_description FROM product WHERE cod=@cod";
+                MySqlCommand cmd = new MySqlCommand( sql, _connection);
+                cmd.Parameters.AddWithValue("@cod", cod);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+                
+                if (dr.Read())
+                {
+                    shortDescription = dr.GetString("short_description");
+                }
+
+                return shortDescription;
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+                return null;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        #endregion
     }
 }
