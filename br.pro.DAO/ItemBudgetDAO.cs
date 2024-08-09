@@ -31,8 +31,8 @@ namespace Holerite.br.pro.DAO
         {
             try
             {
-                string sql = @"INSERT INTO item_budget (severce_cod, amount, price, subtotal)
-                VALUES(@cod_bud, @cod_severce, @amount, @price, @subtotal) WHERE budget_cod=@cod_bud";
+                string sql = @"INSERT INTO item_budget (budget_cod,severce_cod, amount, price, subtotal)
+                VALUES(@cod_bud, @cod_severce, @amount, @price, @subtotal)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cod_bud", obj.CodBudget);
