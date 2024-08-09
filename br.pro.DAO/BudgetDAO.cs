@@ -58,42 +58,6 @@ namespace Holerite.br.pro.DAO
         }
         #endregion
 
-        #region Update
-        /// <summary>
-        /// Atualiza os dados do orçamento no banco de daodos
-        /// </summary>
-        /// <param name="obj"></param>
-        public void Update(Budget obj)
-        {
-            try
-            {
-                string sql = "UPDATE budget SET emp_cod=@cod_emp, client_cod=@cod_client, payment=@payment, subtotal=@subtotal, total=@total, obs=@obs WHERE cod=@cod";
-
-                MySqlCommand cmd = new MySqlCommand(sql, _connection);
-                cmd.Parameters.AddWithValue("@cod_emp",obj.CodEmp);
-                cmd.Parameters.AddWithValue("@cod_client", obj.CodClient);
-                cmd.Parameters.AddWithValue("@payment",obj.Payment);
-                cmd.Parameters.AddWithValue("@subtotal",obj.Subtotal);
-                cmd.Parameters.AddWithValue("@total",obj.Total);
-                cmd.Parameters.AddWithValue("@obs",obj.Observation);
-                cmd.Parameters.AddWithValue("@cod",obj.Cod);
-
-                _connection.Open();
-                cmd.ExecuteNonQuery();
-
-                Dialog.Message("O orçamento foi editado com sucesso!", "sucesso");
-            }
-            catch (Exception ex)
-            {
-                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
-            }
-            finally
-            {
-                _connection.Close(); 
-            }
-        }
-        #endregion
-
         #region Delete
         /// <summary>
         /// Deleta o orçamento do banco de dados
