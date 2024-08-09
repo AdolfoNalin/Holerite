@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -60,126 +61,125 @@ namespace Holerite.Helpers
         }
         #endregion
 
-        #region PrintOutPoint
-        public static void PrintOutPoint(/*bool logo, string type, Company com, Employee emp, DataGridView dg*/)
-        {
-            string type = "Nome";
-            bool logo = false;
-            string issuanceDate = DateTime.Now.ToShortDateString();
-            float time = 00.00f;
-            float extraTime = 0f;
-            float timeRest = 0f;
-            DataGridView dg = new DataGridView();
+        //#region PrintOutPoint
+        //public static void PrintOutPoint(/*bool logo, string type, Company com, Employee emp, DataGridView dg*/)
+        //{
+        //    bool logo = false;
+        //    string issuanceDate = DateTime.Now.ToShortDateString();
+        //    float time = 00.00f;
+        //    float extraTime = 0f;
+        //    float timeRest = 0f;
+        //    DataGridView dg = new DataGridView();
 
-            Company com = new Company()
-            {
-                Name = "Adolfo Nalin Junior",
-                FantasyName = "ANJ Company",
-                CNPJ = "80.562.058/0001-20",
-                State = "SP",
-                City = "Águas de Santa Barbara",
-                Neighborhood = "CDHU 3",
-                Street = "Rua Três",
-                HomeNumber = 95,
-                CEP = "18770-000"
-            };
+        //    Company com = new Company()
+        //    {
+        //        Name = "Adolfo Nalin Junior",
+        //        FantasyName = "ANJ Company",
+        //        CNPJ = "80.562.058/0001-20",
+        //        State = "SP",
+        //        City = "Águas de Santa Barbara",
+        //        Neighborhood = "CDHU 3",
+        //        Street = "Rua Três",
+        //        HomeNumber = 95,
+        //        CEP = "18770-000"
+        //    };
 
-            Employee emp = new Employee()
-            {
-                Name = "Gilsemar Santos",
-                Function = "Ajudante Geral",
-                Daily = 90,
-                CTPS = ""
-            };
+        //    Employee emp = new Employee()
+        //    {
+        //        Name = "Gilsemar Santos",
+        //        Function = "Ajudante Geral",
+        //        Daily = 90,
+        //        CTPS = ""
+        //    };
 
-            string address = $"{com.CEP}, {com.State}, {com.City}, {com.Neighborhood}, {com.Street}, {com.HomeNumber}";
-            try
-            {
-                string nameFile = "";
+        //    string address = $"{com.CEP}, {com.State}, {com.City}, {com.Neighborhood}, {com.Street}, {com.HomeNumber}";
+        //    try
+        //    {
+        //        string nameFile = "";
 
-                SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Filter = "txt file (*.pdf)|*.txt|All file (*.*)|*.*";
-                sfd.FilterIndex = 2;
-                sfd.DefaultExt = "pdf";
-                sfd.RestoreDirectory = true;
-                sfd.AddExtension = false;
-                sfd.Title = "Escolha um local para savar o arquivo";
+        //        SaveFileDialog sfd = new SaveFileDialog();
+        //        sfd.Filter = "txt file (*.pdf)|*.txt|All file (*.*)|*.*";
+        //        sfd.FilterIndex = 2;
+        //        sfd.DefaultExt = "pdf";
+        //        sfd.RestoreDirectory = true;
+        //        sfd.AddExtension = false;
+        //        sfd.Title = "Escolha um local para savar o arquivo";
 
-                if(sfd.ShowDialog() != DialogResult.OK)
-                {
-                    if (sfd.FileName == String.Empty)
-                    {
-                        DialogResult resp = MessageBox.Show("Não quer savar o arquio?", "ATENÇÃO", MessageBoxButtons.YesNo);
-                        if (resp == DialogResult.Yes)
-                        {
-                            sfd.ShowDialog();
-                        }
-                    }
+        //        if(sfd.ShowDialog() != DialogResult.OK)
+        //        {
+        //            if (sfd.FileName == String.Empty)
+        //            {
+        //                DialogResult resp = MessageBox.Show("Não quer savar o arquio?", "ATENÇÃO", MessageBoxButtons.YesNo);
+        //                if (resp == DialogResult.Yes)
+        //                {
+        //                    sfd.ShowDialog();
+        //                }
+        //            }
 
-                    string filePath = sfd.FileName;
-                    nameFile = $"{filePath}_{type}";
-                }
+        //            string filePath = sfd.FileName;
+        //            nameFile = $"{filePath}_Ponto";
+        //        }
 
-                if(logo)
-                {
-                    Image image = Image.GetInstance("Caminho");
-                    image.ScaleToFit(150, 300);
-                    image.SetAbsolutePosition(430f, 650f);
-                }
+        //        if(logo)
+        //        {
+        //            Image image = Image.GetInstance("Caminho");
+        //            image.ScaleToFit(150, 300);
+        //            image.SetAbsolutePosition(430f, 650f);
+        //        }
                
-                FileStream fs = new FileStream(nameFile, FileMode.Create);
-                Document doc = new Document(PageSize.A4);
-                PdfWriter pdf = PdfWriter.GetInstance(doc, fs);
+        //        FileStream fs = new FileStream(nameFile, FileMode.Create);
+        //        Document doc = new Document(PageSize.A4);
+        //        PdfWriter pdf = PdfWriter.GetInstance(doc, fs);
 
-                string dado = "";
+        //        string dado = "";
                 
-                Paragraph empregador = new Paragraph(dado, new Font(Font.NORMAL,20,(int)System.Drawing.FontStyle.Bold));
-                empregador.Alignment = Element.ALIGN_LEFT;
-                empregador.Add($"Empregador/ Nome: {com.Name} | CNPJ: {com.CNPJ} \n Endereço: {address}");
+        //        Paragraph empregador = new Paragraph(dado, new Font(Font.NORMAL,20,(int)System.Drawing.FontStyle.Bold));
+        //        empregador.Alignment = Element.ALIGN_LEFT;
+        //        empregador.Add($"Empregador/ Nome: {com.Name} | CNPJ: {com.CNPJ} \n Endereço: {address}");
 
-                Paragraph empregado = new Paragraph(dado, new Font(Font.NORMAL, 20, (int) System.Drawing.FontStyle.Bold));
-                empregado.Alignment = Element.ALIGN_LEFT;
-                empregado.Add($@"Empregado(a): {emp.Name} | CTPS: {emp.CTPS} | Data Emissão: {issuanceDate} \nFunção: {emp.Function} | 
-                Horário de trabalho de SEG a SEX feira: {time}\nHorário aos Sábados: {extraTime} | Descanso Semanal: {timeRest}");
+        //        Paragraph empregado = new Paragraph(dado, new Font(Font.NORMAL, 20, (int) System.Drawing.FontStyle.Bold));
+        //        empregado.Alignment = Element.ALIGN_LEFT;
+        //        empregado.Add($@"Empregado(a): {emp.Name} | CTPS: {emp.CTPS} | Data Emissão: {issuanceDate} \nFunção: {emp.Function} | 
+        //        Horário de trabalho de SEG a SEX feira: {time}\nHorário aos Sábados: {extraTime} | Descanso Semanal: {timeRest}");
 
-                PdfPTable pt = new PdfPTable(7);
+        //        PdfPTable pt = new PdfPTable(7);
 
-                pt.AddCell("Data");
-                pt.AddCell("Hora Entrada");
-                pt.AddCell("Saida Almoço");
-                pt.AddCell("Entrada Almoço");
-                pt.AddCell("Hora Saida");
-                pt.AddCell("Entrada Extra");
-                pt.AddCell("Saida Extra");
+        //        pt.AddCell("Data");
+        //        pt.AddCell("Hora Entrada");
+        //        pt.AddCell("Saida Almoço");
+        //        pt.AddCell("Entrada Almoço");
+        //        pt.AddCell("Hora Saida");
+        //        pt.AddCell("Entrada Extra");
+        //        pt.AddCell("Saida Extra");
 
-                foreach(DataGridViewRow dgvr in dg.Rows)
-                {
-                    ItemPoint ip = new ItemPoint()
-                    {
-                        Date = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
-                        EntryTime = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
-                        LunchEntrance = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
-                        LunchDeparture = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
-                        ExitTime = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
-                        ExtraEntry = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
-                        ExtraOutput = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString())
-                    };
+        //        foreach(DataGridViewRow dgvr in dg.Rows)
+        //        {
+        //            ItemPoint ip = new ItemPoint()
+        //            {
+        //                Date = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
+        //                EntryTime = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
+        //                LunchEntrance = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
+        //                LunchDeparture = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
+        //                ExitTime = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
+        //                ExtraEntry = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
+        //                ExtraOutput = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString())
+        //            };
 
-                    pt.AddCell(ip.Date.ToString());
-                    pt.AddCell(ip.EntryTime.ToString());
-                    pt.AddCell(ip.LunchEntrance.ToString());
-                    pt.AddCell(ip.LunchDeparture.ToString());
-                    pt.AddCell(ip.ExitTime.ToString());
-                    pt.AddCell(ip.ExtraEntry.ToString());
-                    pt.AddCell(ip.ExtraOutput.ToString());
-                }
-            }
-            catch (Exception ex)
-            {
-                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
-            }
-        }
-        #endregion
+        //            pt.AddCell(ip.Date.ToString());
+        //            pt.AddCell(ip.EntryTime.ToString());
+        //            pt.AddCell(ip.LunchEntrance.ToString());
+        //            pt.AddCell(ip.LunchDeparture.ToString());
+        //            pt.AddCell(ip.ExitTime.ToString());
+        //            pt.AddCell(ip.ExtraEntry.ToString());
+        //            pt.AddCell(ip.ExtraOutput.ToString());
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
+        //    }
+        //}
+        //#endregion
 
         #region PrintOutHolerite
         public void PrintOutHolerite(/**/)
@@ -202,10 +202,13 @@ namespace Holerite.Helpers
         /// <summary>
         /// Transforma o orçamento em PDF
         /// </summary>
-        /// <param name="dt"></param>
+        /// <param name="dg"></param>
         /// <param name="cliente"></param>
-        public void PrintOutBudget(DataTable dt, String cliente, DateTime date, float subtotal, float total, string obs)
+        /// <param name="date"></param>
+        /// <param name="obs"></param>
+        public static void PrintOutBudget(DataGridView dg, string cliente, DateTime date, string obs)
         {
+            float subtotal = 0;
             try
             {
                 string nameFile = "";
@@ -228,14 +231,14 @@ namespace Holerite.Helpers
                             sfd.ShowDialog();
                         }
                     }
-
-                    string filePath = sfd.FileName;
-                    nameFile = $"{filePath}_Orçamento";
                 }
 
-                Image logo = Image.GetInstance(@"C:\Program Files (x86)\Sistema de Vendas\Logo.jpeg");
-                logo.ScaleToFit(150, 300);
-                logo.SetAbsolutePosition(430f, 650f);
+                string filePath = sfd.FileName;
+                nameFile = $"{filePath}_Orçamento";
+
+                //iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(@"C:\Program Files (x86)\Sistema de Vendas\Logo.jpeg");
+                //logo.ScaleToFit(150, 300);
+                //logo.SetAbsolutePosition(430f, 650f);
 
                 FileStream fs = new FileStream(nameFile, FileMode.Create);
                 Document doc = new Document(PageSize.A4);
@@ -243,11 +246,11 @@ namespace Holerite.Helpers
 
                 string dado = "";
 
-                Paragraph cabecario = new Paragraph(dado, new Font(Font.NORMAL, 20, (int)System.Drawing.FontStyle.Bold));
+                Paragraph cabecario = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 14, (int)System.Drawing.FontStyle.Bold));
                 cabecario.Alignment = Element.ALIGN_LEFT;
-                cabecario.Add($"Contrutora Realiza | CNPJ: {}\nEndereço: {}\n{date}");
+                cabecario.Add($"Contrutora Realiza | CNPJ: 40.405.345/0001-20 \nEndereço: \n| Data:{date}");
 
-                Paragraph client = new Paragraph(dado, new Font(Font.NORMAL, 20, (int)System.Drawing.FontStyle.Bold));
+                Paragraph client = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 14, (int)System.Drawing.FontStyle.Bold));
                 cabecario.Alignment = Element.ALIGN_LEFT;
                 cabecario.Add($"Nome: {client}");
 
@@ -259,29 +262,40 @@ namespace Holerite.Helpers
                 pt.AddCell("Qauntidade");
                 pt.AddCell("Subtotal");
 
-                foreach (DataGridViewRow dgvr in dt.Rows)
+                foreach (DataGridViewRow dgvr in dg.Rows)
                 {
                     pt.AddCell(dgvr.Cells[0].Value.ToString());
                     pt.AddCell(dgvr.Cells[1].Value.ToString());
                     pt.AddCell(dgvr.Cells[2].Value.ToString());
                     pt.AddCell(dgvr.Cells[3].Value.ToString());
                     pt.AddCell(dgvr.Cells[4].Value.ToString());
+
+                    subtotal += float.Parse(dgvr.Cells[4].Value.ToString());
+
+                    ItemBudget ib = new ItemBudget()
+                    {
+                        CodBudget = new BudgetDAO().EndBudget(),
+                        CodSeverce = int.Parse(dgvr.Cells[0].Value.ToString()),
+                        Price = float.Parse(dgvr.Cells[2].Value.ToString()),
+                        Amount = int.Parse(dgvr.Cells[3].Value.ToString()),
+                        Subtotal = float.Parse(dgvr.Cells[4].Value.ToString()),
+                    };
+
+                    new ItemBudgetDAO().Insert(ib);
                 }
 
                 pt.HorizontalAlignment = Element.ALIGN_LEFT;
 
-                //Dados finais do orçamento
                 Paragraph dadosFinais = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
                 dadosFinais.Alignment = Element.ALIGN_LEFT;
-                dadosFinais.Add($"\nSubTotal: {subtotal} \nTotal: R${total}");
+                dadosFinais.Add($"\nSubTotal: R${subtotal} \nTotal: R${subtotal}");
 
-                //Obs
                 Paragraph observation = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Regular));
                 observation.Alignment = Element.ALIGN_LEFT;
                 observation.Add($"\nObeservação: \n{obs}");
 
                 doc.Open();
-                doc.Add(logo);
+                //doc.Add(logo);
                 doc.Add(cabecario);
                 doc.Add(client);
                 doc.Add(pt);
@@ -289,11 +303,8 @@ namespace Holerite.Helpers
                 doc.Add(observation);
                 doc.Close();
 
-                Budget bud = new Budget();
-                BudgetDAO dao = new BudgetDAO();
-                txtCodigo.Text = dao.UltimoOrcamento().ToString();
-                new Helpers().LimparTela(this);
-                new Helpers().Gravar(dgOrcamento, cbVendedor.Text, cbCliente.Text, orcamento);
+                BudgetDAO budgetDAO = new BudgetDAO();
+
             }
             catch (Exception ex)
             {
@@ -322,9 +333,9 @@ namespace Holerite.Helpers
                     {
                         CodBudget = dao.EndBudget(),
                         CodSeverce = int.Parse(line.Cells[0].Value.ToString()),
-                        Price = float.Parse(line.Cells[].Value.ToString()),
-                        Amount = float.Parse(line.Cells[].Value.ToString()),
-                        Subtotal = float.Parse(line.Cells[].Value.ToString()),
+                        Price = float.Parse(line.Cells[1].Value.ToString()),
+                        Amount = int.Parse(line.Cells[2].Value.ToString()),
+                        Subtotal = float.Parse(line.Cells[4].Value.ToString()),
                     };
 
                     ItemBudgetDAO itemDao = new ItemBudgetDAO();
@@ -332,6 +343,108 @@ namespace Holerite.Helpers
                 }
 
                 Dialog.MessageInsertOthers("Orçamento");
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+            }
+        }
+        #endregion
+
+        #region PrintOut
+        public static void PrintOutPoint(Employee emp, List<string> date)
+        {
+            try
+            {
+
+                string address = $"{emp.CEP}, {emp.State}, {emp.City}, {emp.Neighborhood}, {emp.Street}, {emp.HomeNumber}";
+                string nameFile = "";
+
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "txt file (*.pdf)|*.txt|All file (*.*)|*.*";
+                sfd.FilterIndex = 2;
+                sfd.DefaultExt = "pdf";
+                sfd.RestoreDirectory = true;
+                sfd.AddExtension = false;
+                sfd.Title = "Escolha um local para savar o arquivo";
+
+                if (sfd.ShowDialog() != DialogResult.OK)
+                {
+                    if (sfd.FileName == String.Empty)
+                    {
+                        DialogResult resp = MessageBox.Show("Não quer savar o arquio?", "ATENÇÃO", MessageBoxButtons.YesNo);
+                        if (resp == DialogResult.Yes)
+                        {
+                            sfd.ShowDialog();
+                        }
+                    }
+                }
+
+                string filePath = sfd.FileName;
+                nameFile = $"{filePath}_Ponto";
+
+                FileStream fs = new FileStream(nameFile, FileMode.Create);
+                Document doc = new Document(PageSize.A4);
+                PdfWriter pdf = PdfWriter.GetInstance(doc, fs);
+
+                string dado = "";
+
+                Paragraph empregador = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Regular));
+                empregador.Alignment = Element.ALIGN_LEFT;
+                empregador.Add($"|Empregador/ Nome: Construtora Realiza | CNPJ: 25.400.345/0001-20| \n|Endereço: 18772-226, Ágaus de Santaq Barbara, Três Marias, 40|");
+
+                Paragraph empregado = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Regular));
+                empregado.Alignment = Element.ALIGN_RIGHT;
+                empregado.Add($"Empregado(a): {emp.Name} | CTPS: {emp.CTPS} | Data Emissão: {DateTime.Now.ToShortDateString()} \nFunção: {emp.Function} |" +
+                "Horário de trabalho de SEG a SEX feira:       \nHorário aos Sábados:     | Descanso Semanal:     \n\n");
+
+                PdfPTable pt = new PdfPTable(8);
+                pt.HorizontalAlignment = Element.ALIGN_CENTER;
+                pt.WidthPercentage = 110f;
+
+                pt.AddCell("Data");
+                pt.AddCell("Hora Entrada");
+                pt.AddCell("Saida Almoço");
+                pt.AddCell("Entrada Almoço");
+                pt.AddCell("Hora Saida");
+                pt.AddCell("Entrada Extra");
+                pt.AddCell("Saida Extra");
+                pt.AddCell("Assinatura");
+
+                string time = "";
+                for(int i = 0; i < date.Count; i++)
+                {
+                    pt.AddCell(date[i]);
+                    pt.AddCell(time);
+                    pt.AddCell(time);
+                    pt.AddCell(time);
+                    pt.AddCell(time);
+                    pt.AddCell(time);
+                    pt.AddCell(time);
+                    pt.AddCell("_______");
+                }
+
+
+                PdfPTable ptOverview = new PdfPTable(3);
+
+                Paragraph overview = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Regular));
+                overview.Alignment = Element.ALIGN_LEFT;
+
+                overview.Add($"Dias/ Horas Normais     R$|___________________|   VISTO DA FISCALIZAÇÃO  ");
+                overview.Add($"H. Extras Adicionais    R$|___________________|                          ");
+                overview.Add($"Falta Mês               R$|___________________|                          ");
+                overview.Add($"Sub total / Base Cal    R$|___________________|                          ");
+                overview.Add($"Outro Desconto(Verso)   R$|___________________|                          ");
+                overview.Add($"Salário Familia         R$|___________________|                          ");
+                overview.Add($"Total Liquido a Receber R$|___________________|                          ");
+
+                doc.Open();
+                doc.Add(empregador);
+                doc.Add(empregado);
+                doc.Add(pt);
+                doc.Add(overview);
+                doc.Close();
+              
             }
             catch (Exception ex)
             {
