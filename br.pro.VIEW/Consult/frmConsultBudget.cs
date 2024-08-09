@@ -86,6 +86,7 @@ namespace Holerite.br.pro.VIEW.Consult
                 tela.rbTerm.Checked = true;
             }
 
+            this.Hide();
             tela.ShowDialog();
         }
         #endregion
