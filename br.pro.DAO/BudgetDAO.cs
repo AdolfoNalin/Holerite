@@ -79,7 +79,7 @@ namespace Holerite.br.pro.DAO
             }
             catch (Exception ex)
             {
-                Dialog.Message("Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atemção");
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atemção");
             }
             finally
             {
