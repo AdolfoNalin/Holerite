@@ -67,7 +67,7 @@ namespace Holerite.br.pro.DAO
         {
             try
             {
-                string sql = "UPADTE budget SET cod_emp=@cod_emp, cod_client=@cod_client, payment=@payment, subtotal=@subtotal, total=@total, observation=@obsertvarion WHERE cod=@cod";
+                string sql = "UPDATE budget SET emp_cod=@cod_emp, client_cod=@cod_client, payment=@payment, subtotal=@subtotal, total=@total, obs=@obs WHERE cod=@cod";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cod_emp",obj.CodEmp);
@@ -75,13 +75,13 @@ namespace Holerite.br.pro.DAO
                 cmd.Parameters.AddWithValue("@payment",obj.Payment);
                 cmd.Parameters.AddWithValue("@subtotal",obj.Subtotal);
                 cmd.Parameters.AddWithValue("@total",obj.Total);
-                cmd.Parameters.AddWithValue("@observation",obj.Observation);
+                cmd.Parameters.AddWithValue("@obs",obj.Observation);
                 cmd.Parameters.AddWithValue("@cod",obj.Cod);
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();
 
-                Dialog.Message("O orçamento foi cadastado com sucesso!", "sucesso");
+                Dialog.Message("O orçamento foi editado com sucesso!", "sucesso");
             }
             catch (Exception ex)
             {
@@ -380,6 +380,10 @@ namespace Holerite.br.pro.DAO
             {
                 Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
                 return 0;
+            }
+            finally
+            {
+                _connection.Close();
             }
         }
         #endregion
