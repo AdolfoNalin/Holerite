@@ -49,5 +49,35 @@ namespace Holerite.br.pro.DAO
             finally { _connection.Close(); }
         }
         #endregion
+
+        #region Delete
+        /// <summary>
+        /// Deleta o EPI do banco de dados
+        /// </summary>
+        /// <param name="cod"></param>
+        public void Delete(int cod)
+        {
+            try
+            {
+                string sql = "DELETE FROM epi WHERE cod=@cod";
+
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+                cmd.Parameters.AddWithValue("@cod", cod);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+
+                Dialog.MessageInsert("EPI");
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        #endregion
     }
 }
