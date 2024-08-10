@@ -247,9 +247,9 @@ namespace Holerite.br.pro.DAO
         /// </summary>
         /// <param name="cod">Código do produto</param>
         /// <returns>Short Description</returns>
-        public String Search(int cod)
+        public Product Search(int cod)
         {
-            string shortDescription = "";
+            Product obj = new Product();
             try
             {
                 string sql = "SELECT short_description FROM product WHERE cod=@cod";
@@ -263,10 +263,53 @@ namespace Holerite.br.pro.DAO
                 
                 if (dr.Read())
                 {
-                    shortDescription = dr.GetString("short_description");
+                    obj.ShortDescription = dr.GetString("short_description");
+                    obj.SpotPrice = float.Parse(dr.GetDecimal("sport_price").ToString());
+                    obj.TermPrice= float.Parse(dr.GetDecimal("term_price").ToString());
                 }
 
-                return shortDescription;
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+                return null;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        #endregion
+
+        #region SearchName
+        /// <summary>
+        /// Pesquisa o produto pelo short_Description
+        /// </summary>
+        /// <param name="description"></param>
+        /// <returns></returns>
+        public Product GetSearch(string description)
+        {
+            Product obj = new Product();
+            try
+            {
+                string sql = "SELECT short_description FROM product WHERE name=@name";
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+                cmd.Parameters.AddWithValue("@name", description);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    obj.ShortDescription = dr.GetString("short_description");
+                    obj.SpotPrice = float.Parse(dr.GetDecimal("sport_price").ToString());
+                    obj.TermPrice = float.Parse(dr.GetDecimal("term_price").ToString());
+                }
+
+                return obj;
             }
             catch (Exception ex)
             {
