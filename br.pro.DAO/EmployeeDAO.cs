@@ -454,9 +454,9 @@ namespace Holerite.br.pro.DAO
                 _connection.Close();
             }
         }
-    #endregion
+        #endregion
 
-    #region Login
+        #region Login
     /// <summary>
     /// Verification if username and password is true in the database
     /// </summary>
@@ -484,6 +484,38 @@ namespace Holerite.br.pro.DAO
             {
                 Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
                 return false;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        #endregion
+
+        #region GetSearchEmp 
+        public Employee GetSearchEmp(string emp_name)
+        {
+            Employee emp = new Employee();
+            try
+            {
+                string sql = "SELECT cod,emp_name FROM user_employee WHERE emp_name=@name";
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+                cmd.Parameters.AddWithValue("@name", emp_name);
+
+                _connection.Open();
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    emp.Cod = dr.GetInt32("cod");
+                    emp.Name = dr.GetString("emp_name");
+                }
+                return emp;
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+                return null;
             }
             finally
             {
