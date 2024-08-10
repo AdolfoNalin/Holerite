@@ -316,12 +316,31 @@ namespace Holerite.br.pro.DAO
         /// </summary>
         /// <param name="cod">Codigo do funcionário</param>
         /// <returns></returns>
-        public string Search(int cod)
+        public Employee Search(int cod)
         {
-            string name = "";
+            Employee emp = new Employee();
             try
             {
-                string sql = "SELECT emp_name FROM user_employee WHERE cod=@cod";
+                string sql = @"SELECT 
+	            e.cod AS 'Código',
+	            e.emp_name AS 'Nome',
+                e.user_name AS 'Nome do Usuário',
+                e.user_password AS 'Senha',
+                e.permissions AS 'Permissoões',
+                e.daily AS 'Daily',
+	            e.cpf AS 'CPF',
+	            e.email AS 'Email',
+	            e.telephone_number AS 'Número de Telefone',
+	            e.phone_number AS 'Número de Celular',
+	            e.cep AS 'CEP',
+	            e.state AS 'Estado',
+	            e.city AS 'Cidade',
+	            e.neighborhood AS 'Bairro',
+	            e.street AS 'Rua',
+	            e.home_number AS 'Número da casa',
+	            e.complement AS 'Complemento',
+                e.emp_function AS 'Funções'
+	            FROM user_employee AS e WHERE WHERE cod=@cod";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cod", cod);
@@ -332,9 +351,19 @@ namespace Holerite.br.pro.DAO
 
                 if (dr.Read())
                 {
-                    name = dr.GetString("emp_name");
+
+                    emp.Cod = dr.GetInt32("Código");
+                    emp.Name = dr.GetString("Nome");
+                    emp.CPF = dr.GetString("CPF");
+                    emp.CEP = dr.GetString("CEP");
+                    emp.State = dr.GetString("Estado");
+                    emp.City = dr.GetString("Cidade");
+                    emp.Neighborhood = dr.GetString("Bairro");
+                    emp.Street = dr.GetString("Rua");
+                    emp.HomeNumber = dr.GetInt32("Número da Casa");
+                    emp.Complement = dr.GetString("Complemento");
                 }
-                return name;
+                return emp;
             }
             catch (Exception ex)
             {
