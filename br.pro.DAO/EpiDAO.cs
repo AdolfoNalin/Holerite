@@ -98,9 +98,10 @@ namespace Holerite.br.pro.DAO
                 string sql = @"SELECT 
                 e.cod AS 'Código',
                 e.date AS 'Data',
-                u.emp_name AS 'Nome do Funcionário'
+                u.emp_name AS 'Nome do Funcionário',
+                e.payment AS 'Forma de pagamento',
+                e.subtotal AS 'Subtotal'
                 FROM epi AS e
-                JOIN product AS p ON (p.cod = e.cod_prod)
                 JOIN user_employee AS u ON (u.cod = e.cod_emp)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
@@ -139,9 +140,10 @@ namespace Holerite.br.pro.DAO
                 string sql = @"SELECT 
                 e.cod AS 'Código',
                 e.date AS 'Data',
-                u.emp_name AS 'Nome do Funcionário'
+                u.emp_name AS 'Nome do Funcionário',
+                e.payment AS 'Forma de pagamento',
+                e.subtotal AS 'Subtotal'
                 FROM epi AS e
-                JOIN product AS p ON (p.cod = e.cod_prod)
                 JOIN user_employee AS u ON (u.cod = e.cod_emp) WHERE u.emp_name LIKE @name";
 
                 MySqlCommand cmd = new MySqlCommand(sql,_connection); 
@@ -176,9 +178,10 @@ namespace Holerite.br.pro.DAO
                 string sql = @"SELECT 
                 e.cod AS 'Código',
                 e.date AS 'Data',
-                u.emp_name AS 'Nome do Funcionário'
+                u.emp_name AS 'Nome do Funcionário',
+                e.payment AS 'Forma de pagamento',
+                e.subtotal AS 'Subtotal'
                 FROM epi AS e
-                JOIN product AS p ON (p.cod = e.cod_prod)
                 JOIN user_employee AS u ON (u.cod = e.cod_emp) WHERE u.name_emp=@name";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
@@ -199,45 +202,6 @@ namespace Holerite.br.pro.DAO
             }
             finally
             {
-                _connection.Close();
-            }
-        }
-        #endregion
-
-        #region SearchCod
-        public DataTable Search(int cod)
-        {
-            DataTable dt = new DataTable();
-            try
-            {
-                string sql = @"SELECT 
-                p.cod AS 'Código',
-                p.short_description AS 'Descrição Resumida',
-                u.spot_price AS 'Preço',
-                p.amount AS 'Quantidade'
-                FROM epi AS e
-                JOIN product AS p ON (p.cod = e.cod_prod)
-                JOIN user_employee AS u ON (u.cod = e.cod_emp) WHERE e.cod=@cod";
-
-                MySqlCommand cmd = new MySqlCommand(sql, _connection);
-                cmd.Parameters.AddWithValue("@cod", cod);
-
-                _connection.Open();
-                cmd.ExecuteNonQuery();
-
-                MySqlDataAdapter da = new MySqlDataAdapter();
-                da.Fill(dt);
-
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                Dialog.MessageError(ex);
-                return null;
-            }
-            finally
-            {
-
                 _connection.Close();
             }
         }
@@ -274,12 +238,12 @@ namespace Holerite.br.pro.DAO
             int cod = 0;
             try
             {
-                string sql = "SELECT MAX(cod) FROM epi";
+                string sql = "SELECT MAX(cod) cod FROM epi";
 
-                MySqlCommand cmd = new MySqlCommand(sql);
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
 
                 _connection.Open();
-                cmd.ExecuteReader();
+                cmd.ExecuteNonQuery();
 
                 MySqlDataReader dr = cmd.ExecuteReader();
 
