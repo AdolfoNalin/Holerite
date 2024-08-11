@@ -4,6 +4,7 @@ using Holerite.Helpers;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,10 @@ namespace Holerite.br.pro.DAO
         }
 
         #region Insert
+        /// <summary>
+        /// Cadastra os itens da EPI no banco de dados
+        /// </summary>
+        /// <param name="obj"></param>
         public void Insert(ItemEpi obj)
         {
             try
@@ -40,15 +45,83 @@ namespace Holerite.br.pro.DAO
             }
             catch (Exception ex)
             {
-                Dialog.MessageError(ex);    
+                Dialog.MessageError(ex);
             }
             finally
             {
-                _connection.Close(); 
+                _connection.Close();
             }
         }
         #endregion
 
-        
+        #region Delete
+        /// <summary>
+        /// Deleta os itens da EPI do banco de dados
+        /// </summary>
+        /// <param name="cod"></param>
+        public void Delete(int cod)
+        {
+            try
+            {
+                string slq = "DELETE FROM item_epi WHERE cod=@cod";
+
+                MySqlCommand cmd = new MySqlCommand(slq, _connection);
+                cmd.Parameters.AddWithValue("@cod", cod);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        #endregion
+
+        #region Consult
+        /// <summary>
+        /// Consulta os itens EPIs do banco de dados
+        /// </summary>
+        /// <returns></returns>
+        public DataTable Consult()
+        { 
+            DataTable dt = new DataTable();
+            try
+            {
+                string sql = @"SELECT 
+                p.cod AS 'Código',
+                p.short_description AS 'Descrição Resumida',
+                i.price AS 'Preço',
+                i.amount AS 'Quantidade',
+                i.subtotal AS 'Subtotal'
+                FROM item_epi AS i
+                JOIN product AS p ON (p.cod = i.cod_product)";
+
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError (ex);
+                return null;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        #endregion
     }
 }
