@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Management.Instrumentation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,13 +32,14 @@ namespace Holerite.br.pro.DAO
         {
             try
             {
-                string sql = @"INSERT INTO epi (cod_emp, cod_prod, amount, obs)
-                VALUES(@cod_emp, @cod_prod, @amunt, @obs)";
+                string sql = @"INSERT INTO epi (cod_emp, date,subtotal, payment, obs)
+                VALUES(@cod_emp, @date, @subtotal, @payment, @obs)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cod_emp", obj.CodEmp);
-                cmd.Parameters.AddWithValue("@cod_prod", obj.CodProd);
-                cmd.Parameters.AddWithValue("@amount", obj.Amount);
+                cmd.Parameters.AddWithValue("@date", obj.Date);
+                cmd.Parameters.AddWithValue("@subtotal", obj.Subtotal);
+                cmd.Parameters.AddWithValue("@payment", obj.Payment);
                 cmd.Parameters.AddWithValue("@obs", obj.Obs);
 
                 _connection.Open();
@@ -217,7 +219,7 @@ namespace Holerite.br.pro.DAO
                 JOIN product AS p ON (p.cod = e.cod_prod)
                 JOIN user_employee AS u ON (u.cod = e.cod_emp) WHERE e.cod=@cod";
 
-                MySqlCommand cmd = new MySqlCommand( sql, _connection);
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cod", cod);
 
                 _connection.Open();
@@ -226,12 +228,76 @@ namespace Holerite.br.pro.DAO
                 MySqlDataAdapter da = new MySqlDataAdapter();
                 da.Fill(dt);
 
-               return dt;
+                return dt;
             }
             catch (Exception ex)
             {
                 Dialog.MessageError(ex);
                 return null;
+            }
+            finally
+            {
+
+                _connection.Close();
+            }
+        }
+        #endregion
+
+        #region Control
+        public void Control(int cod, int amount)
+        {
+            try
+            {
+                string sql = "UPDATE product SET amount=@amoun WHERE cod=@cod";
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+                cmd.Parameters.AddWithValue("@amount", amount);
+                cmd.Parameters.AddWithValue("@cod", cod);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+
+        #endregion
+
+        #region EndCod
+        public int EndCod()
+        {
+            int cod = 0;
+            try
+            {
+                string sql = "SELECT MAX(cod) FROM epi";
+
+                MySqlCommand cmd = new MySqlCommand(sql);
+
+                _connection.Open();
+                cmd.ExecuteReader();
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    cod = dr.GetInt32("cod");
+                }
+
+                return cod;
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+                return 0;
+            }
+            finally
+            {
+                _connection.Close();
             }
         }
         #endregion
