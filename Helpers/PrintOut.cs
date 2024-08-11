@@ -61,7 +61,7 @@ namespace Holerite.Helpers
         }
         #endregion
 
-        //#region PrintOutPoint
+        #region PrintOutPoint
         //public static void PrintOutPoint(/*bool logo, string type, Company com, Employee emp, DataGridView dg*/)
         //{
         //    bool logo = false;
@@ -179,7 +179,7 @@ namespace Holerite.Helpers
         //        Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
         //    }
         //}
-        //#endregion
+        #endregion
 
         #region PrintOutHolerite
         public void PrintOutHolerite(/**/)
@@ -333,16 +333,14 @@ namespace Holerite.Helpers
                     {
                         CodBudget = dao.EndBudget(),
                         CodSeverce = int.Parse(line.Cells[0].Value.ToString()),
-                        Price = float.Parse(line.Cells[1].Value.ToString()),
-                        Amount = int.Parse(line.Cells[2].Value.ToString()),
+                        Price = float.Parse(line.Cells[2].Value.ToString()),
+                        Amount = int.Parse(line.Cells[3].Value.ToString()),
                         Subtotal = float.Parse(line.Cells[4].Value.ToString()),
                     };
 
                     ItemBudgetDAO itemDao = new ItemBudgetDAO();
                     itemDao.Insert(ib);
                 }
-
-                Dialog.MessageInsertOthers("Orçamento");
             }
             catch (Exception ex)
             {
@@ -445,6 +443,122 @@ namespace Holerite.Helpers
                 doc.Add(overview);
                 doc.Close();
               
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+            }
+        }
+        #endregion
+
+        #region PrintOut
+        public static void PrintOutEpi(int codEmp, int codEpi,DataGridView dg, string observation)
+        {
+            EmployeeDAO empD = new EmployeeDAO();
+            Employee emp = empD.Search(codEmp);
+            string address = $"{emp.CEP}, {emp.State}, {emp.City}, {emp.Neighborhood}, {emp.Street}, {emp.HomeNumber}";
+            try
+            {
+                string nameFile = "";
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "txt file (*.pdf)|*.txt|All file (*.*)|*.*";
+                sfd.FilterIndex = 2;
+                sfd.DefaultExt = "pdf";
+                sfd.RestoreDirectory = true;
+                sfd.AddExtension = false;
+                sfd.Title = "Escolha um local para savar o arquivo";
+
+                if (sfd.ShowDialog() != DialogResult.OK)
+                {
+                    if (sfd.FileName == String.Empty)
+                    {
+                        DialogResult resp = MessageBox.Show("Não quer savar o arquio?", "ATENÇÃO", MessageBoxButtons.YesNo);
+                        if (resp == DialogResult.Yes)
+                        {
+                            sfd.ShowDialog();
+                        }
+                    }
+                }
+                 
+                string filePath = sfd.FileName;
+                nameFile = $"{filePath}_EPI";
+
+                FileStream fs = new FileStream(nameFile, FileMode.Create);
+                Document doc = new Document(PageSize.A5);
+                PdfWriter pdf = PdfWriter.GetInstance(doc, fs);
+
+                string dado = "";
+
+                Paragraph empregador = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
+                empregador.Alignment = Element.ALIGN_LEFT;
+                empregador.Add($"|Empregador/ Nome: Construtora Realiza |\n|CNPJ: 25.400.345/0001-20|\n|Endereço: 18772-226, Ágaus de Santaq Barbara, Três Marias, 40|");
+
+                Paragraph empregado = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
+                empregado.Alignment = Element.ALIGN_LEFT;
+                empregado.Add($"Empregado(a): {emp.Name} | Data Emissão: {DateTime.Now.ToShortDateString()} \nEmdereço: {address}| \n\n");
+
+                PdfPTable pt = new PdfPTable(3);
+                pt.HorizontalAlignment = Element.ALIGN_CENTER;
+                pt.WidthPercentage = 90f;
+
+                pt.AddCell("Código");
+                pt.AddCell("Descrição Resumida");
+                pt.AddCell("Quantidade");
+
+                for (int i = 0; i < dg.Rows.Count; i++)
+                {
+                    ItemEpi ie = new ItemEpi()
+                    {
+                        CodEpi = new EpiDAO().EndCod(),
+                        CodProd = int.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
+                        Price = float.Parse(dg.CurrentRow.Cells[2].Value.ToString()),
+                        Amount = int.Parse(dg.CurrentRow.Cells[3].Value.ToString()),
+                        Subtotal = float.Parse(dg.CurrentRow.Cells[4].Value.ToString()),
+                    };
+
+                    Product obj = new ProductDAO().Search(ie.CodProd);
+                  
+                    if (codEpi == 0)
+                    {
+                        ItemEpiDAO dao = new ItemEpiDAO();
+                        dao.Insert(ie);
+                    }
+
+                    pt.AddCell(ie.CodProd.ToString());
+                    pt.AddCell(obj.ShortDescription);
+                    pt.AddCell(ie.Amount.ToString());
+                }
+
+                Paragraph obs = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
+                obs.Alignment = Element.ALIGN_LEFT;
+
+                obs.Add($"\n\n{observation}");
+
+                Paragraph assinatura = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
+                assinatura.Alignment = Element.ALIGN_LEFT;
+
+                assinatura.Add($"\n\n{emp.Name}:____________________________________| ");
+
+                doc.Open();
+                doc.Add(empregador);
+                doc.Add(empregado);
+                doc.Add(pt);
+                doc.Add(assinatura);
+                doc.Close();
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError (ex);
+            }
+        }
+        #endregion
+
+        #region PrintOut
+        public void PrintOutEpi()
+        {
+            try
+            {
+
             }
             catch (Exception ex)
             {
