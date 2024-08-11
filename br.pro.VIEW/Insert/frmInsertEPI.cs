@@ -304,10 +304,13 @@ namespace Holerite.br.pro.VIEW.Insert
         #region btnSalve_click
         private void btnSalve_Click(object sender, EventArgs e)
         {
+            string payment = rbSpot.Checked == true ? "vista" : "prazo";
+
             Epi obj = new Epi()
             {
                 CodEmp = int.Parse(cbEmployee.SelectedValue.ToString()),
                 Date = DateTime.Parse(mtbDate.Text),
+                Payment = payment,
                 Subtotal = float.Parse(dgEPI.CurrentRow.Cells[4].Value.ToString()),
                 Obs = txtObs.Text,
             };
@@ -337,6 +340,8 @@ namespace Holerite.br.pro.VIEW.Insert
             else
             {
                 this.Hide();
+                frmConsultEpi epi = new frmConsultEpi();
+                epi.ShowDialog();
             }
         }
         #endregion
