@@ -47,6 +47,7 @@
             this.pontoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.atualzarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gerarPontoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.holeriteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.emitirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -203,7 +204,8 @@
             // 
             this.pontoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.consultaToolStripMenuItem2,
-            this.atualzarToolStripMenuItem});
+            this.atualzarToolStripMenuItem,
+            this.gerarPontoToolStripMenuItem});
             this.pontoToolStripMenuItem.Image = global::Holerite.Properties.Resources.Page_Point_png;
             this.pontoToolStripMenuItem.Name = "pontoToolStripMenuItem";
             this.pontoToolStripMenuItem.Size = new System.Drawing.Size(70, 21);
@@ -213,13 +215,22 @@
             // 
             this.consultaToolStripMenuItem2.Name = "consultaToolStripMenuItem2";
             this.consultaToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.consultaToolStripMenuItem2.Text = "Consulta";
+            this.consultaToolStripMenuItem2.Text = "Cadastrar";
+            this.consultaToolStripMenuItem2.Click += new System.EventHandler(this.consultaToolStripMenuItem2_Click);
             // 
             // atualzarToolStripMenuItem
             // 
             this.atualzarToolStripMenuItem.Name = "atualzarToolStripMenuItem";
             this.atualzarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.atualzarToolStripMenuItem.Text = "Atualzar";
+            this.atualzarToolStripMenuItem.Click += new System.EventHandler(this.atualzarToolStripMenuItem_Click);
+            // 
+            // gerarPontoToolStripMenuItem
+            // 
+            this.gerarPontoToolStripMenuItem.Name = "gerarPontoToolStripMenuItem";
+            this.gerarPontoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gerarPontoToolStripMenuItem.Text = "Gerar Ponto";
+            this.gerarPontoToolStripMenuItem.Click += new System.EventHandler(this.gerarPontoToolStripMenuItem_Click);
             // 
             // holeriteToolStripMenuItem
             // 
@@ -234,13 +245,14 @@
             // consultaToolStripMenuItem3
             // 
             this.consultaToolStripMenuItem3.Name = "consultaToolStripMenuItem3";
-            this.consultaToolStripMenuItem3.Size = new System.Drawing.Size(126, 22);
+            this.consultaToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
             this.consultaToolStripMenuItem3.Text = "Consulta";
+            this.consultaToolStripMenuItem3.Click += new System.EventHandler(this.consultaToolStripMenuItem3_Click);
             // 
             // emitirToolStripMenuItem
             // 
             this.emitirToolStripMenuItem.Name = "emitirToolStripMenuItem";
-            this.emitirToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.emitirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.emitirToolStripMenuItem.Text = "Emitir";
             // 
             // caixaToolStripMenuItem
@@ -325,5 +337,6 @@
         private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
         private System.Windows.Forms.Button btnBudget;
         private System.Windows.Forms.Button btnConsultBudget;
+        private System.Windows.Forms.ToolStripMenuItem gerarPontoToolStripMenuItem;
     }
 }

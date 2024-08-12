@@ -118,5 +118,35 @@ namespace Holerite.br.pro.VIEW
         }
         #endregion
 
+        #region Gerar Ponto
+        private void gerarPontoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConsultEmpGeneratePoint tela = new frmConsultEmpGeneratePoint();
+            tela.ShowDialog();
+        }
+        #endregion
+
+        #region Cadastrar Ponto
+        private void consultaToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            frmInsertPoint tela = new frmInsertPoint();
+            tela.ShowDialog();
+        }
+        #endregion
+
+        #region ConsultUpdataPoint
+        private void atualzarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConsultPoint tela = new frmConsultPoint();
+            tela .ShowDialog();
+        }
+        #endregion
+
+        #region ConsultHolerite
+        private void consultaToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            
+        }
+        #endregion
     }
 }
