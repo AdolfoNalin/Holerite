@@ -100,9 +100,10 @@ namespace Holerite.br.pro.DAO
                 e.date AS 'Data',
                 u.emp_name AS 'Nome do Funcionário',
                 e.payment AS 'Forma de pagamento',
-                e.subtotal AS 'Subtotal'
+                e.subtotal AS 'Subtotal',
+                e.obs AS 'Observação'
                 FROM epi AS e
-                JOIN user_employee AS u ON (u.cod = e.cod_emp)";
+                JOIN user_employee AS u ON (u.cod = e.cod_emp) ORDER BY e.cod ASC";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
 
@@ -142,9 +143,10 @@ namespace Holerite.br.pro.DAO
                 e.date AS 'Data',
                 u.emp_name AS 'Nome do Funcionário',
                 e.payment AS 'Forma de pagamento',
-                e.subtotal AS 'Subtotal'
+                e.subtotal AS 'Subtotal',
+                e.obs AS 'Observação'
                 FROM epi AS e
-                JOIN user_employee AS u ON (u.cod = e.cod_emp) WHERE u.emp_name LIKE @name";
+                JOIN user_employee AS u ON (u.cod = e.cod_emp) WHERE u.emp_name LIKE @name ORDER BY e.cod ASC";
 
                 MySqlCommand cmd = new MySqlCommand(sql,_connection); 
                 cmd.Parameters.AddWithValue("@name", name);
@@ -180,9 +182,10 @@ namespace Holerite.br.pro.DAO
                 e.date AS 'Data',
                 u.emp_name AS 'Nome do Funcionário',
                 e.payment AS 'Forma de pagamento',
-                e.subtotal AS 'Subtotal'
+                e.subtotal AS 'Subtotal',
+                e.obs AS 'Observação'
                 FROM epi AS e
-                JOIN user_employee AS u ON (u.cod = e.cod_emp) WHERE u.name_emp=@name";
+                JOIN user_employee AS u ON (u.cod = e.cod_emp) WHERE u.emp_name=@name ORDER BY e.cod ASC";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@name", name);
@@ -190,7 +193,7 @@ namespace Holerite.br.pro.DAO
                 _connection.Open();
                 cmd.ExecuteNonQuery();
 
-                MySqlDataAdapter da = new MySqlDataAdapter();
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(dt);
 
                 return dt;
