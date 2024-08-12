@@ -32,14 +32,16 @@ namespace Holerite.br.pro.VIEW.Consult
         {
             string name = "%" + txtName.Text + "%";
 
-            dgEpi.DataSource = new EpiDAO().Consult(name);
+            EpiDAO dao = new EpiDAO();
+            dgEpi.DataSource = dao.Consult(name);
         }
         #endregion
 
         #region btnSearch_click
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            dgEpi.DataSource = new EpiDAO().Search(txtName.Text);
+            EpiDAO dao = new EpiDAO();
+            dgEpi.DataSource = dao.Search(txtName.Text);
         }
         #endregion
 
