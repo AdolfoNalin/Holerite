@@ -29,7 +29,7 @@ namespace Holerite.br.pro.DAO
         {
             try
             {
-                string sql = @"INSERT item_epi SET (cod_epi, cod_product, price, amount, subtotal)
+                string sql = @"INSERT INTO item_epi (cod_epi, cod_product, price, amount, subtotal)
                 VALUES(@cod_epi, @cod_product, @price, @amount, @subtotal)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
@@ -89,7 +89,7 @@ namespace Holerite.br.pro.DAO
         /// </summary>
         /// <returns></returns>
         public DataTable Consult()
-        { 
+        {
             DataTable dt = new DataTable();
             try
             {
@@ -114,7 +114,7 @@ namespace Holerite.br.pro.DAO
             }
             catch (Exception ex)
             {
-                Dialog.MessageError (ex);
+                Dialog.MessageError(ex);
                 return null;
             }
             finally
@@ -123,5 +123,47 @@ namespace Holerite.br.pro.DAO
             }
         }
         #endregion
+
+        #region Search
+        /// <summary>
+        /// Pesquisa os itens da epi
+        /// </summary>
+        /// <param name="codEpi">Código da Epi</param>
+        /// <returns></returns>
+        public DataTable Search(int codEpi)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string sql = @"SELECT 
+                p.cod AS 'Código',
+                p.short_description AS 'Descrição Resumida',
+                i.price AS 'Preço',
+                i.amount AS 'Quantidade',
+                i.subtotal AS 'Subtotal'
+                FROM item_epi AS i
+                JOIN product AS p ON (p.cod = i.cod_product) WHERE i.cod_epi=@cod";
+
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+                cmd.Parameters.AddWithValue("@cod", codEpi);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+                return null;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+    #endregion
     }
 }
