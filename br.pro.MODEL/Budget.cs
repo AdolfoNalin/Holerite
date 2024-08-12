@@ -15,5 +15,6 @@ namespace Holerite.br.pro.MODEL
         public float Subtotal { get; set; }
         public float Total { get; set; }
         public string Observation { get; set; }
+        public DateTime Date { get; set; }
     }
 }

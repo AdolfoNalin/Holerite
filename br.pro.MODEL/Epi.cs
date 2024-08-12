@@ -12,6 +12,7 @@ namespace Holerite.br.pro.MODEL
         public int Cod { get; set; }
         public DateTime Date { get; set; }
         public int CodEmp { get; set; }
+        public string Payment { get; set; }
         public float Subtotal { get; set; }
         public string Obs { get; set; }
     }

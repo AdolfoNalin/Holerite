@@ -14,6 +14,6 @@ namespace Holerite.br.pro.MODEL
         public float Price { get; set; }
         public int Amount { get; set; }
         public float Subtotal { get; set; }
-        public string Obs { get; set; }
+
     }
 }
