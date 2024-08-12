@@ -340,18 +340,18 @@ namespace Holerite.br.pro.DAO
 	            e.home_number AS 'Número da casa',
 	            e.complement AS 'Complemento',
                 e.emp_function AS 'Funções'
-	            FROM user_employee AS e WHERE WHERE cod=@cod";
+	            FROM user_employee AS e WHERE e.cod=@cod";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cod", cod);
 
                 _connection.Open();
+                cmd.ExecuteNonQuery();
 
                 MySqlDataReader dr = cmd.ExecuteReader();
 
                 if (dr.Read())
                 {
-
                     emp.Cod = dr.GetInt32("Código");
                     emp.Name = dr.GetString("Nome");
                     emp.CPF = dr.GetString("CPF");
@@ -361,7 +361,6 @@ namespace Holerite.br.pro.DAO
                     emp.Neighborhood = dr.GetString("Bairro");
                     emp.Street = dr.GetString("Rua");
                     emp.HomeNumber = dr.GetInt32("Número da Casa");
-                    emp.Complement = dr.GetString("Complemento");
                 }
                 return emp;
             }
