@@ -33,11 +33,9 @@
             this.btnRemove = new System.Windows.Forms.Button();
             this.lblName = new System.Windows.Forms.Label();
             this.lblCodEpi = new System.Windows.Forms.Label();
-            this.btnSearchEmp = new System.Windows.Forms.Button();
             this.lblDescription = new System.Windows.Forms.Label();
             this.txtAmount = new System.Windows.Forms.TextBox();
             this.lblAmount = new System.Windows.Forms.Label();
-            this.btnSearchProduct = new System.Windows.Forms.Button();
             this.mtbDate = new System.Windows.Forms.MaskedTextBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSalve = new System.Windows.Forms.Button();
@@ -113,14 +111,6 @@
             this.lblCodEpi.TabIndex = 5;
             this.lblCodEpi.Text = "Cod:";
             // 
-            // btnSearchEmp
-            // 
-            this.btnSearchEmp.Location = new System.Drawing.Point(449, 61);
-            this.btnSearchEmp.Name = "btnSearchEmp";
-            this.btnSearchEmp.Size = new System.Drawing.Size(35, 23);
-            this.btnSearchEmp.TabIndex = 7;
-            this.btnSearchEmp.UseVisualStyleBackColor = true;
-            // 
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
@@ -145,14 +135,6 @@
             this.lblAmount.Size = new System.Drawing.Size(65, 13);
             this.lblAmount.TabIndex = 10;
             this.lblAmount.Text = "Quantidade:";
-            // 
-            // btnSearchProduct
-            // 
-            this.btnSearchProduct.Location = new System.Drawing.Point(449, 128);
-            this.btnSearchProduct.Name = "btnSearchProduct";
-            this.btnSearchProduct.Size = new System.Drawing.Size(35, 23);
-            this.btnSearchProduct.TabIndex = 12;
-            this.btnSearchProduct.UseVisualStyleBackColor = true;
             // 
             // mtbDate
             // 
@@ -379,11 +361,9 @@
             this.Controls.Add(this.btnSalve);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.mtbDate);
-            this.Controls.Add(this.btnSearchProduct);
             this.Controls.Add(this.txtAmount);
             this.Controls.Add(this.lblAmount);
             this.Controls.Add(this.lblDescription);
-            this.Controls.Add(this.btnSearchEmp);
             this.Controls.Add(this.txtCodEpi);
             this.Controls.Add(this.lblCodEpi);
             this.Controls.Add(this.lblName);
@@ -406,10 +386,8 @@
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblCodEpi;
-        private System.Windows.Forms.Button btnSearchEmp;
         private System.Windows.Forms.Label lblDescription;
         private System.Windows.Forms.Label lblAmount;
-        private System.Windows.Forms.Button btnSearchProduct;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSalve;
         private System.Windows.Forms.Label lblCodEmp;

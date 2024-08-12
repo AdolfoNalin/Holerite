@@ -305,7 +305,7 @@ namespace Holerite.br.pro.VIEW.Insert
         private void btnSalve_Click(object sender, EventArgs e)
         {
             string payment = rbSpot.Checked == true ? "vista" : "prazo";
-
+            
             Epi obj = new Epi()
             {
                 CodEmp = int.Parse(cbEmployee.SelectedValue.ToString()),
@@ -368,7 +368,7 @@ namespace Holerite.br.pro.VIEW.Insert
             Employee emp = empD.GetSearchEmp(cbEmployee.Text);
             string payment = rbSpot.Checked == true ? "vista" : "prazo";
             int codEpi = txtCodEpi.Text == String.Empty ? 0 : int.Parse(txtCodEpi.Text);
-            int codEmp = txtCodEmp.Text != String.Empty ? 0 : emp.Cod;
+            int codEmp = emp.Cod;
 
             Epi obj = new Epi()
             {
@@ -385,7 +385,7 @@ namespace Holerite.br.pro.VIEW.Insert
                 dao.Insert(obj);
             }
            
-            PrintOut.PrintOutEpi(codEmp, codEpi,dgEPI);
+            PrintOut.PrintOutEpi(codEmp, codEpi,dgEPI, obj.Obs);
 
             DialogResult resp = MessageBox.Show("Deseja imprimir outro EPI", "ATENÇÃO", MessageBoxButtons.YesNo);
 
