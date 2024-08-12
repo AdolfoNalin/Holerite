@@ -543,6 +543,7 @@ namespace Holerite.Helpers
                 doc.Add(empregador);
                 doc.Add(empregado);
                 doc.Add(pt);
+                doc.Add(obs);
                 doc.Add(assinatura);
                 doc.Close();
             }
@@ -554,11 +555,88 @@ namespace Holerite.Helpers
         #endregion
 
         #region PrintOut
-        public void PrintOutEpi()
+        public static void PrintOutEpi(Employee emp, int amountLine)
         {
+            string address = $"{emp.CEP}, {emp.State}, {emp.City}, {emp.Neighborhood}, {emp.Street}, {emp.HomeNumber}";
             try
             {
+                string nameFile = "";
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "txt file (*.pdf)|*.txt|All file (*.*)|*.*";
+                sfd.FilterIndex = 2;
+                sfd.DefaultExt = "pdf";
+                sfd.RestoreDirectory = true;
+                sfd.AddExtension = false;
+                sfd.Title = "Escolha um local para savar o arquivo";
 
+                if (sfd.ShowDialog() != DialogResult.OK)
+                {
+                    if (sfd.FileName == String.Empty)
+                    {
+                        DialogResult resp = MessageBox.Show("Não quer savar o arquio?", "ATENÇÃO", MessageBoxButtons.YesNo);
+                        if (resp == DialogResult.Yes)
+                        {
+                            sfd.ShowDialog();
+                        }
+                    }
+                }
+
+                string filePath = sfd.FileName;
+                nameFile = $"{filePath}_EPI";
+
+                FileStream fs = new FileStream(nameFile, FileMode.Create);
+                Document doc = new Document(PageSize.A5);
+                PdfWriter pdf = PdfWriter.GetInstance(doc, fs);
+
+                string dado = "";
+
+                Paragraph empregador = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
+                empregador.Alignment = Element.ALIGN_LEFT;
+                empregador.Add($"|Empregador/ Nome: Construtora Realiza |\n|CNPJ: 25.400.345/0001-20|\n|Endereço: 18772-226, Ágaus de Santaq Barbara, Três Marias, 40|");
+
+                Paragraph empregado = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
+                empregado.Alignment = Element.ALIGN_LEFT;
+                empregado.Add($"Empregado(a): {emp.Name} | Data Emissão: {DateTime.Now.ToShortDateString()} \nEmdereço: {address}| \n\n");
+
+                PdfPTable pt = new PdfPTable(3);
+                pt.HorizontalAlignment = Element.ALIGN_CENTER;
+                pt.WidthPercentage = 90f;
+
+                pt.AddCell("Código");
+                pt.AddCell("Descrição Resumida");
+                pt.AddCell("Quantidade");
+
+                string spaceLine = "         ";
+                string observation = "|                                  |";
+
+                for (int i = 0; i < amountLine; i++)
+                {
+                    pt.AddCell(spaceLine);
+                    pt.AddCell(spaceLine);
+                    pt.AddCell(spaceLine);
+                }
+
+                Paragraph obs = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
+                obs.Alignment = Element.ALIGN_LEFT;
+
+                obs.Add("Observação");
+
+                for (int i =  0; i < 5; i++)
+                {
+                    obs.Add($"\n\n{observation}");
+                }
+
+                Paragraph assinatura = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
+                assinatura.Alignment = Element.ALIGN_LEFT;
+
+                assinatura.Add($"\n\n{emp.Name}:____________________________________| ");
+
+                doc.Open();
+                doc.Add(empregador);
+                doc.Add(empregado);
+                doc.Add(pt);
+                doc.Add(assinatura);
+                doc.Close();
             }
             catch (Exception ex)
             {
