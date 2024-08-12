@@ -252,7 +252,7 @@ namespace Holerite.br.pro.DAO
             Product obj = new Product();
             try
             {
-                string sql = "SELECT short_description FROM product WHERE cod=@cod";
+                string sql = "SELECT short_description,spot_price,term_price FROM product WHERE cod=@cod";
                 MySqlCommand cmd = new MySqlCommand( sql, _connection);
                 cmd.Parameters.AddWithValue("@cod", cod);
 
@@ -264,7 +264,7 @@ namespace Holerite.br.pro.DAO
                 if (dr.Read())
                 {
                     obj.ShortDescription = dr.GetString("short_description");
-                    obj.SpotPrice = float.Parse(dr.GetDecimal("sport_price").ToString());
+                    obj.SpotPrice = float.Parse(dr.GetDecimal("spot_price").ToString());
                     obj.TermPrice= float.Parse(dr.GetDecimal("term_price").ToString());
                 }
 
@@ -293,9 +293,9 @@ namespace Holerite.br.pro.DAO
             Product obj = new Product();
             try
             {
-                string sql = "SELECT short_description FROM product WHERE name=@name";
+                string sql = "SELECT cod,short_description, spot_price, term_price FROM product WHERE short_description=@description";
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
-                cmd.Parameters.AddWithValue("@name", description);
+                cmd.Parameters.AddWithValue("@description", description);
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();
@@ -304,8 +304,9 @@ namespace Holerite.br.pro.DAO
 
                 if (dr.Read())
                 {
+                    obj.Cod = dr.GetInt32("cod");
                     obj.ShortDescription = dr.GetString("short_description");
-                    obj.SpotPrice = float.Parse(dr.GetDecimal("sport_price").ToString());
+                    obj.SpotPrice = float.Parse(dr.GetDecimal("spot_price").ToString());
                     obj.TermPrice = float.Parse(dr.GetDecimal("term_price").ToString());
                 }
 
