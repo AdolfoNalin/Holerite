@@ -82,6 +82,7 @@
             this.dgGeneratePoint.ReadOnly = true;
             this.dgGeneratePoint.Size = new System.Drawing.Size(521, 317);
             this.dgGeneratePoint.TabIndex = 4;
+            this.dgGeneratePoint.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgGeneratePoint_CellDoubleClick);
             // 
             // btnGenerate
             // 
@@ -121,8 +122,8 @@
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.MonthCalendar Calender;
-        private System.Windows.Forms.DataGridView dgGeneratePoint;
         private System.Windows.Forms.Button btnGenerate;
+        public System.Windows.Forms.MonthCalendar Calender;
+        public System.Windows.Forms.DataGridView dgGeneratePoint;
     }
 }

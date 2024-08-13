@@ -16,6 +16,13 @@ namespace Holerite.br.pro.VIEW.Consult
 {
     public partial class frmConsultEmpGeneratePoint : Form
     {
+        private int _codScreen;
+        public frmConsultEmpGeneratePoint(int codScreen)
+        {
+            InitializeComponent();
+            _codScreen = codScreen;
+        }
+
         public frmConsultEmpGeneratePoint()
         {
             InitializeComponent();
@@ -48,26 +55,52 @@ namespace Holerite.br.pro.VIEW.Consult
         #region btnGenerate_click
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            List<string> list = new List<string>();
-
-            if (Calender.SelectionStart.Month == Calender.SelectionEnd.Month && dgGeneratePoint.CurrentRow.Index > 0)
+            if (_codScreen == 1)
             {
-                for (int i = Calender.SelectionRange.Start.Day; i <= Calender.SelectionRange.End.Day; i++)
+                List<string> list = new List<string>();
+
+                if (Calender.SelectionStart.Month == Calender.SelectionEnd.Month && dgGeneratePoint.CurrentRow.Index > 0)
                 {
-                    list.Add($"{i}/{Calender.SelectionRange.Start.Month}/{Calender.SelectionRange.Start.Year}");
+                    for (int i = Calender.SelectionRange.Start.Day; i <= Calender.SelectionRange.End.Day; i++)
+                    {
+                        list.Add($"{i}/{Calender.SelectionRange.Start.Month}/{Calender.SelectionRange.Start.Year}");
+                    }
+
+                    string cpf = dgGeneratePoint.CurrentRow.Cells[6].Value.ToString();
+
+                    EmployeeDAO dao = new EmployeeDAO();
+                    Employee emp = dao.GetSearch(cpf);
+
+                    PrintOut.PrintOutPoint(emp, list);
                 }
-
-                string cpf = dgGeneratePoint.CurrentRow.Cells[6].Value.ToString();
-
-                EmployeeDAO dao = new EmployeeDAO();
-                Employee emp = dao.GetSearch(cpf);
-
-                PrintOut.PrintOutPoint(emp, list);
+                else
+                {
+                    Dialog.Message("Verifique se o funcionário está seleccionado e de os dias do calendário estão selecionados", "atenção");
+                }
             }
-            else
+            else if(_codScreen == 2)
             {
-                Dialog.Message("Verifique se o funcionário está seleccionado e de os dias do calendário estão selecionados", "atenção");
-            }
+                if (Calender.SelectionStart.Day + 2 <= Calender.SelectionEnd.Day && dgGeneratePoint.CurrentRow.Index >= 0)
+                {
+                    DialogResult resp = MessageBox.Show("Os dias foram selecionatos com sucesso!. Deseja fechar está tela?", "ateção", MessageBoxButtons.YesNo);
+
+                    if (resp == DialogResult.Yes)
+                    {
+                        this.Hide();
+                    }
+                }
+                else
+                {
+                    Dialog.Message("Certifique-se que há mais de 3 dias selecionado para a folha de ponto ser válida!", "atenção");
+                }
+            }            
+        }
+        #endregion
+
+        #region dgGeneratePoint_CellDoubleClick
+        private void dgGeneratePoint_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
         #endregion
     }
