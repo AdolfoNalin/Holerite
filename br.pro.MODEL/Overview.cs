@@ -12,7 +12,7 @@ namespace Holerite.br.pro.MODEL
         public int CodPoint { get; set; }
         public DateTime TimeWork { get; set; }
         public DateTime ExtraTime { get; set; }
-        public float MiissingMonth { get; set; }
+        public float MissingMonth { get; set; }
         public float Subtotal { get; set; }
         public float INSS { get; set; }
         public float OthersDes { get; set; }
