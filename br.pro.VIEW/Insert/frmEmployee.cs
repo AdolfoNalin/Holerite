@@ -29,11 +29,13 @@ namespace Holerite.br.pro.VIEW.Insert
         /// <param name="e"></param>
         private void btnInsert_Click(object sender, EventArgs e)
         {
+
+            string password = PasswordGenerator.GeneratePassword(txtPassword.Text);
             Employee obj = new Employee()
             {
                 Name = txtName.Text,
                 UserName = txtUserName.Text,
-                Password = txtPassword.Text,
+                Password = password,
                 Function = cbFunction.Text,
                 Daily = float.Parse(txtDaily.Text),
                 //Permissions = txtPermissions.Text,
@@ -95,12 +97,13 @@ namespace Holerite.br.pro.VIEW.Insert
         #region btnUpdate
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            string password = PasswordGenerator.GeneratePassword(txtPassword.Text);
             Employee obj = new Employee()
             {
                 Cod = int.Parse(txtCod.Text),
                 Name = txtName.Text,
                 UserName = txtUserName.Text,
-                Password = txtPassword.Text,
+                Password = password,
                 Function = cbFunction.Text,
                 Daily = float.Parse(txtDaily.Text),
                 //Permissions = txtPermissions.Text,
