@@ -162,9 +162,9 @@ namespace Holerite.br.pro.DAO
             {
                 string sql = @"SELECT 
 	            e.cod AS 'Código',
-	            e.emp_name AS 'Nome',
+	            e.name AS 'Nome',
                 e.user_name AS 'Nome do Usuário',
-                e.user_password AS 'Senha',
+                e.password AS 'Senha',
                 e.permissions AS 'Permissoões',
                 e.daily AS 'Daily',
 	            e.cpf AS 'CPF',
@@ -217,9 +217,9 @@ namespace Holerite.br.pro.DAO
             {
                 string sql = @"SELECT 
 	            e.cod AS 'Código',
-	            e.emp_name AS 'Nome',
+	            e.name AS 'Nome',
                 e.user_name AS 'Nome do Usuário',
-                e.user_password AS 'Senha',
+                e.password AS 'Senha',
                 e.permissions AS 'Permissoões',
                 e.daily AS 'Daily',
 	            e.cpf AS 'CPF',
@@ -272,9 +272,9 @@ namespace Holerite.br.pro.DAO
             {
                 string sql = @"SELECT 
 	            e.cod AS 'Código',
-	            e.emp_name AS 'Nome',
+	            e.name AS 'Nome',
                 e.user_name AS 'Nome do Usuário',
-                e.user_password AS 'Senha',
+                e.password AS 'Senha',
                 e.permissions AS 'Permissoões',
                 e.daily AS 'Daily',
 	            e.cpf AS 'CPF',
@@ -323,9 +323,9 @@ namespace Holerite.br.pro.DAO
             {
                 string sql = @"SELECT 
 	            e.cod AS 'Código',
-	            e.emp_name AS 'Nome',
+	            e.name AS 'Nome',
                 e.user_name AS 'Nome do Usuário',
-                e.user_password AS 'Senha',
+                e.password AS 'Senha',
                 e.permissions AS 'Permissoões',
                 e.daily AS 'Daily',
 	            e.cpf AS 'CPF',
@@ -425,7 +425,7 @@ namespace Holerite.br.pro.DAO
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
                 {
-                    emp.Name = dr.GetString("emp_name");
+                    emp.Name = dr.GetString("name");
                     emp.Function = dr.GetString("emp_function");
                     emp.CEP = dr.GetString("cep");
                     emp.State = dr.GetString("state");
@@ -459,7 +459,7 @@ namespace Holerite.br.pro.DAO
             string name = "";
             try
             {
-                string sql = "SELECT emp_name FROM user_employee WHERE cod=@cod";
+                string sql = "SELECT name FROM user_employee WHERE cod=@cod";
                 MySqlCommand cmd = new MySqlCommand( sql, _connection);
                 cmd.Parameters.AddWithValue("@cod", cod);
 
@@ -468,7 +468,7 @@ namespace Holerite.br.pro.DAO
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
                 {
-                    name = dr.GetString("emp_name");
+                    name = dr.GetString("name");
                 }
                 return name;
             }
