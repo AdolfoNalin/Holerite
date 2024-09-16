@@ -78,7 +78,6 @@ namespace Holerite.br.pro.DAO
                 cmd.Parameters.AddWithValue("@extra_output", obj.ExtraOutput);
                 cmd.Parameters.AddWithValue("extraEntry", obj.ExtraEntry);
                 cmd.Parameters.AddWithValue("@cod_point", obj.CodPoint);
-                cmd.Parameters.AddWithValue("@cod", obj.Cod);
             }
             catch (Exception ex)
             {

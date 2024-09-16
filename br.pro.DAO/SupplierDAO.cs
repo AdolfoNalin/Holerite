@@ -152,7 +152,7 @@ namespace Holerite.br.pro.DAO
                 string sql = @"SELECT 
 	            s.cod AS 'Código',
 	            s.name AS 'Nome',
-                s.fantasy_name AS 'Nome do Usuário',
+                s.fantasy_name AS 'Nome Fantasia',
 	            s.cnpj AS 'Senha',
 	            s.email AS 'Email',
 	            s.telephone_number AS 'Número de Telefone',

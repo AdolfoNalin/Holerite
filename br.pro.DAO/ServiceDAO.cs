@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace Holerite.br.pro.DAO
 {
-    public class SeverceDAO
+    public class ServiceDAO
     {
         private MySqlConnection _connection;
 
-        public SeverceDAO()
+        public ServiceDAO()
         {
             _connection = new ConnectionFactory().getConnection();
         }
@@ -30,7 +30,7 @@ namespace Holerite.br.pro.DAO
         {
             try
             {
-                string sql = @"INSERT INTO servece (cod_employee, short_description, full_description, spot_price, term_price, obs, um)
+                string sql = @"INSERT INTO service (cod_emp, short_description, full_description, spot_price, term_price, obs, um)
                 VALUES (@cod_emp, @short_descrition, @full_descrition, @spot_price, @term_price, @obs, um)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
@@ -67,7 +67,7 @@ namespace Holerite.br.pro.DAO
         {
             try
             {
-                string sql = @"UPDATE servece SET cod_employee=@cod_emp, short_description=@short_description, full_description=@full_description, spot_price=@spot_price, 
+                string sql = @"UPDATE service SET cod_emp=@cod_emp, short_description=@short_description, full_description=@full_description, spot_price=@spot_price, 
                 term_price=@term_price, obs=@obs, um=@um WHERE cod = @cod;";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
@@ -103,7 +103,7 @@ namespace Holerite.br.pro.DAO
         {
             try
             {
-                string sql = "DELETE FROM severce WHERE cod=@cod";
+                string sql = "DELETE FROM sevirce WHERE cod=@cod";
 
                 MySqlCommand cmd = new MySqlCommand( sql, _connection);
                 cmd.Parameters.AddWithValue("#cod", cod);
@@ -133,15 +133,15 @@ namespace Holerite.br.pro.DAO
             {
                 string sql = @"SELECT 
                 s.cod AS 'Código',
-                u.emp_name AS 'Nome Funcionário',
+                u.name AS 'Nome Funcionário',
                 s.short_description AS 'Descrição resumida',
                 s.full_description AS 'Descrição Completa',
                 s.um AS 'Unidade de Medida',
                 s.spot_price AS 'Preço á vista',
                 s.term_price AS 'Preço á Prazo',
                 s.obs AS 'Observação'
-                FROM servece AS s
-                JOIN user_employee AS u ON (u.cod = s.cod_employee);";
+                FROM service AS s
+                JOIN user_employee AS u ON (u.cod = s.cod_emp);";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
 
@@ -173,7 +173,7 @@ namespace Holerite.br.pro.DAO
             DataTable dt = new DataTable();
             try
             {
-                string sql = "SELECT * FROM servece WHERE short_description LIKE @short_description";
+                string sql = "SELECT * FROM service WHERE short_description LIKE @short_description";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@short_description", sd);
@@ -209,7 +209,7 @@ namespace Holerite.br.pro.DAO
             DataTable dt = new DataTable();
             try
             {
-                string sql = "SELECT * FROM severce WHERE short_description=@short_description";
+                string sql = "SELECT * FROM sevirce WHERE short_description=@short_description";
 
                 MySqlCommand cmd = new MySqlCommand( sql, _connection);
                 cmd.Parameters.AddWithValue("short_description", name);
@@ -244,7 +244,7 @@ namespace Holerite.br.pro.DAO
                 s.um AS 'Unidade de Medida',
                 s.spot_price AS 'Preço á vista',
                 s.term_price AS 'Preço á Prazo'
-                FROM servece AS s
+                FROM service AS s
                 WHERE cod=@cod";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
@@ -294,7 +294,7 @@ namespace Holerite.br.pro.DAO
                 s.um AS 'Unidade de Medida',
                 s.spot_price AS 'Preço á vista',
                 s.term_price AS 'Preço á Prazo'
-                FROM servece AS s
+                FROM service AS s
                 WHERE short_description=@sd";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);

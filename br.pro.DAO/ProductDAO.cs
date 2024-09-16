@@ -143,7 +143,7 @@ namespace Holerite.br.pro.DAO
                 p.short_description AS 'Descrição Resumida', 
                 p.full_description AS 'Descrição Completa', 
                 s.fantasy_name AS 'Nome Fantasia',
-                u.emp_name AS 'Funcionário',
+                u.name AS 'Funcionário',
                 p.amount AS 'Quantidade',
                 p.spot_price AS 'Preço á Vista',
                 p.term_price AS 'Preço á Prazo',

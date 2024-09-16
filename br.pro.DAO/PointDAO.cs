@@ -127,8 +127,8 @@ namespace Holerite.br.pro.DAO
             {
                 string sql = @"SELECT  
                 p.cod AS 'Código', 
-                u.emp_name AS 'Colaborador', 
-                p.date AS 'Mês'  
+                u.name AS 'Colaborador', 
+                p.month AS 'Mês'  
                 FROM point AS p        
                 JOIN user_employee AS u on (p.cod_emp = u.cod)";
 
