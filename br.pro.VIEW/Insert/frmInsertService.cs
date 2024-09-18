@@ -38,7 +38,7 @@ namespace Holerite.br.pro.VIEW.Insert
             obj.TermPrice = float.Parse(txtTerm.Text);
             obj.Observation = txtOBS.Text;
 
-            SeverceDAO dao = new SeverceDAO();   
+            ServiceDAO dao = new ServiceDAO();   
             dao.Insert(obj);
         }
         #endregion
@@ -74,7 +74,7 @@ namespace Holerite.br.pro.VIEW.Insert
 
             if(cod > 0)
             {
-                SeverceDAO dao = new SeverceDAO();
+                ServiceDAO dao = new ServiceDAO();
                 dao.Delete(cod);
 
                 frmConsultService tela = new frmConsultService();
@@ -106,7 +106,7 @@ namespace Holerite.br.pro.VIEW.Insert
             obj.TermPrice = float.Parse(txtTerm.Text);
             obj.Observation = txtOBS.Text;
 
-            SeverceDAO dao = new SeverceDAO();
+            ServiceDAO dao = new ServiceDAO();
             dao.Update(obj);
 
             frmConsultService tela = new frmConsultService();

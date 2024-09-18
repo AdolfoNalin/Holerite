@@ -23,12 +23,12 @@ namespace Holerite.br.pro.VIEW.Insert
         private void frmInsertProduct_Load(object sender, EventArgs e)
         {
             cbSupplier.DataSource = new SupplierDAO().Consult();
-            cbSupplier.ValueMember = "cod";
-            cbSupplier.DisplayMember = "name";
+            cbSupplier.ValueMember = "Código";
+            cbSupplier.DisplayMember = "Nome Fantasia";
 
             cbEmployee.DataSource = new EmployeeDAO().Consult();
-            cbEmployee.ValueMember = "cod";
-            cbEmployee.DisplayMember = "emp_name";
+            cbEmployee.ValueMember = "Código";
+            cbEmployee.DisplayMember = "Nome";
         }
         #endregion
 

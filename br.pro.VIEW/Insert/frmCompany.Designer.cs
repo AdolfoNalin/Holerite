@@ -63,12 +63,14 @@
             this.txtComplement = new System.Windows.Forms.TextBox();
             this.lblCod = new System.Windows.Forms.Label();
             this.txtCod = new System.Windows.Forms.TextBox();
+            this.lblCpf = new System.Windows.Forms.Label();
+            this.mtbCpf = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(82, 53);
+            this.txtName.Location = new System.Drawing.Point(95, 54);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(234, 20);
             this.txtName.TabIndex = 0;
@@ -76,7 +78,7 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(44, 56);
+            this.lblName.Location = new System.Drawing.Point(57, 57);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(38, 13);
             this.lblName.TabIndex = 1;
@@ -85,7 +87,7 @@
             // lblFantasyName
             // 
             this.lblFantasyName.AutoSize = true;
-            this.lblFantasyName.Location = new System.Drawing.Point(349, 56);
+            this.lblFantasyName.Location = new System.Drawing.Point(335, 57);
             this.lblFantasyName.Name = "lblFantasyName";
             this.lblFantasyName.Size = new System.Drawing.Size(78, 13);
             this.lblFantasyName.TabIndex = 3;
@@ -93,14 +95,14 @@
             // 
             // txtFantasyName
             // 
-            this.txtFantasyName.Location = new System.Drawing.Point(429, 53);
+            this.txtFantasyName.Location = new System.Drawing.Point(415, 54);
             this.txtFantasyName.Name = "txtFantasyName";
             this.txtFantasyName.Size = new System.Drawing.Size(234, 20);
             this.txtFantasyName.TabIndex = 2;
             // 
             // mtbCNPJ
             // 
-            this.mtbCNPJ.Location = new System.Drawing.Point(746, 53);
+            this.mtbCNPJ.Location = new System.Drawing.Point(842, 53);
             this.mtbCNPJ.Mask = "99,999,999/9999-99";
             this.mtbCNPJ.Name = "mtbCNPJ";
             this.mtbCNPJ.Size = new System.Drawing.Size(107, 20);
@@ -109,7 +111,7 @@
             // lblCNPJ
             // 
             this.lblCNPJ.AutoSize = true;
-            this.lblCNPJ.Location = new System.Drawing.Point(706, 57);
+            this.lblCNPJ.Location = new System.Drawing.Point(802, 57);
             this.lblCNPJ.Name = "lblCNPJ";
             this.lblCNPJ.Size = new System.Drawing.Size(37, 13);
             this.lblCNPJ.TabIndex = 5;
@@ -370,8 +372,9 @@
             // txtComplement
             // 
             this.txtComplement.Location = new System.Drawing.Point(124, 247);
+            this.txtComplement.Multiline = true;
             this.txtComplement.Name = "txtComplement";
-            this.txtComplement.Size = new System.Drawing.Size(564, 20);
+            this.txtComplement.Size = new System.Drawing.Size(564, 46);
             this.txtComplement.TabIndex = 31;
             // 
             // lblCod
@@ -390,11 +393,30 @@
             this.txtCod.Size = new System.Drawing.Size(42, 20);
             this.txtCod.TabIndex = 33;
             // 
+            // lblCpf
+            // 
+            this.lblCpf.AutoSize = true;
+            this.lblCpf.Location = new System.Drawing.Point(664, 57);
+            this.lblCpf.Name = "lblCpf";
+            this.lblCpf.Size = new System.Drawing.Size(30, 13);
+            this.lblCpf.TabIndex = 36;
+            this.lblCpf.Text = "CPF:";
+            // 
+            // mtbCpf
+            // 
+            this.mtbCpf.Location = new System.Drawing.Point(696, 53);
+            this.mtbCpf.Mask = "999,999,999-99";
+            this.mtbCpf.Name = "mtbCpf";
+            this.mtbCpf.Size = new System.Drawing.Size(88, 20);
+            this.mtbCpf.TabIndex = 35;
+            // 
             // frmCompany
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1120, 423);
+            this.Controls.Add(this.lblCpf);
+            this.Controls.Add(this.mtbCpf);
             this.Controls.Add(this.lblCod);
             this.Controls.Add(this.txtCod);
             this.Controls.Add(this.lblComplement);
@@ -477,5 +499,7 @@
         public System.Windows.Forms.ComboBox cbUF;
         public System.Windows.Forms.TextBox txtComplement;
         public System.Windows.Forms.TextBox txtCod;
+        private System.Windows.Forms.Label lblCpf;
+        public System.Windows.Forms.MaskedTextBox mtbCpf;
     }
 }

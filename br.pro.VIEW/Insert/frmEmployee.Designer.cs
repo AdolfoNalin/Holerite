@@ -429,11 +429,12 @@
             // 
             // btnPermissions
             // 
-            this.btnPermissions.Location = new System.Drawing.Point(622, 145);
+            this.btnPermissions.Location = new System.Drawing.Point(621, 147);
             this.btnPermissions.Name = "btnPermissions";
-            this.btnPermissions.Size = new System.Drawing.Size(30, 23);
+            this.btnPermissions.Size = new System.Drawing.Size(29, 21);
             this.btnPermissions.TabIndex = 72;
             this.btnPermissions.UseVisualStyleBackColor = true;
+            this.btnPermissions.Click += new System.EventHandler(this.btnPermissions_Click);
             // 
             // txtDaily
             // 

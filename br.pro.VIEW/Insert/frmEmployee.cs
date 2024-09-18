@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Holerite.Helpers;
+using Holerite.br.pro.VIEW.Interface;
 
 namespace Holerite.br.pro.VIEW.Insert
 {
@@ -38,8 +39,8 @@ namespace Holerite.br.pro.VIEW.Insert
                 Password = password,
                 Function = cbFunction.Text,
                 Daily = float.Parse(txtDaily.Text),
-                //Permissions = txtPermissions.Text,
-                CPF = mtbCEP.Text,
+                Permissions = txtPermissions.Text,
+                CPF = mtbCPF.Text,
                 TelephoneNumber = mtbTelephoneNumber.Text,
                 PhoneNumber = mtbPhoneNumber.Text,
                 Email = txtEmail.Text,
@@ -106,7 +107,7 @@ namespace Holerite.br.pro.VIEW.Insert
                 Password = password,
                 Function = cbFunction.Text,
                 Daily = float.Parse(txtDaily.Text),
-                //Permissions = txtPermissions.Text,
+                Permissions = txtPermissions.Text,
                 CPF = mtbCPF.Text,
                 TelephoneNumber = mtbTelephoneNumber.Text,
                 PhoneNumber = mtbPhoneNumber.Text,
@@ -153,7 +154,7 @@ namespace Holerite.br.pro.VIEW.Insert
         {
             FunctionDAO dao = new FunctionDAO();
             cbFunction.DataSource = dao.Consult();
-            cbFunction.DisplayMember = "function_emp";
+            cbFunction.DisplayMember = "fun";
             cbFunction.ValueMember = "cod";
 
             txtFunction.Visible = false;
@@ -200,6 +201,17 @@ namespace Holerite.br.pro.VIEW.Insert
                 obj.Fun = cbFunction.Text;
                 dao.Insert(obj);
             }
+        }
+        #endregion
+
+        #region btnPermissions_Click
+        private void btnPermissions_Click(object sender, EventArgs e)
+        {
+            frmPermission tela = new frmPermission();
+            tela.ShowDialog();
+            List<CheckBox> listCheck = tela.listChck;
+
+            listCheck.ForEach(lc => txtPermissions.Text += $"{lc.Text}, ");
         }
         #endregion
     }

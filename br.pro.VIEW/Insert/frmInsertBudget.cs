@@ -46,7 +46,7 @@ namespace Holerite.br.pro.VIEW.Insert
             cbClient.DisplayMember = "Nome";
             cbClient.ValueMember = "Código";
 
-            SeverceDAO daoS = new SeverceDAO();
+            ServiceDAO daoS = new ServiceDAO();
             cbService.DataSource = daoS.Consult();
             cbService.DisplayMember = "Descrição resumida";
             cbService.ValueMember = "Código";
@@ -213,7 +213,7 @@ namespace Holerite.br.pro.VIEW.Insert
         {
             if(e.KeyChar == 13)
             {
-                SeverceDAO dao = new SeverceDAO();
+                ServiceDAO dao = new ServiceDAO();
                 Severce obj = dao.Search(int.Parse(txtCodService.Text));
 
                 txtCodService.Text = obj.Cod.ToString();
@@ -230,7 +230,7 @@ namespace Holerite.br.pro.VIEW.Insert
         {
             if (e.KeyChar == 13)
             {
-                SeverceDAO dao = new SeverceDAO();
+                ServiceDAO dao = new ServiceDAO();
                 Severce obj = dao.GetSeverce(cbService.Text);
 
                 txtCodService.Text = obj.Cod.ToString();
@@ -251,7 +251,7 @@ namespace Holerite.br.pro.VIEW.Insert
                 {
                     try
                     {
-                        SeverceDAO dao = new SeverceDAO();
+                        ServiceDAO dao = new ServiceDAO();
 
                         float subtotal = 0;
                         float total = 0;
@@ -295,7 +295,7 @@ namespace Holerite.br.pro.VIEW.Insert
                 try
                 {
 
-                    SeverceDAO dao = new SeverceDAO();
+                    ServiceDAO dao = new ServiceDAO();
 
                     float subtotal = 0;
                     float total = 0;
