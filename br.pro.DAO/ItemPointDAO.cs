@@ -29,11 +29,11 @@ namespace Holerite.br.pro.DAO
         {
             try
             {
-                string sql = @"INSERT INTO item_point (date_point, entry_time, lunch_departure, lunch_entrance, exit_time, extra_output, extra_entry, cod_point)
-                VALUES (@date_point, @entry_time, @lunch_departure, @lunch_entrance, @exit_time, @extra_output, @extra_entry, @cod_point)";
+                string sql = @"INSERT INTO item_point (date, entry_time, lunch_departure, lunch_entrance, exit_time, extra_output, extra_entry, cod_point)
+                VALUES (@date, @entry_time, @lunch_departure, @lunch_entrance, @exit_time, @extra_output, @extra_entry, @cod_point)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
-                cmd.Parameters.AddWithValue("@date_point", obj.Date);
+                cmd.Parameters.AddWithValue("@date", obj.Date);
                 cmd.Parameters.AddWithValue("@entry_time", obj.EntryTime);
                 cmd.Parameters.AddWithValue("@lunch_departure", obj.LunchDeparture);
                 cmd.Parameters.AddWithValue("@lunch_entrance", obj.LunchEntrance);
