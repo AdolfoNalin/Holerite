@@ -45,16 +45,14 @@ namespace Holerite.Helpers
             EmployeeDAO dao = new EmployeeDAO();
             try
             {
-                if (dao.Login(userName, password))
+                if ((String.IsNullOrWhiteSpace(userName) || String.IsNullOrWhiteSpace(password)) ||
+                    (String.IsNullOrWhiteSpace(userName) && String.IsNullOrWhiteSpace(password)))
                 {
-                    frmMenu tela = new frmMenu();
-                    tela.ShowDialog();
+                    Dialog.Message("Os campos Nome e Senha não podem ser vazios", "Erro");
                 }
-                else
+                else if(dao.Login(userName, password) == false) 
                 {
                     Dialog.Message("Usuário não encontrado, tente novamente", "atenção");
-                    frmLogin tela = new frmLogin();
-                    tela.ShowDialog();
                 }
             }
             catch (Exception ex)
@@ -137,6 +135,26 @@ namespace Holerite.Helpers
                         }
                     }
                 }
+            }
+        }
+        #endregion
+
+        #region VelidatePermissionUser
+        public static List<String> VelidatePermissionUser(string name)
+        {
+            EmployeeDAO dao = new EmployeeDAO();
+            try
+            {
+                Employee emp = dao.GetSearchEmp(name);
+
+                List<String> list = emp.Permissions.Split(',').ToList();
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+                return null;
             }
         }
         #endregion
