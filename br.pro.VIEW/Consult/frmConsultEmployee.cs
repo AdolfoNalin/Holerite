@@ -78,7 +78,7 @@ namespace Holerite.br.pro.VIEW.Consult
             tela.txtStreet.Text = dgEmployee.CurrentRow.Cells[14].Value.ToString();
             tela.txtHomeNumber.Text = dgEmployee.CurrentRow.Cells[15].Value.ToString();
             tela.txtComplement.Text = dgEmployee.CurrentRow.Cells[16].Value.ToString();
-            tela.cbFunction.Text = dgEmployee.CurrentRow.Cells[17].Value.ToString();
+            tela.txtFunction.Text = dgEmployee.CurrentRow.Cells[17].Value.ToString();
 
             this.Hide();
             tela.ShowDialog();

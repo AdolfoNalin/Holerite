@@ -30,7 +30,7 @@ namespace Holerite.br.pro.VIEW.Consult
         {
             string name = "%" + txtName.Text + "%";
 
-            SeverceDAO dao = new SeverceDAO();
+            ServiceDAO dao = new ServiceDAO();
             dao.Consult(name);
         }
         #endregion
@@ -43,14 +43,22 @@ namespace Holerite.br.pro.VIEW.Consult
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            SeverceDAO dao = new SeverceDAO();
+            ServiceDAO dao = new ServiceDAO();
             dao.Search(txtName.Text);
         }
 
         #endregion
 
-        #region dgSeverce_CellMouseClick
-        private void dgSeverce_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        #region frmConsultSeverce_Load
+        private void frmConsultSeverce_Load(object sender, EventArgs e)
+        {
+            ServiceDAO dao = new ServiceDAO();
+            dgSeverce.DataSource = dao.Consult();
+        }
+        #endregion
+
+        #region dgSeverce_CellContentClick
+        private void dgSeverce_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             Severce obj = new Severce();
             EmployeeDAO dao = new EmployeeDAO();
@@ -74,14 +82,6 @@ namespace Holerite.br.pro.VIEW.Consult
 
             tela.ShowDialog();
             this.Hide();
-        }
-        #endregion
-
-        #region frmConsultSeverce_Load
-        private void frmConsultSeverce_Load(object sender, EventArgs e)
-        {
-            SeverceDAO dao = new SeverceDAO();
-            dgSeverce.DataSource = dao.Consult();
         }
         #endregion
     }

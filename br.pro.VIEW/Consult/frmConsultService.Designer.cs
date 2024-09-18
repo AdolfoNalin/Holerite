@@ -64,6 +64,7 @@
             this.dgSeverce.ReadOnly = true;
             this.dgSeverce.Size = new System.Drawing.Size(776, 281);
             this.dgSeverce.TabIndex = 2;
+            this.dgSeverce.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSeverce_CellContentClick);
             // 
             // btnSearch
             // 
@@ -75,7 +76,7 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // frmConsultSeverce
+            // frmConsultService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -85,7 +86,7 @@
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.txtName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "frmConsultSeverce";
+            this.Name = "frmConsultService";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta Serviço";
             this.Load += new System.EventHandler(this.frmConsultSeverce_Load);

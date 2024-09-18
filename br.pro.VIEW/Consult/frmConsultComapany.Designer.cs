@@ -41,17 +41,17 @@
             this.dgCompany.AllowUserToDeleteRows = false;
             this.dgCompany.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgCompany.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgCompany.Location = new System.Drawing.Point(12, 140);
+            this.dgCompany.Location = new System.Drawing.Point(12, 91);
             this.dgCompany.Name = "dgCompany";
             this.dgCompany.ReadOnly = true;
-            this.dgCompany.Size = new System.Drawing.Size(776, 298);
+            this.dgCompany.Size = new System.Drawing.Size(776, 347);
             this.dgCompany.TabIndex = 0;
             this.dgCompany.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCompany_CellContentClick);
             // 
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(24, 104);
+            this.lblName.Location = new System.Drawing.Point(21, 56);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(38, 13);
             this.lblName.TabIndex = 1;
@@ -59,7 +59,7 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(65, 101);
+            this.txtSearch.Location = new System.Drawing.Point(62, 53);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(252, 20);
             this.txtSearch.TabIndex = 2;
@@ -67,7 +67,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(323, 102);
+            this.btnSearch.Location = new System.Drawing.Point(320, 54);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(64, 19);
             this.btnSearch.TabIndex = 3;
