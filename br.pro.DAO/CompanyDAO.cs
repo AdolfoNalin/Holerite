@@ -147,7 +147,23 @@ namespace Holerite.br.pro.DAO
             DataTable dt = new DataTable();
             try
             {
-                string sql = "SELECT * FROM company";
+                string sql = @"Select 
+                cod as 'Código',
+                name as 'Nome Proprietário',
+                fantasy_name as 'Nome Fantasia',
+                cpf as 'CPF',
+                cnpj as 'CNPJ',
+                telephone_number as 'Telefone',
+                phone_number as 'Celular',
+                email as 'Email',
+                cep as 'CEP',
+                state as 'Estado',
+                city as 'Cidade',
+                neighborhood as 'Bairro',
+                street as 'Rua',
+                home_number as 'Número',
+                complement as 'Complemento'
+                from company";
 
                 MySqlCommand cmd = new MySqlCommand( sql, _connection);
 
@@ -182,7 +198,23 @@ namespace Holerite.br.pro.DAO
             try
             {
                 name = "%" + name + "%";
-                string sql = "SELECT * FROM company WHERE fantasy_name LIKE @fantasy_name";
+                string sql = @"Select 
+                cod as 'Código',
+                name as 'Nome Proprietário',
+                fantasy_name as 'Nome Fantasia',
+                cpf as 'CPF',
+                cnpj as 'CNPJ',
+                telephone_number as 'Telefone',
+                phone_number as 'Celular',
+                email as 'Email',
+                cep as 'CEP',
+                state as 'Estado',
+                city as 'Cidade',
+                neighborhood as 'Bairro',
+                street as 'Rua',
+                home_number as 'Número',
+                complement as 'Complemento'
+                from company WHERE fantasy_name LIKE @fantasy_name";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@fantasy_name", name); 
@@ -198,7 +230,7 @@ namespace Holerite.br.pro.DAO
             }
             catch (Exception ex)
             {
-                Dialog.Message("Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
+                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
                 return null;
             }
             finally
@@ -219,7 +251,23 @@ namespace Holerite.br.pro.DAO
             DataTable dt = new DataTable();
             try
             {
-                string sql = "SELECT * FROM company WHERE fantasy_name=@fantasy_name";
+                string sql = @"Select 
+                cod as 'Código',
+                name as 'Nome Proprietário',
+                fantasy_name as 'Nome Fantasia',
+                cpf as 'CPF',
+                cnpj as 'CNPJ',
+                telephone_number as 'Telefone',
+                phone_number as 'Celular',
+                email as 'Email',
+                cep as 'CEP',
+                state as 'Estado',
+                city as 'Cidade',
+                neighborhood as 'Bairro',
+                street as 'Rua',
+                home_number as 'Número',
+                complement as 'Complemento'
+                from company WHERE fantasy_name=@fantasy_name";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@fantasy_name", name);
@@ -254,7 +302,23 @@ namespace Holerite.br.pro.DAO
             int cod = 0;
             try
             {
-                string sql = "SELECT cod FROM company WHERE cnpj=@cnpj AND name=@name";
+                string sql = @"Select 
+                cod as 'Código',
+                name as 'Nome Proprietário',
+                fantasy_name as 'Nome Fantasia',
+                cpf as 'CPF',
+                cnpj as 'CNPJ',
+                telephone_number as 'Telefone',
+                phone_number as 'Celular',
+                email as 'Email',
+                cep as 'CEP',
+                state as 'Estado',
+                city as 'Cidade',
+                neighborhood as 'Bairro',
+                street as 'Rua',
+                home_number as 'Número',
+                complement as 'Complemento'
+                from company WHERE cnpj=@cnpj AND name=@name";
                 MySqlCommand cmd = new MySqlCommand( sql, _connection);
                 cmd.Parameters.AddWithValue("@cnpj", cnpj);
                 cmd.Parameters.AddWithValue("@name", name);
