@@ -31,12 +31,12 @@ namespace Holerite.br.pro.DAO
         {
             try
             {
-                string sql = "INSERT INTO point (cod_company, cod_emp, date) VALUES(@cod_company, @cod_emp, @date)";
+                string sql = "INSERT INTO point (cod_company, cod_emp, month) VALUES(@cod_company, @cod_emp, @month)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cod_company", obj.CodCompany);
                 cmd.Parameters.AddWithValue("@cod_emp", obj.CodEmp);
-                cmd.Parameters.AddWithValue("@date", obj.Month);
+                cmd.Parameters.AddWithValue("@month", obj.Month);
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();

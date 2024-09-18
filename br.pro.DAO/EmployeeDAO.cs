@@ -237,7 +237,7 @@ namespace Holerite.br.pro.DAO
 	            e.home_number AS 'Número da casa',
 	            e.complement AS 'Complemento',
                 e.emp_function AS 'Funções'
-	            FROM user_employee AS e WHERE e.emp_name LIKE @name";
+	            FROM user_employee AS e WHERE e.name LIKE @name";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@name", name);
@@ -292,7 +292,7 @@ namespace Holerite.br.pro.DAO
 	            e.home_number AS 'Número da casa',
 	            e.complement AS 'Complemento',
                 e.emp_function AS 'Funções'
-	            FROM user_employee AS e WHERE e.emp_name=@name";
+	            FROM user_employee AS e WHERE e.name=@name";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@name", name);
@@ -389,7 +389,7 @@ namespace Holerite.br.pro.DAO
             int cod = 0;
             try
             {
-                string sql = "SELECT cod FROM user_employee WHERE cpf=@cpf AND emp_name=@name";
+                string sql = "SELECT cod FROM user_employee WHERE cpf=@cpf AND name=@name";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cpf", cpf);
@@ -498,7 +498,7 @@ namespace Holerite.br.pro.DAO
         {
             try
             {
-                string sql = "SELECT * FROM user_employee WHERE user_name=@user_name AND user_password=@password";
+                string sql = "SELECT * FROM user_employee WHERE user_name=@user_name AND password=@password";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@user_name", userName);
@@ -524,14 +524,14 @@ namespace Holerite.br.pro.DAO
         #endregion
 
         #region GetSearchEmp 
-        public Employee GetSearchEmp(string emp_name)
+        public Employee GetSearchEmp(string name)
         {
             Employee emp = new Employee();
             try
             {
-                string sql = "SELECT cod,emp_name FROM user_employee WHERE emp_name=@name";
+                string sql = "SELECT cod,name, permissions FROM user_employee WHERE name=@name OR user_name=@name";
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
-                cmd.Parameters.AddWithValue("@name", emp_name);
+                cmd.Parameters.AddWithValue("@name", name);
 
                 _connection.Open();
 
@@ -539,7 +539,8 @@ namespace Holerite.br.pro.DAO
                 if (dr.Read())
                 {
                     emp.Cod = dr.GetInt32("cod");
-                    emp.Name = dr.GetString("emp_name");
+                    emp.Name = dr.GetString("name");
+                    emp.Permissions = dr.GetString("permissions");
                 }
                 return emp;
             }
