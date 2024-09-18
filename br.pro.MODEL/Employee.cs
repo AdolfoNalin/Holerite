@@ -12,7 +12,7 @@ namespace Holerite.br.pro.MODEL
         public string Password { get; set; }
         public string Function { get; set; }
         public float Daily { get; set; }
-        public List<string> Permissions { get; set; }
+        public string Permissions { get; set; }
         public string CTPS { get; set; }
     }
 }
