@@ -9,7 +9,6 @@ namespace Holerite.br.pro.MODEL
 {
     public class ItemPoint
     {
-        public int Cod { get; set; }
         public int CodPoint { get; set; }
         public DateTime Date { get; set; }
         public DateTime EntryTime { get; set; }
