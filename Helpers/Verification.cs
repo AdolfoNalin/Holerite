@@ -158,5 +158,27 @@ namespace Holerite.Helpers
             }
         }
         #endregion
+
+        #region ValidatePermission
+        public static void ValidadePermission(List<string> permissions, string permission, Form screen)
+        {
+            try
+            {
+                if (permissions.Any(p => p == permission))
+                {
+                    screen.ShowDialog();
+                }
+                else
+                {
+                    Dialog.Message("Usuário não autorizado para acessar essa tela!", "Não autorizado");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+            }
+        }
+        #endregion
     }
 }
