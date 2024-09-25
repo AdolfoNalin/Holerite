@@ -102,13 +102,13 @@ namespace Holerite.br.pro.DAO
                 b.cod AS 'Código',
                 b.date AS 'Data',
                 b.payment AS 'Forma de pagamento',
-                u.emp_name AS 'Nome Funcionário',
+                u.name AS 'Nome Funcionário',
                 c.name AS 'Nome Cliente',
                 b.subtotal AS 'Subtotal',
                 b.obs AS 'Observação'
                 FROM budget AS b
-                JOIN user_employee AS u ON (u.cod = b.emp_cod)
-                JOIN client AS c ON (c.cod = b.client_cod)";
+                JOIN user_employee AS u ON (u.cod = b.cod_emp)
+                JOIN client AS c ON (c.cod = b.cod_client)";
 
                 MySqlCommand cmd = new MySqlCommand( sql, _connection);
 
