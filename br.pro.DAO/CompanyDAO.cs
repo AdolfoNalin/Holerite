@@ -341,5 +341,77 @@ namespace Holerite.br.pro.DAO
             finally { _connection.Close(); }
         }
         #endregion
+
+        #region Search
+        public Company Search(int cod)
+        {
+            Company company = new Company();
+            try
+            {
+                string sql = @"Select 
+                cod as 'Código',
+                name as 'Nome Proprietário',
+                fantasy_name as 'Nome Fantasia',
+                cpf as 'CPF',
+                cnpj as 'CNPJ',
+                telephone_number as 'Telefone',
+                phone_number as 'Celular',
+                email as 'Email',
+                cep as 'CEP',
+                state as 'Estado',
+                city as 'Cidade',
+                neighborhood as 'Bairro',
+                street as 'Rua',
+                home_number as 'Número',
+                complement as 'Complemento'
+                from company WHERE cod = @cod";
+
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+                cmd.Parameters.AddWithValue("@cod", cod);
+
+                _connection.Open();
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+
+                if(dr.Read())
+                {
+                    Company com = new Company()
+                    {
+                        Cod = dr.GetInt32("Código"),
+                        Name = dr.GetString("Nome Proprietário"),
+                        FantasyName = dr.GetString("Nome Fantasia"),
+                        CPF = dr.GetString("CPF"),
+                        CNPJ = dr.GetString("CNPJ"),
+                        TelephoneNumber = dr.GetString("Telefone"),
+                        PhoneNumber = dr.GetString("Celular"),
+                        Email = dr.GetString("Email"),
+                        CEP = dr.GetString("CEP"),
+                        State = dr.GetString("Estado"),
+                        City = dr.GetString("Cidade"),
+                        Neighborhood = dr.GetString("Bairro"),
+                        Street = dr.GetString("Rua"),
+                        HomeNumber = dr.GetInt32("Número"),
+                        Complement = dr.GetString("Complemento")
+                    };
+
+                    company = com;
+                }
+                else
+                {
+                    Dialog.Message("Conexão não encontrada", "atenção");
+                }
+                return company;
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+                return null;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        #endregion
     }
 }
