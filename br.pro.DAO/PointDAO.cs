@@ -245,7 +245,7 @@ namespace Holerite.br.pro.DAO
             int cod = 0;
             try
             {
-                string sql = "SELECT MAX(cod) FROM point";
+                string sql = "SELECT MAX(cod) AS 'Código' FROM point";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
 
@@ -255,14 +255,14 @@ namespace Holerite.br.pro.DAO
 
                 if (dr.Read())
                 {
-                    cod = dr.GetInt32("cod");
+                    cod = dr.GetInt32("Código");
                 }
 
                 return cod;
             }
             catch (Exception ex)
             {
-                Dialog.Message("Acoenteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
+                Dialog.Message($"Acoenteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
                 return 0;
             }
             finally
