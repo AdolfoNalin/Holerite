@@ -82,7 +82,7 @@ namespace Holerite.br.pro.VIEW.Consult
             {
                 if (Calender.SelectionStart.Day + 2 <= Calender.SelectionEnd.Day && dgGeneratePoint.CurrentRow.Index >= 0)
                 {
-                    DialogResult resp = MessageBox.Show("Os dias foram selecionatos com sucesso!. Deseja fechar está tela?", "ateção", MessageBoxButtons.YesNo);
+                    DialogResult resp = MessageBox.Show("Os dias foram selecionatos com sucesso!", "ateção", MessageBoxButtons.YesNo);
 
                     if (resp == DialogResult.Yes)
                     {
