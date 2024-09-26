@@ -10,12 +10,12 @@ namespace Holerite.br.pro.MODEL
     public class ItemPoint
     {
         public int CodPoint { get; set; }
-        public DateTime Date { get; set; }
-        public DateTime EntryTime { get; set; }
-        public DateTime LunchDeparture { get; set; }
-        public DateTime LunchEntrance{ get; set; }
-        public DateTime ExitTime { get; set; }
-        public DateTime ExtraEntry { get; set; }
-        public DateTime ExtraOutput { get; set; }
+        public string Date { get; set; }
+        public string EntryTime { get; set; }
+        public string LunchDeparture { get; set; }
+        public string LunchEntrance{ get; set; }
+        public string ExitTime { get; set; }
+        public string ExtraEntry { get; set; }
+        public string ExtraOutput { get; set; }
     }
 }
