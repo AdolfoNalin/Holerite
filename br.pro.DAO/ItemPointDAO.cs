@@ -5,6 +5,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using ZstdSharp.Unsafe;
@@ -37,14 +38,13 @@ namespace Holerite.br.pro.DAO
                 cmd.Parameters.AddWithValue("@entry_time", obj.EntryTime);
                 cmd.Parameters.AddWithValue("@lunch_departure", obj.LunchDeparture);
                 cmd.Parameters.AddWithValue("@lunch_entrance", obj.LunchEntrance);
-                cmd.Parameters.AddWithValue("@exit_tome", obj.ExitTime);
+                cmd.Parameters.AddWithValue("@exit_time", obj.ExitTime);
                 cmd.Parameters.AddWithValue("@extra_output", obj.ExtraOutput);
-                cmd.Parameters.AddWithValue("extraEntry", obj.ExtraEntry);
+                cmd.Parameters.AddWithValue("@extra_entry", obj.ExtraEntry);
                 cmd.Parameters.AddWithValue("@cod_point", obj.CodPoint);
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();
-
             }
             catch (Exception ex)
             {
@@ -67,21 +67,21 @@ namespace Holerite.br.pro.DAO
             try
             {
                 string sql = @"UPDATE item_point SET date_point=@date_point, entry_time=@entry_time, lunch_departure=@lunch_departure, lunch_entrance=@lunch_entrance, exit_time=@exit_time, 
-                extra_output=@extra_output, extra_entry=@extra_entry, cod_point=@cod_point WHERE cod=@cod";
+                extra_output=@extra_output, extra_entry=@extra_entry WHERE cod_point=@cod_point";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@date_point", obj.Date);
                 cmd.Parameters.AddWithValue("@entry_time", obj.EntryTime);
                 cmd.Parameters.AddWithValue("@lunch_departure", obj.LunchDeparture);
                 cmd.Parameters.AddWithValue("@lunch_entrance", obj.LunchEntrance);
-                cmd.Parameters.AddWithValue("@exit_tome", obj.ExitTime);
+                cmd.Parameters.AddWithValue("@exit_time", obj.ExitTime);
                 cmd.Parameters.AddWithValue("@extra_output", obj.ExtraOutput);
-                cmd.Parameters.AddWithValue("extraEntry", obj.ExtraEntry);
+                cmd.Parameters.AddWithValue("@extra_entry", obj.ExtraEntry);
                 cmd.Parameters.AddWithValue("@cod_point", obj.CodPoint);
             }
             catch (Exception ex)
             {
-                Dialog.Message("Acoenteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atençãp");
+                Dialog.MessageError(ex);
             }
             finally
             {
