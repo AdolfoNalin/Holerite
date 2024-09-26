@@ -1,6 +1,8 @@
-﻿using Holerite.br.pro.DAO;
+﻿using Google.Protobuf.WellKnownTypes;
+using Holerite.br.pro.DAO;
 using Holerite.br.pro.MODEL;
 using Holerite.br.pro.VIEW;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -140,14 +142,16 @@ namespace Holerite.Helpers
         #endregion
 
         #region VelidatePermissionUser
-        public static List<String> VelidatePermissionUser(string name)
+        public static List<string> VelidatePermissionUser(string name)
         {
             EmployeeDAO dao = new EmployeeDAO();
             try
             {
                 Employee emp = dao.GetSearchEmp(name);
 
-                List<String> list = emp.Permissions.Split(',').ToList();
+                List<string> list = emp.Permissions.Split(',').ToList();
+
+                _ = list.FirstOrDefault() ?? throw new ArgumentNullException("Você não tem permissão para acessar nenhuma tela");
 
                 return list;
             }
@@ -164,15 +168,7 @@ namespace Holerite.Helpers
         {
             try
             {
-                if (permissions.Any(p => p == permission))
-                {
-                    screen.ShowDialog();
-                }
-                else
-                {
-                    Dialog.Message("Usuário não autorizado para acessar essa tela!", "Não autorizado");
-                }
-
+                _ = permissions.Any(p => p == permission) ? screen.ShowDialog() : MessageBox.Show("Você não pode acessar essa tela", "Erro de Autenticação");
             }
             catch (Exception ex)
             {
