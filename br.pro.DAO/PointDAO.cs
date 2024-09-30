@@ -128,8 +128,8 @@ namespace Holerite.br.pro.DAO
                 string sql = @"SELECT  
                 p.cod AS 'Código', 
                 u.name AS 'Colaborador', 
-                p.month AS 'Mês'  
-                FROM point AS p        
+                p.month AS 'Mês'
+                FROM point AS p
                 JOIN user_employee AS u on (p.cod_emp = u.cod)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
