@@ -488,13 +488,13 @@ namespace Holerite.br.pro.DAO
         #endregion
 
         #region Login
-    /// <summary>
-    /// Verification if username and password is true in the database
-    /// </summary>
-    /// <param name="userName"></param>
-    /// <param name="passWord"></param>
-    /// <returns></returns>
-    public bool Login(string userName, string passWord)
+        /// <summary>
+        /// Verification if username and password is true in the database
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="passWord"></param>
+        /// <returns></returns>
+        public bool Login(string userName, string passWord)
         {
             try
             {
@@ -505,11 +505,24 @@ namespace Holerite.br.pro.DAO
                 cmd.Parameters.AddWithValue("password", passWord);
 
                 _connection.Open();
-                cmd?.ExecuteNonQuery();
 
-                Dialog.Message($"Seja bem vindo {userName}!", "Sucesso");
+                MySqlDataReader da = cmd.ExecuteReader();
 
-                return true;
+                if (da.Read())
+                {
+                    Dialog.Message($"Seja bem vindo {userName}!", "Sucesso");
+                    return true;
+                }
+                else
+                {
+                    Dialog.Message("Usuário não encontrado!", "Erro de autenticação");
+                    return false;
+                }
+            }
+            catch(ArgumentException ae)
+            {
+                Dialog.Message("Usuário ou senha incorretos", "Erro");
+                return false;
             }
             catch(Exception ex)
             {
@@ -529,7 +542,7 @@ namespace Holerite.br.pro.DAO
             Employee emp = new Employee();
             try
             {
-                string sql = "SELECT cod,name, permissions FROM user_employee WHERE name=@name OR user_name=@name";
+                string sql = @"SELECT * FROM user_employee WHERE name=@name OR user_name=@name";
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@name", name);
 
@@ -541,6 +554,13 @@ namespace Holerite.br.pro.DAO
                     emp.Cod = dr.GetInt32("cod");
                     emp.Name = dr.GetString("name");
                     emp.Permissions = dr.GetString("permissions");
+                    emp.Function = dr.GetString("emp_function");
+                    emp.CEP = dr.GetString("cep");
+                    emp.State = dr.GetString("state");
+                    emp.City = dr.GetString("city");
+                    emp.Neighborhood = dr.GetString("neighborhood");
+                    emp.Street = dr.GetString("street");
+                    emp.HomeNumber = dr.GetInt32("home_number");
                 }
                 return emp;
             }
