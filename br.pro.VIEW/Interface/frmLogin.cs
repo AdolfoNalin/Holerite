@@ -35,17 +35,24 @@ namespace Holerite.br.pro.VIEW
         /// <param name="e"></param>
         private void btnLogar_Click(object sender, EventArgs e)
         {
+            frmMenu tela = new frmMenu();
             string hashPassword = PasswordGenerator.GeneratePassword(txtPassword.Text);
-            Verification.Login(txtUserName.Text, hashPassword);
             permissions = Verification.VelidatePermissionUser(txtUserName.Text);
             permissions.RemoveAt(permissions.Count - 1);
-            
 
-            frmMenu tela = new frmMenu();
             tela.permissions = permissions;
-            this.Hide();
-            tela.ShowDialog();
-            this.Close();
+
+            if (Verification.Login(txtUserName.Text, hashPassword) == true)
+            {
+                this.Hide();
+                tela.ShowDialog();
+                this.Close();
+            }
+            else
+            {
+                txtUserName.Text = String.Empty;
+                txtPassword.Text = String.Empty;
+            }
         }
         #endregion
     }
