@@ -17,7 +17,7 @@ namespace Holerite.Helpers
             {
                 byte[] bPassword = Encoding.UTF8.GetBytes(password);
                 byte[] bytes = pass.ComputeHash(bPassword);
-                hashpassword = Encoding.UTF8.GetString(bytes);
+                hashpassword = BitConverter.ToString(bytes).Replace("-",".").ToLower();
             }
 
             return hashpassword;
