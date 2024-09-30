@@ -210,8 +210,8 @@ namespace Holerite.br.pro.VIEW.Insert
             frmPermission tela = new frmPermission();
             tela.ShowDialog();
             List<CheckBox> listCheck = tela.listChck;
-
-            listCheck.ForEach(lc => txtPermissions.Text += $"{lc.Text}, ");
+            txtPermissions.Text = String.Empty;
+            listCheck.ForEach(lc => txtPermissions.Text += $"{lc.Text},");
         }
         #endregion
     }
