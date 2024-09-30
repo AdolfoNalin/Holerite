@@ -16,10 +16,11 @@ namespace Holerite.br.pro.VIEW
 {
     public partial class frmMenu : Form
     {
-        public List<string> permissions { get; set; }
+        public List<string> permissions = new List<string>();
         public frmMenu()
         {
             InitializeComponent();
+
         }
 
         #region btnBudget_click
@@ -42,7 +43,7 @@ namespace Holerite.br.pro.VIEW
 
         #region ConsultClient
         private void consultarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        { 
             frmConsultarClient tela = new frmConsultarClient();
             Verification.ValidadePermission(permissions, "Cliente", tela);
             tela.Close();
@@ -94,16 +95,16 @@ namespace Holerite.br.pro.VIEW
         }
         #endregion
 
-        #region ConsultSeverce
+        #region ConsultService
         private void consultarToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             frmConsultService tela = new frmConsultService();
-            Verification.ValidadePermission(permissions, "Serciço", tela);
+            Verification.ValidadePermission(permissions, "Serviço", tela);
             tela.Close();
         }
         #endregion
 
-        #region InsertSeverce
+        #region InsertService
         private void cadastrarToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             frmInsertService tela = new frmInsertService(); 
@@ -148,15 +149,6 @@ namespace Holerite.br.pro.VIEW
         }
         #endregion
 
-        #region ConsultUpdataPoint
-        private void atualzarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmConsultPoint tela = new frmConsultPoint();
-            Verification.ValidadePermission(permissions, "Ponto", tela);
-            tela.Close();
-        }
-        #endregion
-
         #region ConsultHolerite
         private void consultaToolStripMenuItem3_Click(object sender, EventArgs e)
         {
@@ -186,5 +178,18 @@ namespace Holerite.br.pro.VIEW
         {
 
         }
+
+        #region Exit
+        private void sairToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            DialogResult resp = MessageBox.Show("Deseja mesmo sair os do programa?", "ATENÇÃO", MessageBoxButtons.YesNo);
+
+            if (resp == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
+        #endregion
+
     }
 }
