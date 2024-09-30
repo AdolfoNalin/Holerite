@@ -36,7 +36,7 @@ namespace Holerite.br.pro.DAO
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@cod_bud", obj.CodBudget);
-                cmd.Parameters.AddWithValue("@cod_severce", obj.CodSeverce);
+                cmd.Parameters.AddWithValue("@cod_severce", obj.CodService);
                 cmd.Parameters.AddWithValue("@amount", obj.Amount);
                 cmd.Parameters.AddWithValue("@price", obj.Price);
                 cmd.Parameters.AddWithValue("@subtotal", obj.Subtotal);
@@ -54,31 +54,6 @@ namespace Holerite.br.pro.DAO
             }
         }
 
-        #endregion
-
-        #region Delete
-        /// <summary>
-        /// Deleta os item do orçamento pai
-        /// </summary>
-        /// <param name="cod"></param>
-        public void Delete(int cod)
-        {
-            try
-            {
-                string sql = "DELETE FROM item_budget WHERE budget_cod=@budget_cod";
-
-                MySqlCommand cmd = new MySqlCommand(sql, _connection);
-                cmd.Parameters.AddWithValue("@budget_cod", cod);
-
-                _connection?.Open();
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
-            }
-            finally { _connection?.Close(); };
-        }
         #endregion
 
         #region Consult
