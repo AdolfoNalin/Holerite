@@ -12,7 +12,7 @@ namespace Holerite.br.pro.MODEL
     {
         public int Cod { get; set; }
         public int CodBudget { get; set; }
-        public int CodSeverce { get; set; }
+        public int CodService { get; set; }
         public float Price { get; set; }
         public int Amount { get; set; }
         public float Subtotal { get; set; }
