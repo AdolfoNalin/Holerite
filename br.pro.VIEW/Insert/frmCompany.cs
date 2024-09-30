@@ -51,6 +51,7 @@ namespace Holerite.br.pro.VIEW.Insert
                 FantasyName = txtFantasyName.Text,
                 CNPJ = mtbCNPJ.Text,
                 Email = txtEmail.Text,
+                CPF = mtbCpf.Text,
                 CEP = mtbCEP.Text,
                 TelephoneNumber = mtbTelephoneNumber.Text,
                 PhoneNumber = mtbPhoneNumber.Text,
@@ -84,6 +85,7 @@ namespace Holerite.br.pro.VIEW.Insert
                 Cod = int.Parse(txtCod.Text),
                 Name = txtName.Text,
                 FantasyName = txtFantasyName.Text,
+                CPF = mtbCpf.Text,
                 CNPJ = mtbCNPJ.Text,
                 Email = txtEmail.Text,
                 CEP = mtbCEP.Text,
@@ -96,8 +98,6 @@ namespace Holerite.br.pro.VIEW.Insert
                 HomeNumber = int.Parse(txtHomeNumber.Text),
                 Complement = txtComplement.Text
             };
-
-            MessageBox.Show(obj.TelephoneNumber);
 
             CompanyDAO dao = new CompanyDAO();
             dao.Update(obj);
