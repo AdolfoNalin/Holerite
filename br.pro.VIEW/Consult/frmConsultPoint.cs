@@ -1,4 +1,5 @@
 ﻿using Holerite.br.pro.DAO;
+using Holerite.br.pro.MODEL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,11 +38,23 @@ namespace Holerite.br.pro.VIEW.Consult
             frmInsertPoint ip = new frmInsertPoint();
             ip.txtCod.Text = dgPoint.CurrentRow.Cells[0].Value.ToString();
             ip.txtNameEmployee.Text = dgPoint.CurrentRow.Cells[1].Value.ToString();
-            ip.mtbCPF.Text = dgPoint.CurrentRow.Cells[2].Value.ToString();
-            ip.txtFunction.Text = dgPoint.CurrentRow.Cells[4].Value.ToString();
-            ip.txtAddress.Text = dgPoint.CurrentRow.Cells[5].Value.ToString();
+            ip.mtbDate.Text = dgPoint.CurrentRow.Cells[2].Value.ToString();
 
+            Employee emp = new EmployeeDAO().GetSearchEmp(ip.txtNameEmployee.Text);
+
+            ip.txtFunction.Text = emp.Function;
+            ip.mtbCPF.Text = emp.CPF;  
+
+            string address = $"{emp.CEP}, {emp.State}, {emp.City}, {emp.Neighborhood}, {emp.Street}, {emp.HomeNumber}, {emp.Complement}";
+
+            ip.txtAddress.Text = address;
+
+            ip.dgPoint.Columns.Clear();
+
+            ip.dgPoint.DataSource = new ItemPointDAO().Search(int.Parse(ip.txtCod.Text));
+    
             ip.ShowDialog();
+            this.Close();
         }
         #endregion
     }
