@@ -494,8 +494,9 @@ namespace Holerite.br.pro.DAO
         /// <param name="userName"></param>
         /// <param name="passWord"></param>
         /// <returns></returns>
-        public bool Login(string userName, string passWord)
+        public Employee Login(string userName, string passWord)
         {
+            Employee emp = new Employee();
             try
             {
                 string sql = "SELECT * FROM user_employee WHERE user_name=@user_name AND password=@password";
@@ -511,23 +512,21 @@ namespace Holerite.br.pro.DAO
                 if (da.Read())
                 {
                     Dialog.Message($"Seja bem vindo {userName}!", "Sucesso");
-                    return true;
+                    emp.CodCompany = da.GetInt32("cod_company");
+                    emp.Login = true;
+                    return emp;
                 }
-                else
-                {
-                    Dialog.Message("Usuário não encontrado!", "Erro de autenticação");
-                    return false;
-                }
+                return null;
             }
             catch(ArgumentException ae)
             {
                 Dialog.Message("Usuário ou senha incorretos", "Erro");
-                return false;
+                return null;
             }
             catch(Exception ex)
             {
                 Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
-                return false;
+                return null;
             }
             finally
             {
