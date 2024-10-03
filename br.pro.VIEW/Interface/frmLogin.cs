@@ -1,4 +1,5 @@
-﻿using Holerite.Helpers;
+﻿using Holerite.br.pro.MODEL;
+using Holerite.Helpers;
 using Org.BouncyCastle.Pqc.Crypto.Crystals.Dilithium;
 using System;
 using System.Collections.Generic;
@@ -35,23 +36,32 @@ namespace Holerite.br.pro.VIEW
         /// <param name="e"></param>
         private void btnLogar_Click(object sender, EventArgs e)
         {
-            frmMenu tela = new frmMenu();
-            string hashPassword = PasswordGenerator.GeneratePassword(txtPassword.Text);
-            permissions = Verification.VelidatePermissionUser(txtUserName.Text);
-            permissions.RemoveAt(permissions.Count - 1);
-
-            tela.permissions = permissions;
-
-            if (Verification.Login(txtUserName.Text, hashPassword) == true)
+            try
             {
-                this.Hide();
-                tela.ShowDialog();
-                this.Close();
+                string hashPassword = PasswordGenerator.GeneratePassword(txtPassword.Text);
+                Employee emp = Verification.Login(txtUserName.Text, hashPassword);
+                frmMenu tela = new frmMenu(emp.CodCompany);
+
+                permissions = Verification.VelidatePermissionUser(txtUserName.Text);
+                permissions.RemoveAt(permissions.Count - 1);
+
+                tela.permissions = permissions;
+
+                if (emp.Login)
+                {
+                    this.Hide();
+                    tela.ShowDialog();
+                    this.Close();
+                }
+                else
+                {
+                    txtUserName.Text = String.Empty;
+                    txtPassword.Text = String.Empty;
+                }
             }
-            else
+            catch (NullReferenceException)
             {
-                txtUserName.Text = String.Empty;
-                txtPassword.Text = String.Empty;
+                return;
             }
         }
         #endregion
