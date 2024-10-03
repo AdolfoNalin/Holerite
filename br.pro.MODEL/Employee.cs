@@ -8,11 +8,13 @@ namespace Holerite.br.pro.MODEL
 {
     public class Employee : Client
     {
+        public int CodCompany { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Function { get; set; }
         public float Daily { get; set; }
         public string Permissions { get; set; }
         public string CTPS { get; set; }
+        public bool Login { get; set; }
     }
 }
