@@ -72,12 +72,13 @@ namespace Holerite.br.pro.DAO
         {
             try
             {
-                string sql = @"UPDATE company SET name=@name, cnpj=@cnpj, email=@email, telephone_number=@telephone_number, phone_number=@phone_number, state=@state, city=@city, 
-                    neighborhood=@neighborhood, street=@street, home_number=@home_number, cep=@cep, fantasy_name=@fantasy_name WHERE cod=@cod";
+                string sql = @"UPDATE company SET name=@name, cnpj=@cnpj, cpf=@cpf, email=@email, telephone_number=@telephone_number, phone_number=@phone_number, state=@state, city=@city, 
+                    neighborhood=@neighborhood, street=@street, home_number=@home_number, cep=@cep, complement=@complement, fantasy_name=@fantasy_name WHERE cod=@cod";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@name", obj.Name);
                 cmd.Parameters.AddWithValue("@cnpj", obj.CNPJ);
+                cmd.Parameters.AddWithValue("@cpf", obj.CPF);
                 cmd.Parameters.AddWithValue("@email", obj.Email);
                 cmd.Parameters.AddWithValue("@telephone_number", obj.TelephoneNumber);
                 cmd.Parameters.AddWithValue("@phone_number", obj.PhoneNumber);
@@ -87,6 +88,7 @@ namespace Holerite.br.pro.DAO
                 cmd.Parameters.AddWithValue("@street", obj.Street);
                 cmd.Parameters.AddWithValue("@home_number", obj.HomeNumber);
                 cmd.Parameters.AddWithValue("@cep", obj.CEP);
+                cmd.Parameters.AddWithValue("@complement", obj.Complement);
                 cmd.Parameters.AddWithValue("@fantasy_name", obj.FantasyName);
                 cmd.Parameters.AddWithValue("@cod", obj.Cod);
 
@@ -345,7 +347,7 @@ namespace Holerite.br.pro.DAO
         #region Search
         public Company Search(int cod)
         {
-            Company company = new Company();
+            Company com = new Company();
             try
             {
                 string sql = @"Select 
@@ -374,33 +376,28 @@ namespace Holerite.br.pro.DAO
                 MySqlDataReader dr = cmd.ExecuteReader();
 
                 if(dr.Read())
-                {
-                    Company com = new Company()
-                    {
-                        Cod = dr.GetInt32("Código"),
-                        Name = dr.GetString("Nome Proprietário"),
-                        FantasyName = dr.GetString("Nome Fantasia"),
-                        CPF = dr.GetString("CPF"),
-                        CNPJ = dr.GetString("CNPJ"),
-                        TelephoneNumber = dr.GetString("Telefone"),
-                        PhoneNumber = dr.GetString("Celular"),
-                        Email = dr.GetString("Email"),
-                        CEP = dr.GetString("CEP"),
-                        State = dr.GetString("Estado"),
-                        City = dr.GetString("Cidade"),
-                        Neighborhood = dr.GetString("Bairro"),
-                        Street = dr.GetString("Rua"),
-                        HomeNumber = dr.GetInt32("Número"),
-                        Complement = dr.GetString("Complemento")
-                    };
-
-                    company = com;
+                { 
+                    com.Cod = dr.GetInt32("Código");
+                    com.Name = dr.GetString("Nome Proprietário");
+                    com.FantasyName = dr.GetString("Nome Fantasia");
+                    com.CPF = dr.GetString("CPF");
+                    com.CNPJ = dr.GetString("CNPJ");
+                    com.TelephoneNumber = dr.GetString("Telefone");
+                    com.PhoneNumber = dr.GetString("Celular");
+                    com.Email = dr.GetString("Email");
+                    com.CEP = dr.GetString("CEP");
+                    com.State = dr.GetString("Estado");
+                    com.City = dr.GetString("Cidade");
+                    com.Neighborhood = dr.GetString("Bairro");
+                    com.Street = dr.GetString("Rua");
+                    com.HomeNumber = dr.GetInt32("Número");
+                    com.Complement = dr.GetString("Complemento");
                 }
                 else
                 {
                     Dialog.Message("Conexão não encontrada", "atenção");
                 }
-                return company;
+                return com;
             }
             catch (Exception ex)
             {
