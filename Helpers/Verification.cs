@@ -42,28 +42,24 @@ namespace Holerite.Helpers
         /// </summary>
         /// <param name="userName">Name of user</param>
         /// <param name="password">Name of Password</param>
-        public static Boolean Login(string userName, string password)
+        public static Employee Login(string userName, string password)
         {
             EmployeeDAO dao = new EmployeeDAO();
             try
             {
-                bool resp = false;
-                while ((String.IsNullOrEmpty(userName) && String.IsNullOrEmpty(password)) || (String.IsNullOrEmpty(userName) || String.IsNullOrEmpty(password)))
-                {
-                    Dialog.Message("Usuário e senha não podem ser vazios", "erro de autenticação");
-                }
+                Employee emp = dao.Login(userName, password) ?? throw new ArgumentNullException("Usuário ou senha não podem ser vazios");
 
-                if (dao.Login(userName, password))
-                {
-                    resp = true;
-                }
-
-                return resp;
+                return emp;
+            }
+            catch (ArgumentNullException)
+            {
+                Dialog.Message("Usuário e senha não podem ser vazios", "erro de autenticação");
+                return null;
             }
             catch (Exception ex)
             {
                 Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caominho para {ex.StackTrace}", "Atenção");
-                return false;
+                return null;
             }
         }
         #endregion
