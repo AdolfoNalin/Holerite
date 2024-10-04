@@ -410,5 +410,72 @@ namespace Holerite.br.pro.DAO
             }
         }
         #endregion
+
+        #region Search
+        public Company SearchName(string fantasyName)
+        {
+            Company com = new Company();
+            try
+            {
+                string sql = @"Select 
+                cod as 'Código',
+                name as 'Nome Proprietário',
+                fantasy_name as 'Nome Fantasia',
+                cpf as 'CPF',
+                cnpj as 'CNPJ',
+                telephone_number as 'Telefone',
+                phone_number as 'Celular',
+                email as 'Email',
+                cep as 'CEP',
+                state as 'Estado',
+                city as 'Cidade',
+                neighborhood as 'Bairro',
+                street as 'Rua',
+                home_number as 'Número',
+                complement as 'Complemento'
+                from company WHERE fantasy_name = @name";
+
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+                cmd.Parameters.AddWithValue("@name", fantasyName);
+
+                _connection.Open();
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    com.Cod = dr.GetInt32("Código");
+                    com.Name = dr.GetString("Nome Proprietário");
+                    com.FantasyName = dr.GetString("Nome Fantasia");
+                    com.CPF = dr.GetString("CPF");
+                    com.CNPJ = dr.GetString("CNPJ");
+                    com.TelephoneNumber = dr.GetString("Telefone");
+                    com.PhoneNumber = dr.GetString("Celular");
+                    com.Email = dr.GetString("Email");
+                    com.CEP = dr.GetString("CEP");
+                    com.State = dr.GetString("Estado");
+                    com.City = dr.GetString("Cidade");
+                    com.Neighborhood = dr.GetString("Bairro");
+                    com.Street = dr.GetString("Rua");
+                    com.HomeNumber = dr.GetInt32("Número");
+                    com.Complement = dr.GetString("Complemento");
+                }
+                else
+                {
+                    Dialog.Message("Conexão não encontrada", "atenção");
+                }
+                return com;
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+                return null;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        #endregion
     }
 }
