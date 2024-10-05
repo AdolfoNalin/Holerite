@@ -165,6 +165,7 @@ namespace Holerite.br.pro.DAO
             {
                 string sql = @"SELECT 
 	            e.cod AS 'Código',
+                c.Fantasy_name AS 'Nome empresa',
 	            e.name AS 'Nome',
                 e.user_name AS 'Nome do Usuário',
                 e.password AS 'Senha',
@@ -182,7 +183,8 @@ namespace Holerite.br.pro.DAO
 	            e.home_number AS 'Número da casa',
 	            e.complement AS 'Complemento',
                 e.emp_function AS 'Funções'
-	            FROM user_employee AS e";
+	            FROM user_employee AS e
+                JOIN company AS c on (c.cod = e.cod_company)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
 
@@ -503,7 +505,7 @@ namespace Holerite.br.pro.DAO
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@user_name", userName);
-                cmd.Parameters.AddWithValue("password", passWord);
+                cmd.Parameters.AddWithValue("@password", passWord);
 
                 _connection.Open();
 
@@ -516,14 +518,12 @@ namespace Holerite.br.pro.DAO
                     emp.Login = true;
                     return emp;
                 }
-                return null;
+                else
+                {
+                    throw new ArgumentException("Usuário ou senha incorretos", "Erro");
+                }
             }
-            catch(ArgumentException ae)
-            {
-                Dialog.Message("Usuário ou senha incorretos", "Erro");
-                return null;
-            }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
                 return null;
