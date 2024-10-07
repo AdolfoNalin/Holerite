@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,10 +18,12 @@ namespace Holerite.br.pro.VIEW
     public partial class frmMenu : Form
     {
         public List<string> permissions = new List<string>();
-        public frmMenu()
-        {
-            InitializeComponent();
+        private int _codCompany;
 
+        public frmMenu(int codCompany)
+        {
+            _codCompany = codCompany;
+            InitializeComponent();
         }
 
         #region btnBudget_click
@@ -71,8 +74,9 @@ namespace Holerite.br.pro.VIEW
         #region InsertEployee
         private void cadastrarToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            frmEmployee tela = new frmEmployee();
+            frmEmployee tela = new frmEmployee(_codCompany);
             Verification.ValidadePermission(permissions, "Funcionário", tela);
+            tela.txtCodCompany.Text = _codCompany.ToString();
             tela.Close();
         }
         #endregion
@@ -131,7 +135,7 @@ namespace Holerite.br.pro.VIEW
         }
         #endregion
 
-        #region Gerar Ponto
+        #region GerarPonto
         private void gerarPontoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmConsultEmpGeneratePoint tela = new frmConsultEmpGeneratePoint(1);
@@ -140,12 +144,21 @@ namespace Holerite.br.pro.VIEW
         }
         #endregion
 
-        #region Cadastrar Ponto
+        #region InsertPonto
         private void consultaToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            frmInsertPoint tela = new frmInsertPoint();
+            frmInsertPoint tela = new frmInsertPoint(_codCompany);
             Verification.ValidadePermission(permissions, "Ponto", tela);
             tela.Close();
+        }
+        #endregion
+
+        #region ConsultPoint
+        private void consultaToolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            frmConsultPoint screen = new frmConsultPoint();
+            Verification.ValidadePermission(permissions, "Ponto", screen);
+            screen.Close();
         }
         #endregion
 
@@ -165,7 +178,7 @@ namespace Holerite.br.pro.VIEW
         }
         #endregion
 
-        #region InsertCompanyu
+        #region InsertCompany
         private void cadastrarToolStripMenuItem4_Click(object sender, EventArgs e)
         {
             frmCompany tela = new frmCompany();
@@ -190,6 +203,5 @@ namespace Holerite.br.pro.VIEW
             }
         }
         #endregion
-
     }
 }
