@@ -35,9 +35,11 @@ namespace Holerite.br.pro.VIEW.Consult
         /// <param name="e"></param>
         private void dgPoint_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            frmInsertPoint ip = new frmInsertPoint();
+            string nameCompany = dgPoint.CurrentRow.Cells[1].Value.ToString();
+            Company com = new CompanyDAO().SearchName(nameCompany);
+            frmInsertPoint ip = new frmInsertPoint(com.Cod);
             ip.txtCod.Text = dgPoint.CurrentRow.Cells[0].Value.ToString();
-            ip.txtNameEmployee.Text = dgPoint.CurrentRow.Cells[1].Value.ToString();
+            ip.txtNameEmployee.Text = nameCompany;
             ip.mtbDate.Text = dgPoint.CurrentRow.Cells[2].Value.ToString();
 
             Employee emp = new EmployeeDAO().GetSearchEmp(ip.txtNameEmployee.Text);
@@ -57,5 +59,10 @@ namespace Holerite.br.pro.VIEW.Consult
             this.Close();
         }
         #endregion
+
+        private void btnSearchDate_Click(object sender, EventArgs e)
+        {
+            dgPoint.DataSource = new PointDAO().Search(dtpStartDate.Text, dtpEndDate.Text);
+        }
     }
 }
