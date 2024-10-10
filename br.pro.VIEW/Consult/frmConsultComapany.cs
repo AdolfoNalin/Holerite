@@ -44,11 +44,12 @@ namespace Holerite.br.pro.VIEW.Consult
         }
         #endregion
 
-        #region dgCompany_cellContentclick
-        private void dgCompany_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        #region dgCompany_click
+        private void dgCompany_Click(object sender, EventArgs e)
         {
+
             Company obj = new Company()
-            { 
+            {
                 Cod = int.Parse(dgCompany.CurrentRow.Cells[0].Value.ToString()),
                 Name = dgCompany.CurrentRow.Cells[1].Value.ToString(),
                 FantasyName = dgCompany.CurrentRow.Cells[2].Value.ToString(),
@@ -84,7 +85,7 @@ namespace Holerite.br.pro.VIEW.Consult
             tela.mtbTelephoneNumber.Text = obj.TelephoneNumber.ToString();
             tela.mtbPhoneNumber.Text = obj.PhoneNumber.ToString();
 
-            tela.ShowDialog();  
+            tela.ShowDialog();
         }
         #endregion
     }
