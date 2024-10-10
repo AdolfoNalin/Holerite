@@ -46,7 +46,7 @@
             this.dgCompany.ReadOnly = true;
             this.dgCompany.Size = new System.Drawing.Size(776, 347);
             this.dgCompany.TabIndex = 0;
-            this.dgCompany.Click += new System.EventHandler(this.dgCompany_Click);
+            this.dgCompany.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCompany_CellContentClick);
             // 
             // lblName
             // 
