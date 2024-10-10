@@ -235,6 +235,47 @@ namespace Holerite.br.pro.DAO
         }
         #endregion
 
+        #region SearchDate
+        public DataTable Search(string startDate, string endDate)
+        {
+            startDate = DateTime.Parse(startDate).ToString("yyyy/MM/dd");
+            endDate = DateTime.Parse(endDate).ToString("yyyy/MM/dd");
+
+            DataTable dt = new DataTable();
+            try
+            {
+                string sql = @"SELECT  
+                p.cod AS 'Código', 
+                u.name AS 'Colaborador', 
+                p.month AS 'Mês'
+                FROM point AS p
+                JOIN user_employee AS u on (p.cod_emp = u.cod)
+                WHERE p.month BETWEEN @startdate AND @enddate";
+
+                MySqlCommand cmd = new MySqlCommand(sql, _connection);
+                cmd.Parameters.AddWithValue("@startdate", startDate);
+                cmd.Parameters.AddWithValue("@enddate", endDate);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+                return null;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        #endregion
+
         #region EndPoint
         /// <summary>
         /// Retorna o cod do ultimo ponto que foi cadastrado
