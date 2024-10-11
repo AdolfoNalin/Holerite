@@ -40,18 +40,20 @@ namespace Holerite.br.pro.VIEW
             {
                 string hashPassword = PasswordGenerator.GeneratePassword(txtPassword.Text);
                 Employee emp = Verification.Login(txtUserName.Text, hashPassword);
-                frmMenu tela = new frmMenu(emp.CodCompany);
 
-                permissions = Verification.VelidatePermissionUser(txtUserName.Text);
-                permissions.RemoveAt(permissions.Count - 1);
-
-                tela.permissions = permissions;
-
-                if (emp.Login)
+                if(emp.CodCompany > 0)
                 {
-                    this.Hide();
-                    tela.ShowDialog();
-                    this.Close();
+                    frmMenu tela = new frmMenu(emp.CodCompany);
+                    permissions = Verification.VelidatePermissionUser(txtUserName.Text);
+                    tela.permissions = permissions;
+                    permissions.RemoveAt(permissions.Count - 1);
+
+                    if (emp.Login)
+                    {
+                        this.Hide();
+                        tela.ShowDialog();
+                        this.Close();
+                    }
                 }
                 else
                 {
