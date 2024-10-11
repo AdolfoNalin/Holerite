@@ -39,7 +39,7 @@ namespace Holerite.br.pro.VIEW.Insert
                 Name = txtName.Text,
                 UserName = txtUserName.Text,
                 Password = password,
-                Function = cbFunction.Text,
+                Function = txtFuction.Text,
                 Daily = float.Parse(txtDaily.Text),
                 Permissions = txtPermissions.Text,
                 CPF = mtbCPF.Text,
@@ -107,7 +107,7 @@ namespace Holerite.br.pro.VIEW.Insert
                 Name = txtName.Text,
                 UserName = txtUserName.Text,
                 Password = password,
-                Function = cbFunction.Text,
+                Function = txtFuction.Text,
                 Daily = float.Parse(txtDaily.Text),
                 Permissions = txtPermissions.Text,
                 CPF = mtbCPF.Text,
@@ -147,63 +147,6 @@ namespace Holerite.br.pro.VIEW.Insert
                 txtStreet.Text = obj.Street;
                 txtHomeNumber.Text = obj.HomeNumber;
                 txtComplement.Text = obj.Complement;
-            }
-        }
-        #endregion
-
-        #region Load
-        private void frmEmployee_Load(object sender, EventArgs e)
-        {
-            txtCodCompany.Text = _codCompany.ToString();
-
-            FunctionDAO dao = new FunctionDAO();
-            cbFunction.DataSource = dao.Consult();
-            cbFunction.DisplayMember = "fun";
-            cbFunction.ValueMember = "cod";
-
-            txtFunction.Visible = false;
-        }
-        #endregion
-
-        #region cbFunction_KeyPress
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void cbFunction_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 13 && cbFunction.Text == "Outros")
-            {
-                cbFunction.Visible = false;
-                txtFunction.Visible = true;
-                txtFunction.Focus();
-            }
-            else if(e.KeyChar == 13 && cbFunction.Text != "Outros")
-            {
-                FunctionDAO dao = new FunctionDAO();
-                cbFunction.DataSource = dao.Consult(cbFunction.Text);
-                cbFunction.DisplayMember = "function_emp";
-                cbFunction.ValueMember = "cod";
-
-            }
-        }
-        #endregion
-
-        #region txtFunction_KeyPress
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtFunction_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if(e.KeyChar == 13)
-            {
-                Function obj = new Function();
-                FunctionDAO dao = new FunctionDAO();
-                obj.Fun = cbFunction.Text;
-                dao.Insert(obj);
             }
         }
         #endregion

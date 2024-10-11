@@ -68,10 +68,9 @@
             this.btnPermissions = new System.Windows.Forms.Button();
             this.txtDaily = new System.Windows.Forms.TextBox();
             this.lblDaily = new System.Windows.Forms.Label();
-            this.cbFunction = new System.Windows.Forms.ComboBox();
-            this.txtFunction = new System.Windows.Forms.TextBox();
             this.lblCodCompany = new System.Windows.Forms.Label();
             this.txtCodCompany = new System.Windows.Forms.TextBox();
+            this.txtFuction = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtComplement
@@ -454,23 +453,6 @@
             this.lblDaily.TabIndex = 73;
             this.lblDaily.Text = "Diária:";
             // 
-            // cbFunction
-            // 
-            this.cbFunction.FormattingEnabled = true;
-            this.cbFunction.Location = new System.Drawing.Point(72, 148);
-            this.cbFunction.Name = "cbFunction";
-            this.cbFunction.Size = new System.Drawing.Size(121, 21);
-            this.cbFunction.TabIndex = 75;
-            this.cbFunction.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbFunction_KeyPress);
-            // 
-            // txtFunction
-            // 
-            this.txtFunction.Location = new System.Drawing.Point(72, 148);
-            this.txtFunction.Name = "txtFunction";
-            this.txtFunction.Size = new System.Drawing.Size(121, 20);
-            this.txtFunction.TabIndex = 76;
-            this.txtFunction.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFunction_KeyPress);
-            // 
             // lblCodCompany
             // 
             this.lblCodCompany.AutoSize = true;
@@ -487,15 +469,21 @@
             this.txtCodCompany.Size = new System.Drawing.Size(50, 20);
             this.txtCodCompany.TabIndex = 77;
             // 
+            // txtFuction
+            // 
+            this.txtFuction.Location = new System.Drawing.Point(72, 151);
+            this.txtFuction.Name = "txtFuction";
+            this.txtFuction.Size = new System.Drawing.Size(117, 20);
+            this.txtFuction.TabIndex = 79;
+            // 
             // frmEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtFuction);
             this.Controls.Add(this.lblCodCompany);
             this.Controls.Add(this.txtCodCompany);
-            this.Controls.Add(this.txtFunction);
-            this.Controls.Add(this.cbFunction);
             this.Controls.Add(this.txtDaily);
             this.Controls.Add(this.lblDaily);
             this.Controls.Add(this.btnPermissions);
@@ -540,7 +528,6 @@
             this.Name = "frmEmployee";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastrar Funcionário";
-            this.Load += new System.EventHandler(this.frmEmployee_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -588,9 +575,8 @@
         private System.Windows.Forms.Button btnPermissions;
         public System.Windows.Forms.TextBox txtDaily;
         private System.Windows.Forms.Label lblDaily;
-        public System.Windows.Forms.TextBox txtFunction;
-        public System.Windows.Forms.ComboBox cbFunction;
         private System.Windows.Forms.Label lblCodCompany;
         public System.Windows.Forms.TextBox txtCodCompany;
+        public System.Windows.Forms.TextBox txtFuction;
     }
 }

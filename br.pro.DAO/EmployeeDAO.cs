@@ -34,9 +34,9 @@ namespace Holerite.br.pro.DAO
             try
             {
                 string sql = @"INSERT INTO user_employee(name, user_name, password, permissions, daily, cpf, email, telephone_number, phone_number, state, city, neighborhood, 
-                street, home_number, cep, emp_function, complement)
+                street, home_number, cep, emp_function, complement, fun)
                 VALUES(@name, @user_name, @password, @permissions, @daily, @cpf, @email, @telephone_number, @phone_number, @state, @city, @neighborhood, 
-                @street, @home_number, @cep, @emp_function, @complement)";
+                @street, @home_number, @cep, @emp_function, @complement, @fun)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@name", obj.Name);
@@ -56,6 +56,7 @@ namespace Holerite.br.pro.DAO
                 cmd.Parameters.AddWithValue("@cep", obj.CEP);
                 cmd.Parameters.AddWithValue("@emp_function", obj.Function);
                 cmd.Parameters.AddWithValue("@complement", obj.Complement);
+                cmd.Parameters.AddWithValue("@fun", obj.Function);
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();
@@ -85,7 +86,7 @@ namespace Holerite.br.pro.DAO
                 string sql = @"UPDATE user_employee SET 
                 name=@name, user_name=@user_name, password=@password, permissions=@permissions, daily=@daily, cpf=@cpf, email=@email, telephone_number=@telephone_number, 
                 phone_number=@phone_number, state=@state, city=@city, neighborhood=@neighborhood, street=@street, home_number=@home_number, cep=@cep, emp_function=@emp_function, 
-                complement=@complement WHERE cod=@cod";
+                complement=@complement, fun=@fun WHERE cod=@cod";
 
                 MySqlCommand cmd = new MySqlCommand(sql, _connection);
                 cmd.Parameters.AddWithValue("@name", obj.Name);
@@ -105,6 +106,7 @@ namespace Holerite.br.pro.DAO
                 cmd.Parameters.AddWithValue("@cep", obj.CEP);
                 cmd.Parameters.AddWithValue("@emp_function", obj.Function);
                 cmd.Parameters.AddWithValue("@complement", obj.Complement);
+                cmd.Parameters.AddWithValue("@fun", obj.Function);
                 cmd.Parameters.AddWithValue("@cod", obj.Cod);
 
                 _connection.Open();
