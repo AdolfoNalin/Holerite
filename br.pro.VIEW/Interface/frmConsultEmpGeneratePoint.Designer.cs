@@ -31,9 +31,12 @@
             this.lblName = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.Calender = new System.Windows.Forms.MonthCalendar();
             this.dgGeneratePoint = new System.Windows.Forms.DataGridView();
             this.btnGenerate = new System.Windows.Forms.Button();
+            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
+            this.dtpStart = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgGeneratePoint)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,13 +67,6 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // Calender
-            // 
-            this.Calender.Location = new System.Drawing.Point(555, 99);
-            this.Calender.MaxSelectionCount = 31;
-            this.Calender.Name = "Calender";
-            this.Calender.TabIndex = 3;
-            // 
             // dgGeneratePoint
             // 
             this.dgGeneratePoint.AllowUserToAddRows = false;
@@ -87,7 +83,7 @@
             // btnGenerate
             // 
             this.btnGenerate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGenerate.Location = new System.Drawing.Point(711, 376);
+            this.btnGenerate.Location = new System.Drawing.Point(226, 426);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(82, 40);
             this.btnGenerate.TabIndex = 5;
@@ -95,14 +91,51 @@
             this.btnGenerate.UseVisualStyleBackColor = true;
             this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
+            // dtpEnd
+            // 
+            this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpEnd.Location = new System.Drawing.Point(462, 64);
+            this.dtpEnd.Name = "dtpEnd";
+            this.dtpEnd.Size = new System.Drawing.Size(96, 20);
+            this.dtpEnd.TabIndex = 14;
+            // 
+            // dtpStart
+            // 
+            this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpStart.Location = new System.Drawing.Point(463, 41);
+            this.dtpStart.Name = "dtpStart";
+            this.dtpStart.Size = new System.Drawing.Size(96, 20);
+            this.dtpStart.TabIndex = 13;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(407, 67);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Data Fim:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(397, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 13);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Data Início:";
+            // 
             // frmConsultEmpGeneratePoint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(569, 478);
+            this.Controls.Add(this.dtpEnd);
+            this.Controls.Add(this.dtpStart);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.dgGeneratePoint);
-            this.Controls.Add(this.Calender);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblName);
@@ -123,7 +156,10 @@
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnGenerate;
-        public System.Windows.Forms.MonthCalendar Calender;
         public System.Windows.Forms.DataGridView dgGeneratePoint;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.DateTimePicker dtpEnd;
+        public System.Windows.Forms.DateTimePicker dtpStart;
     }
 }

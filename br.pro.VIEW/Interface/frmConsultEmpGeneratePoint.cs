@@ -1,6 +1,7 @@
 ﻿using Holerite.br.pro.DAO;
 using Holerite.br.pro.MODEL;
 using Holerite.Helpers;
+using iTextSharp.text;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,7 @@ namespace Holerite.br.pro.VIEW.Consult
 {
     public partial class frmConsultEmpGeneratePoint : Form
     {
+        public List<String> date = new List<String>();
         private int _codScreen;
         public frmConsultEmpGeneratePoint(int codScreen)
         {
@@ -59,19 +61,18 @@ namespace Holerite.br.pro.VIEW.Consult
             {
                 List<string> list = new List<string>();
 
-                if (Calender.SelectionStart.Month == Calender.SelectionEnd.Month && dgGeneratePoint.CurrentRow.Index >= 0)
+                if (dtpStart.Value.Month == dtpEnd.Value.Month && dgGeneratePoint.CurrentRow.Index >= 0)
                 {
-                    for (int i = Calender.SelectionRange.Start.Day; i <= Calender.SelectionRange.End.Day; i++)
+                    for (int i = dtpStart.Value.Day; i <= dtpEnd.Value.Day; i++)
                     {
-                        list.Add($"{i}/{Calender.SelectionRange.Start.Month}/{Calender.SelectionRange.Start.Year}");
+                        list.Add($"{i}/{dtpStart.Value.Month}/{dtpStart.Value.Year}");
                     }
 
-                    string cpf = dgGeneratePoint.CurrentRow.Cells[6].Value.ToString();
+                    string cpf = dgGeneratePoint.CurrentRow.Cells[7].Value.ToString();
 
-                    EmployeeDAO dao = new EmployeeDAO();
-                    Employee emp = dao.GetSearch(cpf);
-
-                    PrintOut.PrintOutPoint(emp, list);
+                    Employee emp = new EmployeeDAO().GetSearch(cpf);
+                    Company com = new CompanyDAO().SearchName(dgGeneratePoint.CurrentRow.Cells[1].Value.ToString());
+                    PrintOut.PrintOutPoint(com, emp, list);
                 }
                 else
                 {
@@ -80,14 +81,18 @@ namespace Holerite.br.pro.VIEW.Consult
             }
             else if(_codScreen == 2)
             {
-                if (Calender.SelectionStart.Day + 2 <= Calender.SelectionEnd.Day && dgGeneratePoint.CurrentRow.Index >= 0)
+                if (dtpStart.Value.Month == dtpEnd.Value.Month && dgGeneratePoint.CurrentRow.Index >= 0)
                 {
                     DialogResult resp = MessageBox.Show("Os dias foram selecionatos com sucesso!", "ateção", MessageBoxButtons.YesNo);
 
                     if (resp == DialogResult.Yes)
                     {
-                        this.Hide();
+                        for (int i = dtpStart.Value.Day; i <= dtpEnd.Value.Day; i++)
+                        {
+                            date.Add($"{i}/{dtpStart.Value.Month}/{dtpStart.Value.Year}");
+                        }
                     }
+                    this.Hide();
                 }
                 else
                 {
