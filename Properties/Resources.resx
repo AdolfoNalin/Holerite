@@ -124,14 +124,23 @@
   <data name="products" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\br.pro.VIEW\Imagens\products.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="People-supplier" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\br.pro.VIEW\Imagens\People-supplier.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="consult-folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\br.pro.VIEW\Imagens\consult-folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="economics" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\br.pro.VIEW\Imagens\economics.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Page-Point.png" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\br.pro.VIEW\Imagens\Page-Point.png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="People-supplier" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\br.pro.VIEW\Imagens\People-supplier.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Persona-Client" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\br.pro.VIEW\Imagens\Persona-Client.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Company" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\br.pro.VIEW\Imagens\Company.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\br.pro.VIEW\Imagens\search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,7 +154,7 @@
   <data name="settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\br.pro.VIEW\Imagens\settings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="consult-folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\br.pro.VIEW\Imagens\consult-folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="money-bag" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\br.pro.VIEW\Imagens\money-bag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

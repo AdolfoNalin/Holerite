@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Holerite</RootNamespace>
     <AssemblyName>Holerite</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,10 +35,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
-      <HintPath>packages\BouncyCastle.Cryptography.2.2.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+      <HintPath>packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.25.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>packages\Google.Protobuf.3.25.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.4, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\iTextSharp.5.5.13.4\lib\net461\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="K4os.Compression.LZ4, Version=1.3.5.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
       <HintPath>packages\K4os.Compression.LZ4.1.3.5\lib\net462\K4os.Compression.LZ4.dll</HintPath>
@@ -171,21 +175,47 @@
     <Compile Include="br.pro.DAO\ClientDAO.cs" />
     <Compile Include="br.pro.DAO\CompanyDAO.cs" />
     <Compile Include="br.pro.DAO\EmployeeDAO.cs" />
-    <Compile Include="br.pro.DAO\SeverceDAO.cs" />
+    <Compile Include="br.pro.DAO\EpiDAO.cs" />
+    <Compile Include="br.pro.DAO\FunctionDAO.cs" />
+    <Compile Include="br.pro.DAO\ItemBudgetDAO.cs" />
+    <Compile Include="br.pro.DAO\ItemEpiDAO.cs" />
+    <Compile Include="br.pro.DAO\ItemPointDAO.cs" />
+    <Compile Include="br.pro.DAO\PointDAO.cs" />
+    <Compile Include="br.pro.DAO\ProductDAO.cs" />
+    <Compile Include="br.pro.DAO\ServiceDAO.cs" />
     <Compile Include="br.pro.DAO\SupplierDAO.cs" />
     <Compile Include="br.pro.MODEL\Address.cs" />
     <Compile Include="br.pro.MODEL\Budget.cs" />
     <Compile Include="br.pro.MODEL\Client.cs" />
     <Compile Include="br.pro.MODEL\Company.cs" />
     <Compile Include="br.pro.MODEL\Employee.cs" />
+    <Compile Include="br.pro.MODEL\Epi.cs" />
+    <Compile Include="br.pro.MODEL\Function.cs" />
     <Compile Include="br.pro.MODEL\ItemBudget.cs" />
+    <Compile Include="br.pro.MODEL\ItemEpi.cs" />
+    <Compile Include="br.pro.MODEL\ItemPoint.cs" />
+    <Compile Include="br.pro.MODEL\Overview.cs" />
+    <Compile Include="br.pro.MODEL\Point.cs" />
+    <Compile Include="br.pro.MODEL\Product.cs" />
     <Compile Include="br.pro.MODEL\Severce.cs" />
     <Compile Include="br.pro.MODEL\Supplier.cs" />
+    <Compile Include="br.pro.VIEW\Consult\frmConsultEpi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Consult\frmConsultEpi.Designer.cs">
+      <DependentUpon>frmConsultEpi.cs</DependentUpon>
+    </Compile>
     <Compile Include="br.pro.VIEW\Consult\frmConsultarClient.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="br.pro.VIEW\Consult\frmConsultarClient.Designer.cs">
       <DependentUpon>frmConsultarClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Consult\frmConsultBudget.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Consult\frmConsultBudget.Designer.cs">
+      <DependentUpon>frmConsultBudget.cs</DependentUpon>
     </Compile>
     <Compile Include="br.pro.VIEW\Consult\frmConsultComapany.cs">
       <SubType>Form</SubType>
@@ -193,17 +223,35 @@
     <Compile Include="br.pro.VIEW\Consult\frmConsultComapany.Designer.cs">
       <DependentUpon>frmConsultComapany.cs</DependentUpon>
     </Compile>
+    <Compile Include="br.pro.VIEW\Interface\frmConsultEmpGeneratePoint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Interface\frmConsultEmpGeneratePoint.Designer.cs">
+      <DependentUpon>frmConsultEmpGeneratePoint.cs</DependentUpon>
+    </Compile>
     <Compile Include="br.pro.VIEW\Consult\frmConsultEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="br.pro.VIEW\Consult\frmConsultEmployee.Designer.cs">
       <DependentUpon>frmConsultEmployee.cs</DependentUpon>
     </Compile>
-    <Compile Include="br.pro.VIEW\Consult\frmConsultSeverce.cs">
+    <Compile Include="br.pro.VIEW\Consult\frmConsultPoint.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="br.pro.VIEW\Consult\frmConsultSeverce.Designer.cs">
-      <DependentUpon>frmConsultSeverce.cs</DependentUpon>
+    <Compile Include="br.pro.VIEW\Consult\frmConsultPoint.Designer.cs">
+      <DependentUpon>frmConsultPoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Consult\frmConsultProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Consult\frmConsultProduct.Designer.cs">
+      <DependentUpon>frmConsultProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Consult\frmConsultService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Consult\frmConsultService.Designer.cs">
+      <DependentUpon>frmConsultService.cs</DependentUpon>
     </Compile>
     <Compile Include="br.pro.VIEW\Consult\frmConsultSupplier.cs">
       <SubType>Form</SubType>
@@ -211,11 +259,35 @@
     <Compile Include="br.pro.VIEW\Consult\frmConsultSupplier.Designer.cs">
       <DependentUpon>frmConsultSupplier.cs</DependentUpon>
     </Compile>
-    <Compile Include="br.pro.VIEW\frmLogin.cs">
+    <Compile Include="br.pro.VIEW\Insert\frmGenerateEPI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="br.pro.VIEW\frmLogin.Designer.cs">
+    <Compile Include="br.pro.VIEW\Insert\frmGenerateEPI.Designer.cs">
+      <DependentUpon>frmGenerateEPI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Insert\frmInsertEPI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Insert\frmInsertEPI.Designer.cs">
+      <DependentUpon>frmInsertEPI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Insert\frmInsertPoint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Insert\frmInsertPoint.Designer.cs">
+      <DependentUpon>frmInsertPoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Interface\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Interface\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Interface\frmMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Interface\frmMenu.Designer.cs">
+      <DependentUpon>frmMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="br.pro.VIEW\Insert\frmClient.cs">
       <SubType>Form</SubType>
@@ -241,17 +313,29 @@
     <Compile Include="br.pro.VIEW\Insert\frmInsertBudget.Designer.cs">
       <DependentUpon>frmInsertBudget.cs</DependentUpon>
     </Compile>
-    <Compile Include="br.pro.VIEW\Insert\frmInsertSeverce.cs">
+    <Compile Include="br.pro.VIEW\Insert\frmInsertProduct.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="br.pro.VIEW\Insert\frmInsertSeverce.Designer.cs">
-      <DependentUpon>frmInsertSeverce.cs</DependentUpon>
+    <Compile Include="br.pro.VIEW\Insert\frmInsertProduct.Designer.cs">
+      <DependentUpon>frmInsertProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Insert\frmInsertService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Insert\frmInsertService.Designer.cs">
+      <DependentUpon>frmInsertService.cs</DependentUpon>
     </Compile>
     <Compile Include="br.pro.VIEW\Insert\frmSupplier.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="br.pro.VIEW\Insert\frmSupplier.Designer.cs">
       <DependentUpon>frmSupplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Interface\frmPermission.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Interface\frmPermission.Designer.cs">
+      <DependentUpon>frmPermission.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -261,25 +345,46 @@
     </Compile>
     <Compile Include="Helpers\ConsultCEP.cs" />
     <Compile Include="Helpers\Dialog.cs" />
+    <Compile Include="Helpers\PasswordGenerator.cs" />
+    <Compile Include="Helpers\PrintOut.cs" />
+    <Compile Include="Helpers\Verification.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="br.pro.VIEW\Consult\frmConsultarClient.resx">
       <DependentUpon>frmConsultarClient.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Consult\frmConsultBudget.resx">
+      <DependentUpon>frmConsultBudget.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="br.pro.VIEW\Consult\frmConsultComapany.resx">
       <DependentUpon>frmConsultComapany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Interface\frmConsultEmpGeneratePoint.resx">
+      <DependentUpon>frmConsultEmpGeneratePoint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="br.pro.VIEW\Consult\frmConsultEmployee.resx">
       <DependentUpon>frmConsultEmployee.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.VIEW\Consult\frmConsultSeverce.resx">
-      <DependentUpon>frmConsultSeverce.cs</DependentUpon>
+    <EmbeddedResource Include="br.pro.VIEW\Consult\frmConsultEpi.resx">
+      <DependentUpon>frmConsultEpi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Consult\frmConsultPoint.resx">
+      <DependentUpon>frmConsultPoint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Consult\frmConsultProduct.resx">
+      <DependentUpon>frmConsultProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Consult\frmConsultService.resx">
+      <DependentUpon>frmConsultService.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="br.pro.VIEW\Consult\frmConsultSupplier.resx">
       <DependentUpon>frmConsultSupplier.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.VIEW\frmLogin.resx">
+    <EmbeddedResource Include="br.pro.VIEW\Interface\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Interface\frmMenu.resx">
+      <DependentUpon>frmMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="br.pro.VIEW\Insert\frmClient.resx">
       <DependentUpon>frmClient.cs</DependentUpon>
@@ -290,14 +395,29 @@
     <EmbeddedResource Include="br.pro.VIEW\Insert\frmEmployee.resx">
       <DependentUpon>frmEmployee.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Insert\frmGenerateEPI.resx">
+      <DependentUpon>frmGenerateEPI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="br.pro.VIEW\Insert\frmInsertBudget.resx">
       <DependentUpon>frmInsertBudget.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.VIEW\Insert\frmInsertSeverce.resx">
-      <DependentUpon>frmInsertSeverce.cs</DependentUpon>
+    <EmbeddedResource Include="br.pro.VIEW\Insert\frmInsertEPI.resx">
+      <DependentUpon>frmInsertEPI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Insert\frmInsertPoint.resx">
+      <DependentUpon>frmInsertPoint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Insert\frmInsertProduct.resx">
+      <DependentUpon>frmInsertProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Insert\frmInsertService.resx">
+      <DependentUpon>frmInsertService.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="br.pro.VIEW\Insert\frmSupplier.resx">
       <DependentUpon>frmSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Interface\frmPermission.resx">
+      <DependentUpon>frmPermission.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -307,6 +427,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -322,6 +443,28 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resource\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="br.pro.VIEW\Imagens\Company.png" />
+    <Content Include="br.pro.VIEW\Imagens\consult-folder.png" />
+    <Content Include="br.pro.VIEW\Imagens\economics.png" />
+    <Content Include="br.pro.VIEW\Imagens\employee.png" />
+    <Content Include="br.pro.VIEW\Imagens\money-bag.png" />
+    <Content Include="br.pro.VIEW\Imagens\Page-Point.png.png" />
+    <Content Include="br.pro.VIEW\Imagens\People-supplier.png" />
+    <Content Include="br.pro.VIEW\Imagens\Persona-Client.png" />
+    <Content Include="br.pro.VIEW\Imagens\Print-outHolerite.png" />
+    <Content Include="br.pro.VIEW\Imagens\products.png" />
+    <Content Include="br.pro.VIEW\Imagens\search.png" />
+    <Content Include="br.pro.VIEW\Imagens\settings.png" />
+    <Content Include="br.pro.VIEW\Imagens\Severce.png" />
+    <Content Include="br.pro.VIEW\Layout\ConsultClientScreen.png" />
+    <Content Include="br.pro.VIEW\Layout\InsertIntoBudget.png" />
+    <Content Include="br.pro.VIEW\Layout\InsertIntoClient.png" />
+    <Content Include="br.pro.VIEW\Layout\Login screen.png" />
+    <Content Include="br.pro.VIEW\Layout\Tela Menu Sistema Contra Cheque.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
