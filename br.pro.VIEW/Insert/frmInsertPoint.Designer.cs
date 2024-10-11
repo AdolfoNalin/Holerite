@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInsertPoint));
             this.dgPoint = new System.Windows.Forms.DataGridView();
             this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,7 +57,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.mtbDate = new System.Windows.Forms.MaskedTextBox();
             this.btnSave = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnPrintout = new System.Windows.Forms.Button();
             this.btnDeletePoint = new System.Windows.Forms.Button();
             this.btnGenarete = new System.Windows.Forms.Button();
             this.txtCodCompany = new System.Windows.Forms.TextBox();
@@ -68,19 +68,19 @@
             // 
             // dgPoint
             // 
-            this.dgPoint.AllowUserToOrderColumns = true;
+            this.dgPoint.AllowUserToAddRows = false;
             this.dgPoint.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgPoint.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.Format = "d";
-            dataGridViewCellStyle10.NullValue = null;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgPoint.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Format = "d";
+            dataGridViewCellStyle1.NullValue = null;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgPoint.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgPoint.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgPoint.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.date,
@@ -90,22 +90,23 @@
             this.exitTime,
             this.extraEntry,
             this.extraOutput});
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgPoint.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgPoint.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.dgPoint, "dgPoint");
+            this.dgPoint.MultiSelect = false;
             this.dgPoint.Name = "dgPoint";
             // 
             // date
             // 
             this.date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle11.Format = "d";
-            this.date.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Format = "d";
+            this.date.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.date, "date");
             this.date.Name = "date";
             this.date.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -196,7 +197,6 @@
             // 
             resources.ApplyResources(this.mtbCPF, "mtbCPF");
             this.mtbCPF.Name = "mtbCPF";
-            this.mtbCPF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbCPF_KeyPress);
             // 
             // btnSearchEmp
             // 
@@ -243,12 +243,12 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // btnUpdate
+            // btnPrintout
             // 
-            resources.ApplyResources(this.btnUpdate, "btnUpdate");
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            resources.ApplyResources(this.btnPrintout, "btnPrintout");
+            this.btnPrintout.Name = "btnPrintout";
+            this.btnPrintout.UseVisualStyleBackColor = true;
+            this.btnPrintout.Click += new System.EventHandler(this.btnPrintout_Click);
             // 
             // btnDeletePoint
             // 
@@ -282,7 +282,7 @@
             this.Controls.Add(this.lblCodCompany);
             this.Controls.Add(this.btnGenarete);
             this.Controls.Add(this.btnDeletePoint);
-            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.btnPrintout);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.mtbDate);
@@ -327,7 +327,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn extraEntry;
         private System.Windows.Forms.DataGridViewTextBoxColumn extraOutput;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnPrintout;
         private System.Windows.Forms.Button btnDeletePoint;
         private System.Windows.Forms.Button btnGenarete;
         public System.Windows.Forms.TextBox txtCodCompany;

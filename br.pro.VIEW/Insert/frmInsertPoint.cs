@@ -3,15 +3,20 @@ using Holerite.br.pro.MODEL;
 using Holerite.br.pro.VIEW.Consult;
 using Holerite.br.pro.VIEW.Insert;
 using Holerite.Helpers;
+using iTextSharp.text.xml.simpleparser;
+using Org.BouncyCastle.Asn1.X509;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using ZstdSharp;
 using Point = Holerite.br.pro.MODEL.Point;
 
@@ -19,247 +24,109 @@ namespace Holerite.br.pro.VIEW
 {
     public partial class frmInsertPoint : Form
     {
-        public DateTime Data { get; private set; }
+        public DateTime Data { get; private set; } = DateTime.Now;
+        private int _codCompany;
 
-        #region ConsultrotorEmpyt
-        public frmInsertPoint()
+        public frmInsertPoint(int codCompany)
         {
+            _codCompany = codCompany;
             InitializeComponent();
         }
-        #endregion
-
-        #region ConstrutorWithDate
-        public frmInsertPoint(DateTime data)
-        {
-            InitializeComponent();
-            this.Data = data;
-        }
-        #endregion
-
-        #region btnInsert_Click
-        private void btnInsert_Click(object sender, EventArgs e)
-        {
-            EmployeeDAO dao = new EmployeeDAO();
-            Point point = new Point()
-            {
-                CodCompany = 2,
-                CodEmp = dao.Search(mtbCPF.Text, txtNameEmployee.Text),
-                Month = DateTime.Parse(mtbDate.Text),
-            };
-
-            PointDAO Pdao = new PointDAO();
-            Pdao.Insert(point);
-
-            foreach (DataGridViewRow dgPoint in dgPoint.Rows)
-            {
-                ItemPoint item = new ItemPoint()
-                {
-                    CodPoint = Pdao.EndPoint(),
-                    Date = DateTime.Parse(dgPoint.Cells[0].Value.ToString()),
-                    EntryTime = DateTime.Parse(dgPoint.Cells[1].Value.ToString()),
-                    LunchDeparture = DateTime.Parse(dgPoint.Cells[2].Value.ToString()),
-                    LunchEntrance = DateTime.Parse(dgPoint.Cells[3].Value.ToString()),
-                    ExitTime = DateTime.Parse(dgPoint.Cells[4].Value.ToString()),
-                    ExtraEntry = DateTime.Parse(dgPoint.Cells[5].Value.ToString()),
-                    ExtraOutput = DateTime.Parse(dgPoint.Cells[6].Value.ToString())
-                };
-
-                ItemPointDAO Idao = new ItemPointDAO();
-                Idao.Insert(item);
-            }
-
-        }
-        #endregion
-
-        #region btnEdit_Click
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            foreach (DataGridViewRow dgPoint in dgPoint.Rows)
-            {
-                ItemPoint item = new ItemPoint()
-                {
-                    Date = DateTime.Parse(dgPoint.Cells[0].Value.ToString()),
-                    EntryTime = DateTime.Parse(dgPoint.Cells[1].Value.ToString()),
-                    LunchDeparture = DateTime.Parse(dgPoint.Cells[2].Value.ToString()),
-                    LunchEntrance = DateTime.Parse(dgPoint.Cells[3].Value.ToString()),
-                    ExitTime = DateTime.Parse(dgPoint.Cells[4].Value.ToString()),
-                    ExtraEntry = DateTime.Parse(dgPoint.Cells[5].Value.ToString()),
-                    ExtraOutput = DateTime.Parse(dgPoint.Cells[6].Value.ToString())
-                };
-
-                ItemPointDAO Idao = new ItemPointDAO();
-                Idao.Update(item);
-            }
-        }
-        #endregion
-
-        #region btnDelete
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            ItemPointDAO iPoint = new ItemPointDAO();
-            PointDAO point = new PointDAO();
-
-            int cod = int.Parse(txtCod.Text);
-
-            iPoint.Delete(cod);
-            point.Delete(cod);
-        }
-        #endregion
-
-        #region btnPrintOut_click
-        private void btnPrntOut_Click(object sender, EventArgs e)
-        {
-            //PrintOut pt = new PrintOut(dgPoint);
-
-        }
-        #endregion
-
-        #region mtbCPF_keypress
-        private void mtbCPF_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 13)
-            {
-                Employee obj = Verification.ToCheck(mtbCPF.Text);
-
-                txtNameEmployee.Text = obj.Name;
-                txtFunction.Text = obj.Function;
-                txtAddress.Text = $"{obj.CEP}, {obj.State}, {obj.City}, {obj.Neighborhood}, {obj.Street}, {obj.HomeNumber}";
-            }
-        }
-        #endregion
 
         #region Load
         private void frmInsertPoint_Load(object sender, EventArgs e)
         {
-            mtbDate.Text = DateTime.Now.ToShortDateString();
+            mtbDate.Text = Data.ToString();
+            txtCodCompany.Text = _codCompany.ToString();
         }
         #endregion
 
-        #region btnSearchEmp_Click
+        #region SearchEmp_Click
         private void btnSearchEmp_Click(object sender, EventArgs e)
+        {
+            frmConsultEmpGeneratePoint screen = new frmConsultEmpGeneratePoint(2);
+            this.Visible = false;
+            screen.ShowDialog();
+            DataGridView dg = screen.dgGeneratePoint ?? throw new NullReferenceException("Escolha o Funcionário");
+
+            txtCodEmployee.Text = dg.CurrentRow.Cells[0].Value.ToString();
+            txtNameEmployee.Text = dg.CurrentRow.Cells[2].Value.ToString();
+            mtbCPF.Text = dg.CurrentRow.Cells[7].Value.ToString();
+            txtFunction.Text = dg.CurrentRow.Cells[18].Value.ToString();
+
+            Address address = new Address()
+            {
+                State = dg.CurrentRow.Cells[12].Value.ToString(),
+                City = dg.CurrentRow.Cells[13].Value.ToString(),
+                Neighborhood = dg.CurrentRow.Cells[14].Value.ToString(),
+                Street = dg.CurrentRow.Cells[15].Value.ToString(),
+                HomeNumber = dg.CurrentRow.Cells[16].Value.ToString(),
+                Complement = dg.CurrentRow.Cells[17].Value.ToString()
+            };
+
+            txtAddress.Text = $"{address.State}, {address.City}, {address.Neighborhood}, {address.Street}, {address.HomeNumber}, {address.Complement}";
+
+            List<string> date = screen.date;
+            DateTimePicker dateTime = screen.dtpStart;
+
+            string time = "  :  ";
+            
+            for (int i = 0; i < date.Count; i++)
+            {
+                dgPoint.Rows.Add(date[i], time, time, time, time, time, time);
+            }
+                
+            dgPoint.Refresh();
+            
+            dgPoint.Rows[0].Frozen = true;
+            screen.Hide();
+            this.Visible = true;
+        }
+        #endregion
+
+        #region btnSave_Click
+        private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                this.Visible = false;
-                frmConsultEmpGeneratePoint screen = new frmConsultEmpGeneratePoint(2);
-                screen.ShowDialog();
-                this.Visible = true;
-                MonthCalendar mc = screen.Calender;
-                List<string> date = new List<string>();
-
-                if (mc.SelectionRange.Start.Month == mc.SelectionRange.End.Month)
+                if (!String.IsNullOrEmpty(txtCod.Text))
                 {
-                    for (int i = mc.SelectionStart.Day; i <= mc.SelectionEnd.Day; i++)
+                    Point point = new Point()
                     {
-                        date.Add($"{i}/{mc.SelectionStart.Month}/{mc.SelectionStart.Year}");
+                        CodCompany = int.Parse(txtCodCompany.Text),
+                        CodEmp = int.Parse(txtCodEmployee.Text),
+                        Month = Data
+                    };
+
+                    PointDAO pointDao = new PointDAO();
+                    pointDao.Insert(point);
+                    DataTable dt = (DataTable) dgPoint.DataSource;
+
+                    foreach(DataGridViewRow item in dgPoint.Rows)
+                    {
+                        ItemPoint ip = new ItemPoint();
+
+                        ip.CodPoint = pointDao.EndPoint();
+                        ip.Date = item.Cells[0].Value.ToString();
+                        ip.EntryTime = item.Cells[1].Value.ToString();
+                        ip.LunchDeparture = item.Cells[2].Value.ToString();
+                        ip.LunchEntrance = item.Cells[3].Value.ToString();
+                        ip.ExitTime = item.Cells[4].Value.ToString();
+                        ip.ExtraEntry = item.Cells[5].Value.ToString();
+                        ip.ExtraOutput = item.Cells[6].Value.ToString();
+
+                        ItemPointDAO itemDao = new ItemPointDAO();
+                        itemDao.Insert(ip);
                     }
 
-                    for (int i = 0; i < date.Count; i++)
-                    {
-                        dgPoint.Rows.Add(date[i], "  :  ", "  :  ", "  :  ", "  :  ", "  :  ", "  :  ");
-                    }
-
-                    DataGridView dv = new DataGridView();
-                    dv = screen.dgGeneratePoint;
-
-                    Employee emp = new Employee();
-                    emp.Cod = int.Parse(dv.CurrentRow.Cells[0].Value.ToString());
-                    emp.Name = dv.CurrentRow.Cells[1].Value.ToString();
-                    emp.CPF = dv.CurrentRow.Cells[6].Value.ToString();
-                    emp.CEP = dv.CurrentRow.Cells[10].Value.ToString();
-                    emp.State = dv.CurrentRow.Cells[11].Value.ToString();
-                    emp.City = dv.CurrentRow.Cells[12].Value.ToString();
-                    emp.Neighborhood = dv.CurrentRow.Cells[13].Value.ToString();
-                    emp.Street = dv.CurrentRow.Cells[14].Value.ToString();
-                    emp.HomeNumber = int.Parse(dv.CurrentRow.Cells[15].Value.ToString());
-                    emp.Function = dv.CurrentRow.Cells[17].Value.ToString();
-
-                    txtCodCompany.Text = "1";
-                    txtCodEmployee.Text = emp.Cod.ToString();
-                    txtNameEmployee.Text = emp.Name;
-                    mtbCPF.Text = emp.CPF;
-                    txtFunction.Text = emp.Function;
-
-                    string address = $"{emp.CEP}, {emp.State}, {emp.City}, {emp.Neighborhood}, {emp.HomeNumber}";
-                    txtAddress.Text = address;
+                    Dialog.MessageInsert("Ponto");
+                    txtCod.Text = new PointDAO().EndPoint().ToString();
                 }
                 else
                 {
-                    Dialog.Message("A folha de ponto representa somente um mês!", "atencão");
-                }   
-            }
-            catch (Exception ex)
-            {
-                Dialog.MessageError(ex);
-            }
-           
-        }
-        #endregion
-
-        #region btnSave
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (txtCod.Text == String.Empty)
-            {
-                Point point = new Point()
-                {
-                    CodCompany = int.Parse(txtCodCompany.Text),
-                    CodEmp = int.Parse(txtCodEmployee.Text),
-                    Month = DateTime.Parse(mtbDate.Text)
-
-                };
-
-                new PointDAO().Insert(point);
-
-                for (int i = 0; i < dgPoint.Rows.Count; i++)    
-                {
-                    ItemPoint ip = new ItemPoint()
-                    {
-                        CodPoint = new PointDAO().EndPoint(),
-                        Date = DateTime.Parse(dgPoint.CurrentRow.Cells[0].Value.ToString()),
-                        EntryTime = DateTime.Parse(dgPoint.CurrentRow.Cells[1].Value.ToString()),
-                        LunchDeparture = DateTime.Parse(dgPoint.CurrentRow.Cells[2].Value.ToString()),
-                        LunchEntrance = DateTime.Parse(dgPoint.CurrentRow.Cells[3].Value.ToString()),
-                        ExitTime = DateTime.Parse(dgPoint.CurrentRow.Cells[4].Value.ToString()),
-                        ExtraEntry = DateTime.Parse(dgPoint.CurrentRow.Cells[5].Value.ToString()),
-                        ExtraOutput = DateTime.Parse(dgPoint.CurrentRow.Cells[6].Value.ToString())
-                    };
-
-                    new ItemPointDAO().Insert(ip);
+                    Dialog.Message("Você não pode cadastrar o mesmo pointo duas vezes", "atenção");
                 }
-                Dialog.MessageInsert("Ponto", title: "Sucesso");
-            }
-            else
-            {
-                Dialog.MessageError(new ArgumentException("Esse ponto não pode ser cadastrado novamente!"));
-            }
-        }
-        #endregion
 
-        #region btnUpdate_click
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            int.TryParse(txtCod.Text, out int cod);
-
-            try
-            {
-                for (int i = 0; i < dgPoint.Rows.Count; i++)
-                {
-                    ItemPoint ip = new ItemPoint()
-                    {
-                        CodPoint = new PointDAO().EndPoint(),
-                        Date = DateTime.Parse(dgPoint.CurrentRow.Cells[0].Value.ToString()),
-                        EntryTime = DateTime.Parse(dgPoint.CurrentRow.Cells[1].Value.ToString()),
-                        LunchDeparture = DateTime.Parse(dgPoint.CurrentRow.Cells[2].Value.ToString()),
-                        LunchEntrance = DateTime.Parse(dgPoint.CurrentRow.Cells[3].Value.ToString()),
-                        ExitTime = DateTime.Parse(dgPoint.CurrentRow.Cells[4].Value.ToString()),
-                        ExtraEntry = DateTime.Parse(dgPoint.CurrentRow.Cells[5].Value.ToString()),
-                        ExtraOutput = DateTime.Parse(dgPoint.CurrentRow.Cells[6].Value.ToString())
-                    };
-
-                    new ItemPointDAO().Insert(ip);
-                }
-                Dialog.MessageInsert("Ponto", title: "Sucesso");
             }
             catch (Exception ex)
             {
@@ -273,9 +140,8 @@ namespace Holerite.br.pro.VIEW
         {
             try
             {
-                ItemPointDAO dao = new ItemPointDAO();
                 int.TryParse(txtCod.Text, out int cod);
-                dao.Delete(cod);
+                new PointDAO().Delete(cod);
             }
             catch (Exception ex)
             {
@@ -284,13 +150,29 @@ namespace Holerite.br.pro.VIEW
         }
         #endregion
 
-        #region btnGenerate_click
+        #region btnGenarete_click
         private void btnGenarete_Click(object sender, EventArgs e)
         {
-            Employee emp = new EmployeeDAO().GetSearchEmp(txtNameEmployee.Text);
-            Company com = new Company() { 
-                Cod = 1
-            };
+            try
+            {
+                Employee emp = new EmployeeDAO().GetSearch(mtbCPF.Text) ?? throw new NullReferenceException("Funciário não encontrado!");
+                Company com = new CompanyDAO().Search(int.Parse(txtCodCompany.Text)) ?? throw new NullReferenceException("Empresa não encontrada!");
+
+                PrintOut.PrintOutPoint(com, emp, dgPoint);
+                Dialog.MessageInsertOthers("ponto");
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+            }
+        }
+        #endregion
+
+        #region btnPrintout_click
+        private void btnPrintout_Click(object sender, EventArgs e)
+        {
+            Employee emp = new EmployeeDAO().GetSearchEmp(txtNameEmployee.Text) ?? throw new Exception("Funcionário não encontrado!");
+            Company com = new CompanyDAO().Search(int.Parse(txtCodCompany.Text)) ?? throw new NullReferenceException("Empresa não encontrada");
             PrintOut.PrintOutPoint(com, emp, dgPoint);
         }
         #endregion
