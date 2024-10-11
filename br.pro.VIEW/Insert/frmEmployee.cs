@@ -17,8 +17,10 @@ namespace Holerite.br.pro.VIEW.Insert
 {
     public partial class frmEmployee : Form
     {
-        public frmEmployee()
+        private int _codCompany;
+        public frmEmployee(int codCompany)
         {
+            _codCompany = codCompany;
             InitializeComponent();
         }
 
@@ -152,6 +154,8 @@ namespace Holerite.br.pro.VIEW.Insert
         #region Load
         private void frmEmployee_Load(object sender, EventArgs e)
         {
+            txtCodCompany.Text = _codCompany.ToString();
+
             FunctionDAO dao = new FunctionDAO();
             cbFunction.DataSource = dao.Consult();
             cbFunction.DisplayMember = "fun";

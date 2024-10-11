@@ -70,6 +70,8 @@
             this.lblDaily = new System.Windows.Forms.Label();
             this.cbFunction = new System.Windows.Forms.ComboBox();
             this.txtFunction = new System.Windows.Forms.TextBox();
+            this.lblCodCompany = new System.Windows.Forms.Label();
+            this.txtCodCompany = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtComplement
@@ -469,11 +471,29 @@
             this.txtFunction.TabIndex = 76;
             this.txtFunction.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFunction_KeyPress);
             // 
+            // lblCodCompany
+            // 
+            this.lblCodCompany.AutoSize = true;
+            this.lblCodCompany.Location = new System.Drawing.Point(154, 19);
+            this.lblCodCompany.Name = "lblCodCompany";
+            this.lblCodCompany.Size = new System.Drawing.Size(76, 13);
+            this.lblCodCompany.TabIndex = 78;
+            this.lblCodCompany.Text = "Cod Company:";
+            // 
+            // txtCodCompany
+            // 
+            this.txtCodCompany.Location = new System.Drawing.Point(230, 16);
+            this.txtCodCompany.Name = "txtCodCompany";
+            this.txtCodCompany.Size = new System.Drawing.Size(50, 20);
+            this.txtCodCompany.TabIndex = 77;
+            // 
             // frmEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblCodCompany);
+            this.Controls.Add(this.txtCodCompany);
             this.Controls.Add(this.txtFunction);
             this.Controls.Add(this.cbFunction);
             this.Controls.Add(this.txtDaily);
@@ -570,5 +590,7 @@
         private System.Windows.Forms.Label lblDaily;
         public System.Windows.Forms.TextBox txtFunction;
         public System.Windows.Forms.ComboBox cbFunction;
+        private System.Windows.Forms.Label lblCodCompany;
+        public System.Windows.Forms.TextBox txtCodCompany;
     }
 }
