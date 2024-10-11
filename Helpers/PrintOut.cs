@@ -62,123 +62,126 @@ namespace Holerite.Helpers
         #endregion
 
         #region PrintOutPoint
-        //public static void PrintOutPoint(/*bool logo, string type, Company com, Employee emp, DataGridView dg*/)
-        //{
-        //    bool logo = false;
-        //    string issuanceDate = DateTime.Now.ToShortDateString();
-        //    float time = 00.00f;
-        //    float extraTime = 0f;
-        //    float timeRest = 0f;
-        //    DataGridView dg = new DataGridView();
+        public static void PrintOutPoint(Company com, Employee emp, DataGridView dg)
+        {
+            float time = 0;
+            float extraTime = 0;
+            float timeRest = 0;
 
-        //    Company com = new Company()
-        //    {
-        //        Name = "Adolfo Nalin Junior",
-        //        FantasyName = "ANJ Company",
-        //        CNPJ = "80.562.058/0001-20",
-        //        State = "SP",
-        //        City = "Águas de Santa Barbara",
-        //        Neighborhood = "CDHU 3",
-        //        Street = "Rua Três",
-        //        HomeNumber = 95,
-        //        CEP = "18770-000"
-        //    };
+            float.TryParse(dg.CurrentRow.Cells[1].Value.ToString(), out float entryTime);
+            float.TryParse(dg.CurrentRow.Cells[2].Value.ToString(), out float lunchDeparture);
+            float.TryParse(dg.CurrentRow.Cells[3].Value.ToString(), out float lunchEntrarture);
+            float.TryParse(dg.CurrentRow.Cells[4].Value.ToString(), out float exitTime);
+            float.TryParse(dg.CurrentRow.Cells[5].Value.ToString(), out float extraEntry);
+            float.TryParse(dg.CurrentRow.Cells[6].Value.ToString(), out float extraOutput);
 
-        //    Employee emp = new Employee()
-        //    {
-        //        Name = "Gilsemar Santos",
-        //        Function = "Ajudante Geral",
-        //        Daily = 90,
-        //        CTPS = ""
-        //    };
+            for(int i = 0; i < dg.RowCount; i++)
+            {
+                time += (lunchDeparture - entryTime) + (exitTime - lunchEntrarture);
+                extraTime += extraOutput - extraEntry;
+            }
 
-        //    string address = $"{com.CEP}, {com.State}, {com.City}, {com.Neighborhood}, {com.Street}, {com.HomeNumber}";
-        //    try
-        //    {
-        //        string nameFile = "";
+            string empAddress = $"{emp.CEP}, {emp.State}, {com.City}, {emp.Neighborhood}, {emp.Street}, {emp.HomeNumber}";
+            string comAddress = $"{com.CEP}, {com.State}, {com.City}, {com.Neighborhood}, {com.Street}, {com.HomeNumber}";
 
-        //        SaveFileDialog sfd = new SaveFileDialog();
-        //        sfd.Filter = "txt file (*.pdf)|*.txt|All file (*.*)|*.*";
-        //        sfd.FilterIndex = 2;
-        //        sfd.DefaultExt = "pdf";
-        //        sfd.RestoreDirectory = true;
-        //        sfd.AddExtension = false;
-        //        sfd.Title = "Escolha um local para savar o arquivo";
+            try
+            {
+                string nameFile = "";
 
-        //        if(sfd.ShowDialog() != DialogResult.OK)
-        //        {
-        //            if (sfd.FileName == String.Empty)
-        //            {
-        //                DialogResult resp = MessageBox.Show("Não quer savar o arquio?", "ATENÇÃO", MessageBoxButtons.YesNo);
-        //                if (resp == DialogResult.Yes)
-        //                {
-        //                    sfd.ShowDialog();
-        //                }
-        //            }
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "txt file (*.pdf)|*.txt|All file (*.*)|*.*";
+                sfd.FilterIndex = 2;
+                sfd.DefaultExt = "ponto.pdf";
+                sfd.RestoreDirectory = true;
+                sfd.AddExtension = false;
+                sfd.Title = "Escolha um local para savar o arquivo";
 
-        //            string filePath = sfd.FileName;
-        //            nameFile = $"{filePath}_Ponto";
-        //        }
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    if (sfd.FileName == String.Empty)
+                    {
+                        DialogResult resp = MessageBox.Show("Não quer savar o arquio?", "ATENÇÃO", MessageBoxButtons.YesNo);
+                        if (resp == DialogResult.Yes)
+                        {
+                            sfd.ShowDialog();
+                        }
+                    }
 
-        //        if(logo)
-        //        {
-        //            Image image = Image.GetInstance("Caminho");
-        //            image.ScaleToFit(150, 300);
-        //            image.SetAbsolutePosition(430f, 650f);
-        //        }
-               
-        //        FileStream fs = new FileStream(nameFile, FileMode.Create);
-        //        Document doc = new Document(PageSize.A4);
-        //        PdfWriter pdf = PdfWriter.GetInstance(doc, fs);
+                    nameFile = sfd.FileName;
+                }
 
-        //        string dado = "";
-                
-        //        Paragraph empregador = new Paragraph(dado, new Font(Font.NORMAL,20,(int)System.Drawing.FontStyle.Bold));
-        //        empregador.Alignment = Element.ALIGN_LEFT;
-        //        empregador.Add($"Empregador/ Nome: {com.Name} | CNPJ: {com.CNPJ} \n Endereço: {address}");
+                FileStream fs = new FileStream(nameFile, FileMode.OpenOrCreate);
+                Document doc = new Document(PageSize.A4);
+                PdfWriter pdf = PdfWriter.GetInstance(doc, fs);
 
-        //        Paragraph empregado = new Paragraph(dado, new Font(Font.NORMAL, 20, (int) System.Drawing.FontStyle.Bold));
-        //        empregado.Alignment = Element.ALIGN_LEFT;
-        //        empregado.Add($@"Empregado(a): {emp.Name} | CTPS: {emp.CTPS} | Data Emissão: {issuanceDate} \nFunção: {emp.Function} | 
-        //        Horário de trabalho de SEG a SEX feira: {time}\nHorário aos Sábados: {extraTime} | Descanso Semanal: {timeRest}");
+                string dado = "";
 
-        //        PdfPTable pt = new PdfPTable(7);
+                Paragraph empregador = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
+                empregador.Alignment = Element.ALIGN_LEFT;
+                empregador.Add($"Empregador | Nome: {com.Name} | CNPJ: {com.CNPJ} | \nEndereço: {comAddress} |");
 
-        //        pt.AddCell("Data");
-        //        pt.AddCell("Hora Entrada");
-        //        pt.AddCell("Saida Almoço");
-        //        pt.AddCell("Entrada Almoço");
-        //        pt.AddCell("Hora Saida");
-        //        pt.AddCell("Entrada Extra");
-        //        pt.AddCell("Saida Extra");
+                Paragraph empregado = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
+                empregado.Alignment = Element.ALIGN_LEFT;
+                empregado.Add($"Empregado(a): {emp.Name} | CTPS: {emp.CTPS} | Data Emissão: {DateTime.Now.ToShortDateString()} | \nFunção: {emp.Function} | " + 
+                $"Horário de trabalho de SEG a SEX feira: {time} \nHorário aos Sábados: {extraTime} | Descanso Semanal: {timeRest} \n");
 
-        //        foreach(DataGridViewRow dgvr in dg.Rows)
-        //        {
-        //            ItemPoint ip = new ItemPoint()
-        //            {
-        //                Date = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
-        //                EntryTime = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
-        //                LunchEntrance = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
-        //                LunchDeparture = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
-        //                ExitTime = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
-        //                ExtraEntry = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString()),
-        //                ExtraOutput = DateTime.Parse(dg.CurrentRow.Cells[0].Value.ToString())
-        //            };
+                PdfPTable pt = new PdfPTable(7);
+                pt.HorizontalAlignment = Element.ALIGN_CENTER;
+                pt.WidthPercentage = 110f;
 
-        //            pt.AddCell(ip.Date.ToString());
-        //            pt.AddCell(ip.EntryTime.ToString());
-        //            pt.AddCell(ip.LunchEntrance.ToString());
-        //            pt.AddCell(ip.LunchDeparture.ToString());
-        //            pt.AddCell(ip.ExitTime.ToString());
-        //            pt.AddCell(ip.ExtraEntry.ToString());
-        //            pt.AddCell(ip.ExtraOutput.ToString());
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Dialog.Message($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}", "atenção");
-        //    }
-        //}
+                pt.AddCell("Data");
+                pt.AddCell("Hora Entrada");
+                pt.AddCell("Saida Almoço");
+                pt.AddCell("Entrada Almoço");
+                pt.AddCell("Hora Saida");
+                pt.AddCell("Entrada Extra");
+                pt.AddCell("Saida Extra");
+
+                for(int i = 0; i < dg.RowCount; i++)
+                {
+                    ItemPoint ip = new ItemPoint()
+                    {
+                        Date = dg.Rows[i].Cells[0].Value.ToString(),
+                        EntryTime = dg.Rows[i].Cells[1].Value.ToString(),
+                        LunchEntrance = dg.Rows[i].Cells[2].Value.ToString(),
+                        LunchDeparture = dg.Rows[i].Cells[3].Value.ToString(),
+                        ExitTime = dg.Rows[i].Cells[4].Value.ToString(),
+                        ExtraEntry = dg.Rows[i].Cells[5].Value.ToString(),
+                        ExtraOutput = dg.Rows[i].Cells[6].Value.ToString()
+                    };
+
+                    pt.AddCell(ip.Date.ToString());
+                    pt.AddCell(ip.EntryTime.ToString());
+                    pt.AddCell(ip.LunchEntrance.ToString());
+                    pt.AddCell(ip.LunchDeparture.ToString());
+                    pt.AddCell(ip.ExitTime.ToString());
+                    pt.AddCell(ip.ExtraEntry.ToString());
+                    pt.AddCell(ip.ExtraOutput.ToString());
+                }
+
+                Paragraph overview = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
+                overview.Alignment = Element.ALIGN_LEFT;
+
+                overview.Add($"Dias/ Horas Normais     R$|___________________|   VISTO DA FISCALIZAÇÃO  ");
+                overview.Add($"H. Extras Adicionais    R$|___________________|                          ");
+                overview.Add($"Falta Mês               R$|___________________|                          ");
+                overview.Add($"Sub total / Base Cal    R$|___________________|                          ");
+                overview.Add($"Outro Desconto(Verso)   R$|___________________|                          ");
+                overview.Add($"Salário Familia         R$|___________________|                          ");
+                overview.Add($"Total Liquido a Receber R$|___________________|                          ");
+
+                doc.Open();
+                doc.Add(empregador);
+                doc.Add(empregado);
+                doc.Add(pt);
+                doc.Add(overview);
+                doc.Close();
+            }
+            catch (Exception ex)
+            {
+                Dialog.MessageError(ex);
+            }
+        }
         #endregion
 
         #region PrintOutHolerite
@@ -275,7 +278,7 @@ namespace Holerite.Helpers
                     ItemBudget ib = new ItemBudget()
                     {
                         CodBudget = new BudgetDAO().EndBudget(),
-                        CodSeverce = int.Parse(dgvr.Cells[0].Value.ToString()),
+                        CodService = int.Parse(dgvr.Cells[0].Value.ToString()),
                         Price = float.Parse(dgvr.Cells[2].Value.ToString()),
                         Amount = int.Parse(dgvr.Cells[3].Value.ToString()),
                         Subtotal = float.Parse(dgvr.Cells[4].Value.ToString()),
@@ -332,7 +335,7 @@ namespace Holerite.Helpers
                     ItemBudget ib = new ItemBudget()
                     {
                         CodBudget = dao.EndBudget(),
-                        CodSeverce = int.Parse(line.Cells[0].Value.ToString()),
+                        CodService = int.Parse(line.Cells[0].Value.ToString()),
                         Price = float.Parse(line.Cells[2].Value.ToString()),
                         Amount = int.Parse(line.Cells[3].Value.ToString()),
                         Subtotal = float.Parse(line.Cells[4].Value.ToString()),
@@ -349,19 +352,20 @@ namespace Holerite.Helpers
         }
         #endregion
 
-        #region PrintOut
-        public static void PrintOutPoint(Employee emp, List<string> date)
+        #region PrintOutPoint
+        public static void PrintOutPoint(Company com, Employee emp, List<string> data)
         {
+            
             try
             {
-
-                string address = $"{emp.CEP}, {emp.State}, {emp.City}, {emp.Neighborhood}, {emp.Street}, {emp.HomeNumber}";
+                string comAddress = $"{com.CEP}, {com.State}, {com.City}, {com.Neighborhood}, {com.Street}, {com.HomeNumber}";
+                string empAddress = $"{emp.CEP}, {emp.State}, {emp.City}, {emp.Neighborhood}, {emp.Street}, {emp.HomeNumber}";
                 string nameFile = "";
 
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Filter = "txt file (*.pdf)|*.txt|All file (*.*)|*.*";
                 sfd.FilterIndex = 2;
-                sfd.DefaultExt = "pdf";
+                sfd.DefaultExt = "ponto.pdf";
                 sfd.RestoreDirectory = true;
                 sfd.AddExtension = false;
                 sfd.Title = "Escolha um local para savar o arquivo";
@@ -378,8 +382,7 @@ namespace Holerite.Helpers
                     }
                 }
 
-                string filePath = sfd.FileName;
-                nameFile = $"{filePath}_Ponto";
+                nameFile = sfd.FileName;
 
                 FileStream fs = new FileStream(nameFile, FileMode.Create);
                 Document doc = new Document(PageSize.A4);
@@ -389,7 +392,7 @@ namespace Holerite.Helpers
 
                 Paragraph empregador = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Regular));
                 empregador.Alignment = Element.ALIGN_LEFT;
-                empregador.Add($"|Empregador/ Nome: Construtora Realiza | CNPJ: 25.400.345/0001-20| \n|Endereço: 18772-226, Ágaus de Santaq Barbara, Três Marias, 40|");
+                empregador.Add($"|Empregador/ Nome: {com.Name} | CNPJ: {com.CNPJ}| \n|Endereço: {comAddress}|");
 
                 Paragraph empregado = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Regular));
                 empregado.Alignment = Element.ALIGN_RIGHT;
@@ -408,11 +411,10 @@ namespace Holerite.Helpers
                 pt.AddCell("Entrada Extra");
                 pt.AddCell("Saida Extra");
                 pt.AddCell("Assinatura");
-
-                string time = "";
-                for(int i = 0; i < date.Count; i++)
+                string time = "      :  ";
+                for(int i = 0; i < data.Count; i++)
                 {
-                    pt.AddCell(date[i]);
+                    pt.AddCell(data[i]);
                     pt.AddCell(time);
                     pt.AddCell(time);
                     pt.AddCell(time);
@@ -451,7 +453,7 @@ namespace Holerite.Helpers
         }
         #endregion
 
-        #region PrintOut
+        #region PrintOutEpi
         public static void PrintOutEpi(int codEmp, int codEpi,DataGridView dg, string observation)
         {
             EmployeeDAO empD = new EmployeeDAO();
@@ -554,7 +556,7 @@ namespace Holerite.Helpers
         }
         #endregion
 
-        #region PrintOut
+        #region PrintOutEpi
         public static void PrintOutEpi(Employee emp, int amountLine)
         {
             string address = $"{emp.CEP}, {emp.State}, {emp.City}, {emp.Neighborhood}, {emp.Street}, {emp.HomeNumber}";
