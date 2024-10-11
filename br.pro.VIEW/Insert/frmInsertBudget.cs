@@ -380,7 +380,6 @@ namespace Holerite.br.pro.VIEW.Insert
                 int cod = int.Parse(txtCodBudget.Text);
                 BudgetDAO bud = new BudgetDAO();
                 ItemBudgetDAO item = new ItemBudgetDAO();
-                item.Delete(cod);
                 bud.Delete(cod);
 
                 this.Hide();
