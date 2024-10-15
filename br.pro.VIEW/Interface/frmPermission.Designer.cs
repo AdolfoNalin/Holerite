@@ -42,6 +42,7 @@
             this.cbSetting = new System.Windows.Forms.CheckBox();
             this.cbBudget = new System.Windows.Forms.CheckBox();
             this.cbAdmin = new System.Windows.Forms.CheckBox();
+            this.cbEpi = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnBack
@@ -177,7 +178,7 @@
             // cbAdmin
             // 
             this.cbAdmin.AutoSize = true;
-            this.cbAdmin.Location = new System.Drawing.Point(213, 127);
+            this.cbAdmin.Location = new System.Drawing.Point(109, 147);
             this.cbAdmin.Name = "cbAdmin";
             this.cbAdmin.Size = new System.Drawing.Size(91, 17);
             this.cbAdmin.TabIndex = 15;
@@ -185,11 +186,22 @@
             this.cbAdmin.UseVisualStyleBackColor = true;
             this.cbAdmin.CheckedChanged += new System.EventHandler(this.cbAdmin_CheckedChanged);
             // 
+            // cbEpi
+            // 
+            this.cbEpi.AutoSize = true;
+            this.cbEpi.Location = new System.Drawing.Point(213, 127);
+            this.cbEpi.Name = "cbEpi";
+            this.cbEpi.Size = new System.Drawing.Size(43, 17);
+            this.cbEpi.TabIndex = 16;
+            this.cbEpi.Text = "EPI";
+            this.cbEpi.UseVisualStyleBackColor = true;
+            // 
             // frmPermission
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(336, 227);
+            this.Controls.Add(this.cbEpi);
             this.Controls.Add(this.cbAdmin);
             this.Controls.Add(this.cbBudget);
             this.Controls.Add(this.cbSetting);
@@ -229,5 +241,6 @@
         private System.Windows.Forms.CheckBox cbSetting;
         private System.Windows.Forms.CheckBox cbBudget;
         private System.Windows.Forms.CheckBox cbAdmin;
+        private System.Windows.Forms.CheckBox cbEpi;
     }
 }

@@ -34,7 +34,7 @@ namespace Holerite.br.pro.VIEW.Interface
                 cbClient, cbCompany, cbEmployee,
                 cbSupplier, cbService, cbProduct,
                 cbPoint, cbHolerite, cbCheckout,
-                cbSetting, cbBudget
+                cbSetting, cbBudget, cbEpi
             };
 
             listChck = cb.Where(lc => lc.Checked == true).ToList<CheckBox>();
@@ -50,7 +50,7 @@ namespace Holerite.br.pro.VIEW.Interface
                 cbClient, cbCompany, cbEmployee, 
                 cbSupplier, cbService, cbProduct, 
                 cbPoint, cbHolerite, cbCheckout, 
-                cbSetting, cbBudget
+                cbSetting, cbBudget, cbEpi
             };
 
             if(cbAdmin.Checked)
