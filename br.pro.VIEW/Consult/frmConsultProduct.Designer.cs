@@ -54,10 +54,13 @@
             // 
             // dgProduct
             // 
+            this.dgProduct.AllowUserToAddRows = false;
+            this.dgProduct.AllowUserToDeleteRows = false;
             this.dgProduct.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgProduct.Location = new System.Drawing.Point(12, 141);
             this.dgProduct.Name = "dgProduct";
+            this.dgProduct.ReadOnly = true;
             this.dgProduct.Size = new System.Drawing.Size(776, 297);
             this.dgProduct.TabIndex = 2;
             this.dgProduct.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgProduct_CellContentClick);
@@ -96,7 +99,7 @@
 
         private System.Windows.Forms.Label lblShortDescription;
         private System.Windows.Forms.TextBox txtShortDescription;
-        private System.Windows.Forms.DataGridView dgProduct;
         private System.Windows.Forms.Button btnSearch;
+        public System.Windows.Forms.DataGridView dgProduct;
     }
 }

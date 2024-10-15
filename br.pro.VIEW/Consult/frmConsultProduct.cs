@@ -49,21 +49,7 @@ namespace Holerite.br.pro.VIEW.Consult
         #region dgProduct_click
         private void dgProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            frmInsertProduct tela = new frmInsertProduct();
-            Product obj = new Product();
-
-            tela.txtCod.Text = dgProduct.CurrentRow.Cells[0].Value.ToString();
-            tela.txtShortDescription.Text = dgProduct.CurrentRow.Cells[1].Value.ToString();
-            tela.txtFullDescription.Text = dgProduct.CurrentRow.Cells[2].Value.ToString();
-            tela.cbSupplier.Text = dgProduct.CurrentRow.Cells[3].Value.ToString();
-            tela.cbEmployee.Text = dgProduct.CurrentRow.Cells[4].Value.ToString();
-            tela.txtAmount.Text = dgProduct.CurrentRow.Cells[5].Value.ToString();
-            tela.txtSpotPrice.Text = dgProduct.CurrentRow.Cells[6].Value.ToString();
-            tela.txtTermPrice.Text = dgProduct.CurrentRow.Cells[7].Value.ToString();
-            tela.mtbCA.Text = dgProduct.CurrentRow.Cells[8].Value.ToString();
-            tela.txtOBS.Text = dgProduct.CurrentRow.Cells[9].Value.ToString();
-
-            tela.ShowDialog();
+            this.Hide();
         }
         #endregion
     }
