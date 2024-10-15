@@ -25,34 +25,6 @@ namespace Holerite.br.pro.VIEW.Insert
             mtbDate.Text = DateTime.Now.ToShortDateString();
             ProductDAO daoP = new ProductDAO();
             EmployeeDAO daoE = new EmployeeDAO();
-
-            if(txtCodEpi.Text == String.Empty)
-            {
-                cbProduct.DataSource = daoP.Consult();
-                cbEmployee.DataSource = daoE.Consult();
-            }
-
-            cbProduct.DisplayMember = "Descrição Resumida";
-            cbProduct.ValueMember = "Código";
-
-            cbEmployee.DisplayMember = "Nome";
-            cbEmployee.ValueMember = "Código";
-        }
-        #endregion
-
-        #region cbProduct_KeyPress
-        private void cbServece_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 13)
-            {
-                Product obj = new Product();
-                obj = new ProductDAO().GetSearch(cbProduct.Text);
-
-                txtCodProduct.Text = obj.Cod.ToString();
-                cbProduct.Text = obj.ShortDescription.ToString();
-                txtSpot.Text = obj.SpotPrice.ToString();
-                txtTerm.Text = obj.TermPrice.ToString();
-            }
         }
         #endregion
 
@@ -156,7 +128,7 @@ namespace Holerite.br.pro.VIEW.Insert
             {
                 Product obj = new Product();
                 obj.Cod = int.Parse(txtCodProduct.Text);
-                obj.ShortDescription = cbProduct.Text;
+                obj.ShortDescription = txtProduct.Text;
                 obj.SpotPrice = float.Parse(txtSpot.Text);
                 int amount = int.Parse(txtAmount.Text);
                 float subtotal = float.Parse(txtSpot.Text) * float.Parse(txtAmount.Text);
@@ -184,7 +156,7 @@ namespace Holerite.br.pro.VIEW.Insert
                     dt = (DataTable)dgEPI.DataSource;
                     DataRow novaLinha = dt.NewRow();
                     novaLinha["Código"] = obj.Cod;
-                    novaLinha["Descrição Resumida"] = cbProduct.Text;
+                    novaLinha["Descrição Resumida"] = txtProduct.Text;
                     novaLinha["Preço"] = obj.SpotPrice;
                     novaLinha["Quantidade"] = txtAmount.Text;
                     novaLinha["SubTotal"] = subtotal;
@@ -199,7 +171,7 @@ namespace Holerite.br.pro.VIEW.Insert
             {
                 Product obj = new Product();
                 obj.Cod = int.Parse(txtCodProduct.Text);
-                obj.ShortDescription = cbProduct.Text;
+                obj.ShortDescription = txtProduct.Text;
                 obj.TermPrice = float.Parse(txtTerm.Text);
                 int amount = int.Parse(txtAmount.Text);
                 float subtotal = obj.TermPrice *  float.Parse(txtAmount.Text);
@@ -226,7 +198,7 @@ namespace Holerite.br.pro.VIEW.Insert
                     dt = (DataTable)dgEPI.DataSource;
                     DataRow novaLinha = dt.NewRow();
                     novaLinha["Código"] = obj.Cod;
-                    novaLinha["Descrição Resumida"] = cbProduct.Text;
+                    novaLinha["Descrição Resumida"] = txtProduct.Text;
                     novaLinha["Preço"] = obj.TermPrice;
                     novaLinha["Quantidade"] = txtAmount.Text;
                     novaLinha["SubTotal"] = subtotal;
@@ -239,20 +211,6 @@ namespace Holerite.br.pro.VIEW.Insert
             }
 
             txtTotal.Text = subtotalEPIs.ToString();
-        }
-        #endregion
-
-        #region cbEmployee_KeyPress
-        private void cbEmployee_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 13)
-            {
-                Employee obj = new Employee();
-                obj = new EmployeeDAO().GetSearchEmp(cbEmployee.Text);
-
-                txtCodEmp.Text = obj.Cod.ToString();
-                cbEmployee.Text = obj.Name;
-            }
         }
         #endregion
 
@@ -306,9 +264,11 @@ namespace Holerite.br.pro.VIEW.Insert
         {
             string payment = rbSpot.Checked == true ? "vista" : "prazo";
             
+            Employee emp = new EmployeeDAO().GetSearchEmp(txtName.Text);
+
             Epi obj = new Epi()
             {
-                CodEmp = int.Parse(cbEmployee.SelectedValue.ToString()),
+                CodEmp = int.Parse(emp.Name),
                 Date = DateTime.Parse(mtbDate.Text),
                 Payment = payment,
                 Subtotal = float.Parse(dgEPI.CurrentRow.Cells[4].Value.ToString()),
@@ -365,7 +325,7 @@ namespace Holerite.br.pro.VIEW.Insert
         private void btnPrintOut_Click(object sender, EventArgs e)
         {
             EmployeeDAO empD = new EmployeeDAO();
-            Employee emp = empD.GetSearchEmp(cbEmployee.Text);
+            Employee emp = empD.GetSearchEmp(txtName.Text);
             string payment = rbSpot.Checked == true ? "vista" : "prazo";
             int codEpi = txtCodEpi.Text == String.Empty ? 0 : int.Parse(txtCodEpi.Text);
             int codEmp = emp.Cod;
@@ -400,6 +360,37 @@ namespace Holerite.br.pro.VIEW.Insert
                 this.Hide();
             }
 
+        }
+        #endregion
+
+        #region btnConsultEmployee_click
+        private void btnConsultEmployee_Click(object sender, EventArgs e)
+        {
+            frmConsultEmployee screen = new frmConsultEmployee();
+            screen.ShowDialog();
+
+            DataGridView dt = screen.dgEmployee;
+
+            txtName.Text = dt.CurrentRow.Cells[2].Value.ToString();
+            screen.Close();
+        }
+        #endregion
+
+        #region btnConsultProduct_click
+        private void btnConsultProduct_Click(object sender, EventArgs e)
+        {
+            frmConsultProduct screen = new frmConsultProduct();
+            screen.ShowDialog();
+
+            string shortDescription = screen.dgProduct.CurrentRow.Cells[1].Value.ToString();
+            Product prod = new ProductDAO().GetSearch(shortDescription);
+
+            txtCodProduct.Text = screen.dgProduct.CurrentRow.Cells[0].Value.ToString();
+            txtProduct.Text = prod.ShortDescription;
+            txtSpot.Text = prod.SpotPrice.ToString();
+            txtTerm.Text = prod.TermPrice.ToString();
+            screen.Close();
+            txtAmount.Focus();
         }
         #endregion
     }

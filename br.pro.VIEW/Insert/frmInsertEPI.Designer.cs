@@ -39,25 +39,25 @@
             this.mtbDate = new System.Windows.Forms.MaskedTextBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSalve = new System.Windows.Forms.Button();
-            this.txtCodEmp = new System.Windows.Forms.TextBox();
-            this.lblCodEmp = new System.Windows.Forms.Label();
             this.txtCodProduct = new System.Windows.Forms.TextBox();
             this.lblCodProduct = new System.Windows.Forms.Label();
             this.txtSpot = new System.Windows.Forms.TextBox();
             this.lblSpot = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
-            this.cbProduct = new System.Windows.Forms.ComboBox();
             this.rbSpot = new System.Windows.Forms.RadioButton();
             this.rbTerm = new System.Windows.Forms.RadioButton();
             this.txtCodEpi = new System.Windows.Forms.TextBox();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.txtTerm = new System.Windows.Forms.TextBox();
             this.lblTerm = new System.Windows.Forms.Label();
-            this.cbEmployee = new System.Windows.Forms.ComboBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnPrintOut = new System.Windows.Forms.Button();
             this.txtObs = new System.Windows.Forms.TextBox();
             this.lblObs = new System.Windows.Forms.Label();
+            this.btnConsultEmployee = new System.Windows.Forms.Button();
+            this.btnConsultProduct = new System.Windows.Forms.Button();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.txtProduct = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgEPI)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,7 +67,7 @@
             this.dgEPI.AllowUserToDeleteRows = false;
             this.dgEPI.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgEPI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgEPI.Location = new System.Drawing.Point(599, 12);
+            this.dgEPI.Location = new System.Drawing.Point(599, 66);
             this.dgEPI.Name = "dgEPI";
             this.dgEPI.ReadOnly = true;
             this.dgEPI.Size = new System.Drawing.Size(296, 219);
@@ -75,7 +75,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(518, 12);
+            this.btnAdd.Location = new System.Drawing.Point(518, 66);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 1;
@@ -85,7 +85,7 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(518, 41);
+            this.btnRemove.Location = new System.Drawing.Point(518, 95);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(75, 23);
             this.btnRemove.TabIndex = 2;
@@ -96,7 +96,7 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(46, 66);
+            this.lblName.Location = new System.Drawing.Point(113, 17);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(38, 13);
             this.lblName.TabIndex = 3;
@@ -105,7 +105,7 @@
             // lblCodEpi
             // 
             this.lblCodEpi.AutoSize = true;
-            this.lblCodEpi.Location = new System.Drawing.Point(55, 9);
+            this.lblCodEpi.Location = new System.Drawing.Point(12, 15);
             this.lblCodEpi.Name = "lblCodEpi";
             this.lblCodEpi.Size = new System.Drawing.Size(29, 13);
             this.lblCodEpi.TabIndex = 5;
@@ -114,7 +114,7 @@
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(46, 134);
+            this.lblDescription.Location = new System.Drawing.Point(40, 71);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(35, 13);
             this.lblDescription.TabIndex = 8;
@@ -138,7 +138,7 @@
             // 
             // mtbDate
             // 
-            this.mtbDate.Location = new System.Drawing.Point(405, 15);
+            this.mtbDate.Location = new System.Drawing.Point(829, 15);
             this.mtbDate.Mask = "00/00/0000";
             this.mtbDate.Name = "mtbDate";
             this.mtbDate.Size = new System.Drawing.Size(66, 20);
@@ -167,25 +167,9 @@
             this.btnSalve.UseVisualStyleBackColor = true;
             this.btnSalve.Click += new System.EventHandler(this.btnSalve_Click);
             // 
-            // txtCodEmp
-            // 
-            this.txtCodEmp.Location = new System.Drawing.Point(405, 63);
-            this.txtCodEmp.Name = "txtCodEmp";
-            this.txtCodEmp.Size = new System.Drawing.Size(37, 20);
-            this.txtCodEmp.TabIndex = 17;
-            // 
-            // lblCodEmp
-            // 
-            this.lblCodEmp.AutoSize = true;
-            this.lblCodEmp.Location = new System.Drawing.Point(373, 66);
-            this.lblCodEmp.Name = "lblCodEmp";
-            this.lblCodEmp.Size = new System.Drawing.Size(29, 13);
-            this.lblCodEmp.TabIndex = 16;
-            this.lblCodEmp.Text = "Cod:";
-            // 
             // txtCodProduct
             // 
-            this.txtCodProduct.Location = new System.Drawing.Point(405, 131);
+            this.txtCodProduct.Location = new System.Drawing.Point(399, 68);
             this.txtCodProduct.Name = "txtCodProduct";
             this.txtCodProduct.Size = new System.Drawing.Size(37, 20);
             this.txtCodProduct.TabIndex = 19;
@@ -193,7 +177,7 @@
             // lblCodProduct
             // 
             this.lblCodProduct.AutoSize = true;
-            this.lblCodProduct.Location = new System.Drawing.Point(373, 134);
+            this.lblCodProduct.Location = new System.Drawing.Point(367, 71);
             this.lblCodProduct.Name = "lblCodProduct";
             this.lblCodProduct.Size = new System.Drawing.Size(29, 13);
             this.lblCodProduct.TabIndex = 18;
@@ -218,25 +202,16 @@
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(656, 240);
+            this.lblTotal.Location = new System.Drawing.Point(656, 294);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(34, 13);
             this.lblTotal.TabIndex = 22;
             this.lblTotal.Text = "Total:";
             // 
-            // cbProduct
-            // 
-            this.cbProduct.FormattingEnabled = true;
-            this.cbProduct.Location = new System.Drawing.Point(87, 131);
-            this.cbProduct.Name = "cbProduct";
-            this.cbProduct.Size = new System.Drawing.Size(276, 21);
-            this.cbProduct.TabIndex = 23;
-            this.cbProduct.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbServece_KeyPress);
-            // 
             // rbSpot
             // 
             this.rbSpot.AutoSize = true;
-            this.rbSpot.Location = new System.Drawing.Point(535, 83);
+            this.rbSpot.Location = new System.Drawing.Point(535, 137);
             this.rbSpot.Name = "rbSpot";
             this.rbSpot.Size = new System.Drawing.Size(58, 17);
             this.rbSpot.TabIndex = 24;
@@ -248,7 +223,7 @@
             // rbTerm
             // 
             this.rbTerm.AutoSize = true;
-            this.rbTerm.Location = new System.Drawing.Point(535, 106);
+            this.rbTerm.Location = new System.Drawing.Point(535, 160);
             this.rbTerm.Name = "rbTerm";
             this.rbTerm.Size = new System.Drawing.Size(62, 17);
             this.rbTerm.TabIndex = 25;
@@ -259,14 +234,14 @@
             // 
             // txtCodEpi
             // 
-            this.txtCodEpi.Location = new System.Drawing.Point(87, 6);
+            this.txtCodEpi.Location = new System.Drawing.Point(44, 12);
             this.txtCodEpi.Name = "txtCodEpi";
             this.txtCodEpi.Size = new System.Drawing.Size(37, 20);
             this.txtCodEpi.TabIndex = 6;
             // 
             // txtTotal
             // 
-            this.txtTotal.Location = new System.Drawing.Point(696, 237);
+            this.txtTotal.Location = new System.Drawing.Point(696, 291);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(46, 20);
             this.txtTotal.TabIndex = 26;
@@ -286,15 +261,6 @@
             this.lblTerm.Size = new System.Drawing.Size(44, 13);
             this.lblTerm.TabIndex = 27;
             this.lblTerm.Text = "Á Prazo";
-            // 
-            // cbEmployee
-            // 
-            this.cbEmployee.FormattingEnabled = true;
-            this.cbEmployee.Location = new System.Drawing.Point(87, 66);
-            this.cbEmployee.Name = "cbEmployee";
-            this.cbEmployee.Size = new System.Drawing.Size(276, 21);
-            this.cbEmployee.TabIndex = 29;
-            this.cbEmployee.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbEmployee_KeyPress);
             // 
             // btnDelete
             // 
@@ -335,29 +301,63 @@
             this.lblObs.TabIndex = 32;
             this.lblObs.Text = "Observação:";
             // 
+            // btnConsultEmployee
+            // 
+            this.btnConsultEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConsultEmployee.Location = new System.Drawing.Point(440, 12);
+            this.btnConsultEmployee.Name = "btnConsultEmployee";
+            this.btnConsultEmployee.Size = new System.Drawing.Size(32, 24);
+            this.btnConsultEmployee.TabIndex = 34;
+            this.btnConsultEmployee.UseVisualStyleBackColor = true;
+            this.btnConsultEmployee.Click += new System.EventHandler(this.btnConsultEmployee_Click);
+            // 
+            // btnConsultProduct
+            // 
+            this.btnConsultProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConsultProduct.Location = new System.Drawing.Point(442, 66);
+            this.btnConsultProduct.Name = "btnConsultProduct";
+            this.btnConsultProduct.Size = new System.Drawing.Size(36, 24);
+            this.btnConsultProduct.TabIndex = 35;
+            this.btnConsultProduct.UseVisualStyleBackColor = true;
+            this.btnConsultProduct.Click += new System.EventHandler(this.btnConsultProduct_Click);
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(154, 15);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(280, 20);
+            this.txtName.TabIndex = 36;
+            // 
+            // txtProduct
+            // 
+            this.txtProduct.Location = new System.Drawing.Point(76, 69);
+            this.txtProduct.Name = "txtProduct";
+            this.txtProduct.Size = new System.Drawing.Size(280, 20);
+            this.txtProduct.TabIndex = 37;
+            // 
             // frmInsertEPI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(907, 413);
+            this.Controls.Add(this.txtProduct);
+            this.Controls.Add(this.txtName);
+            this.Controls.Add(this.btnConsultProduct);
+            this.Controls.Add(this.btnConsultEmployee);
             this.Controls.Add(this.txtObs);
             this.Controls.Add(this.lblObs);
             this.Controls.Add(this.btnPrintOut);
             this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.cbEmployee);
             this.Controls.Add(this.txtTerm);
             this.Controls.Add(this.lblTerm);
             this.Controls.Add(this.txtTotal);
             this.Controls.Add(this.rbTerm);
             this.Controls.Add(this.rbSpot);
-            this.Controls.Add(this.cbProduct);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.txtSpot);
             this.Controls.Add(this.lblSpot);
             this.Controls.Add(this.txtCodProduct);
             this.Controls.Add(this.lblCodProduct);
-            this.Controls.Add(this.txtCodEmp);
-            this.Controls.Add(this.lblCodEmp);
             this.Controls.Add(this.btnSalve);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.mtbDate);
@@ -390,9 +390,7 @@
         private System.Windows.Forms.Label lblAmount;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSalve;
-        private System.Windows.Forms.Label lblCodEmp;
         private System.Windows.Forms.Label lblCodProduct;
-        public System.Windows.Forms.TextBox txtCodEmp;
         public System.Windows.Forms.TextBox txtCodProduct;
         public System.Windows.Forms.DataGridView dgEPI;
         public System.Windows.Forms.TextBox txtAmount;
@@ -400,17 +398,19 @@
         public System.Windows.Forms.TextBox txtSpot;
         private System.Windows.Forms.Label lblSpot;
         private System.Windows.Forms.Label lblTotal;
-        private System.Windows.Forms.ComboBox cbProduct;
         public System.Windows.Forms.TextBox txtCodEpi;
         public System.Windows.Forms.TextBox txtTotal;
         public System.Windows.Forms.TextBox txtTerm;
         private System.Windows.Forms.Label lblTerm;
-        public System.Windows.Forms.ComboBox cbEmployee;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnPrintOut;
         public System.Windows.Forms.TextBox txtObs;
         private System.Windows.Forms.Label lblObs;
         public System.Windows.Forms.RadioButton rbSpot;
         public System.Windows.Forms.RadioButton rbTerm;
+        private System.Windows.Forms.Button btnConsultEmployee;
+        private System.Windows.Forms.Button btnConsultProduct;
+        public System.Windows.Forms.TextBox txtName;
+        public System.Windows.Forms.TextBox txtProduct;
     }
 }
