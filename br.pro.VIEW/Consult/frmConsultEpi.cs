@@ -50,12 +50,12 @@ namespace Holerite.br.pro.VIEW.Consult
         {
             ItemEpiDAO dao = new ItemEpiDAO();
             frmInsertEPI tela = new frmInsertEPI();
-            tela.rbSpot.Checked =  dgEpi.CurrentRow.Cells[3].Value.ToString() == "vista" ? true : tela.rbTerm.Checked = false;
+            tela.rbSpot.Checked = dgEpi.CurrentRow.Cells[3].Value.ToString() == "vista" ? true : tela.rbTerm.Checked = false;
 
             int cod = int.Parse(dgEpi.CurrentRow.Cells[0].Value.ToString());
             tela.txtCodEpi.Text = cod.ToString();
             tela.mtbDate.Text = dgEpi.CurrentRow.Cells[1].Value.ToString();
-            tela.cbEmployee.Text = dgEpi.CurrentRow.Cells[2].Value.ToString();
+            tela.txtProduct.Text = dgEpi.CurrentRow.Cells[2].Value.ToString();
             tela.txtTotal.Text = dgEpi.CurrentRow.Cells[4].Value.ToString();
             tela.dgEPI.DataSource = dao.Search(cod);
             this.Hide();
