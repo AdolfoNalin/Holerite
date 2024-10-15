@@ -60,32 +60,7 @@ namespace Holerite.br.pro.VIEW.Consult
         #region dgEmployee DoubleClick
         private void dgEmployee_DoubleClick(object sender, EventArgs e)
         {
-            string fantasyName = dgEmployee.CurrentRow.Cells[1].Value.ToString();
-            Company com = new CompanyDAO().SearchName(fantasyName);
-
-            frmEmployee tela = new frmEmployee(com.Cod);
-
-            tela.txtCod.Text = dgEmployee.CurrentRow.Cells[0].Value.ToString();
-            tela.txtName.Text = dgEmployee.CurrentRow.Cells[2].Value.ToString();
-            tela.txtUserName.Text = dgEmployee.CurrentRow.Cells[3].Value.ToString();
-            tela.txtPassword.Text = dgEmployee.CurrentRow.Cells[4].Value.ToString();
-            tela.txtPermissions.Text = dgEmployee.CurrentRow.Cells[5].Value.ToString();
-            tela.txtDaily.Text = dgEmployee.CurrentRow.Cells[6].Value.ToString();
-            tela.mtbCPF.Text = dgEmployee.CurrentRow.Cells[7].Value.ToString();
-            tela.txtEmail.Text = dgEmployee.CurrentRow.Cells[8].Value.ToString();
-            tela.mtbPhoneNumber.Text = dgEmployee.CurrentRow.Cells[9].Value.ToString();
-            tela.mtbTelephoneNumber.Text = dgEmployee.CurrentRow.Cells[10].Value.ToString();
-            tela.mtbCEP.Text = dgEmployee.CurrentRow.Cells[11].Value.ToString();
-            tela.cbUF.Text = dgEmployee.CurrentRow.Cells[12].Value.ToString();
-            tela.txtCity.Text = dgEmployee.CurrentRow.Cells[13].Value.ToString();
-            tela.txtNeighborhood.Text = dgEmployee.CurrentRow.Cells[14].Value.ToString();
-            tela.txtStreet.Text = dgEmployee.CurrentRow.Cells[15].Value.ToString();
-            tela.txtHomeNumber.Text = dgEmployee.CurrentRow.Cells[16].Value.ToString();
-            tela.txtComplement.Text = dgEmployee.CurrentRow.Cells[17].Value.ToString();
-            tela.txtFunction.Text = dgEmployee.CurrentRow.Cells[18].Value.ToString();
-
             this.Hide();
-            tela.ShowDialog();
         }
         #endregion
     }
