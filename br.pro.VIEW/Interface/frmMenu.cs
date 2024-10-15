@@ -1,5 +1,6 @@
 ﻿using Holerite.br.pro.VIEW.Consult;
 using Holerite.br.pro.VIEW.Insert;
+using Holerite.br.pro.VIEW.Interface;
 using Holerite.Helpers;
 using System;
 using System.Collections.Generic;
@@ -201,6 +202,33 @@ namespace Holerite.br.pro.VIEW
             {
                 this.Close();
             }
+        }
+        #endregion
+
+        #region ConsultEpi
+        private void consultaToolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            frmConsultEpi screen = new frmConsultEpi();
+            Verification.ValidadePermission(permissions,"Epi", screen);
+            screen.Close();
+        }
+        #endregion
+
+        #region InsertEpi
+        private void cadastrarToolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            frmInsertEPI screen = new frmInsertEPI();
+            Verification.ValidadePermission(permissions, "Epi", screen);
+            screen.Close();
+        }
+        #endregion
+
+        #region GenerateEPI
+        private void gerarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmGenerateEPI screen = new frmGenerateEPI();
+            Verification.ValidadePermission(permissions, "Epi", screen);
+            screen.Close();
         }
         #endregion
     }

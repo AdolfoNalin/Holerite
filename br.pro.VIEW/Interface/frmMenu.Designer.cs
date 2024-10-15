@@ -47,9 +47,14 @@
             this.produtoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastrarToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ePIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cadastrarToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.gerarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultaToolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.pontoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.gerarPontoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultaToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.holeriteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.emitirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +63,6 @@
             this.sairToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnBudget = new System.Windows.Forms.Button();
             this.btnConsultBudget = new System.Windows.Forms.Button();
-            this.consultaToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,6 +77,7 @@
             this.fornecedorToolStripMenuItem,
             this.serviçoToolStripMenuItem,
             this.produtoToolStripMenuItem,
+            this.ePIToolStripMenuItem,
             this.pontoToolStripMenuItem,
             this.holeriteToolStripMenuItem,
             this.caixaToolStripMenuItem,
@@ -80,13 +85,12 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(934, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(1092, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // clienteToolStripMenuItem
             // 
-            this.clienteToolStripMenuItem.BackgroundImage = global::Holerite.Properties.Resources.Persona_Client;
             this.clienteToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.consultarToolStripMenuItem,
             this.cadastrarToolStripMenuItem});
@@ -229,6 +233,38 @@
             this.cadastrarToolStripMenuItem2.Text = "Cadastrar";
             this.cadastrarToolStripMenuItem2.Click += new System.EventHandler(this.cadastrarToolStripMenuItem2_Click);
             // 
+            // ePIToolStripMenuItem
+            // 
+            this.ePIToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cadastrarToolStripMenuItem5,
+            this.gerarToolStripMenuItem,
+            this.consultaToolStripMenuItem6});
+            this.ePIToolStripMenuItem.Image = global::Holerite.Properties.Resources.EPI1;
+            this.ePIToolStripMenuItem.Name = "ePIToolStripMenuItem";
+            this.ePIToolStripMenuItem.Size = new System.Drawing.Size(53, 21);
+            this.ePIToolStripMenuItem.Text = "EPI";
+            // 
+            // cadastrarToolStripMenuItem5
+            // 
+            this.cadastrarToolStripMenuItem5.Name = "cadastrarToolStripMenuItem5";
+            this.cadastrarToolStripMenuItem5.Size = new System.Drawing.Size(180, 22);
+            this.cadastrarToolStripMenuItem5.Text = "Cadastrar";
+            this.cadastrarToolStripMenuItem5.Click += new System.EventHandler(this.cadastrarToolStripMenuItem5_Click);
+            // 
+            // gerarToolStripMenuItem
+            // 
+            this.gerarToolStripMenuItem.Name = "gerarToolStripMenuItem";
+            this.gerarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gerarToolStripMenuItem.Text = "Gerar EPI";
+            this.gerarToolStripMenuItem.Click += new System.EventHandler(this.gerarToolStripMenuItem_Click);
+            // 
+            // consultaToolStripMenuItem6
+            // 
+            this.consultaToolStripMenuItem6.Name = "consultaToolStripMenuItem6";
+            this.consultaToolStripMenuItem6.Size = new System.Drawing.Size(180, 22);
+            this.consultaToolStripMenuItem6.Text = "Consulta";
+            this.consultaToolStripMenuItem6.Click += new System.EventHandler(this.consultaToolStripMenuItem6_Click);
+            // 
             // pontoToolStripMenuItem
             // 
             this.pontoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -243,16 +279,23 @@
             // consultaToolStripMenuItem2
             // 
             this.consultaToolStripMenuItem2.Name = "consultaToolStripMenuItem2";
-            this.consultaToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.consultaToolStripMenuItem2.Size = new System.Drawing.Size(147, 22);
             this.consultaToolStripMenuItem2.Text = "Cadastrar";
             this.consultaToolStripMenuItem2.Click += new System.EventHandler(this.consultaToolStripMenuItem2_Click);
             // 
             // gerarPontoToolStripMenuItem
             // 
             this.gerarPontoToolStripMenuItem.Name = "gerarPontoToolStripMenuItem";
-            this.gerarPontoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gerarPontoToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.gerarPontoToolStripMenuItem.Text = "Gerar Ponto";
             this.gerarPontoToolStripMenuItem.Click += new System.EventHandler(this.gerarPontoToolStripMenuItem_Click);
+            // 
+            // consultaToolStripMenuItem5
+            // 
+            this.consultaToolStripMenuItem5.Name = "consultaToolStripMenuItem5";
+            this.consultaToolStripMenuItem5.Size = new System.Drawing.Size(147, 22);
+            this.consultaToolStripMenuItem5.Text = "Consulta";
+            this.consultaToolStripMenuItem5.Click += new System.EventHandler(this.consultaToolStripMenuItem5_Click);
             // 
             // holeriteToolStripMenuItem
             // 
@@ -267,14 +310,14 @@
             // consultaToolStripMenuItem3
             // 
             this.consultaToolStripMenuItem3.Name = "consultaToolStripMenuItem3";
-            this.consultaToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.consultaToolStripMenuItem3.Size = new System.Drawing.Size(159, 22);
             this.consultaToolStripMenuItem3.Text = "Consulta";
             this.consultaToolStripMenuItem3.Click += new System.EventHandler(this.consultaToolStripMenuItem3_Click);
             // 
             // emitirToolStripMenuItem
             // 
             this.emitirToolStripMenuItem.Name = "emitirToolStripMenuItem";
-            this.emitirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.emitirToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.emitirToolStripMenuItem.Text = "Gerar Holerite";
             // 
             // caixaToolStripMenuItem
@@ -322,18 +365,11 @@
             this.btnConsultBudget.UseVisualStyleBackColor = true;
             this.btnConsultBudget.Click += new System.EventHandler(this.btnConsultBudget_Click);
             // 
-            // consultaToolStripMenuItem5
-            // 
-            this.consultaToolStripMenuItem5.Name = "consultaToolStripMenuItem5";
-            this.consultaToolStripMenuItem5.Size = new System.Drawing.Size(180, 22);
-            this.consultaToolStripMenuItem5.Text = "Consulta";
-            this.consultaToolStripMenuItem5.Click += new System.EventHandler(this.consultaToolStripMenuItem5_Click);
-            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(934, 450);
+            this.ClientSize = new System.Drawing.Size(1092, 450);
             this.Controls.Add(this.btnConsultBudget);
             this.Controls.Add(this.btnBudget);
             this.Controls.Add(this.menuStrip1);
@@ -382,5 +418,9 @@
         private System.Windows.Forms.ToolStripMenuItem cadastrarToolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem consultaToolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem ePIToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cadastrarToolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem gerarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultaToolStripMenuItem6;
     }
 }
