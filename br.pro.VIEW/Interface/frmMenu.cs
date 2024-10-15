@@ -41,8 +41,36 @@ namespace Holerite.br.pro.VIEW
         #region btnConsultBedget
         private void btnConsultBudget_Click(object sender, EventArgs e)
         {
-            frmConsultBudget tela = new frmConsultBudget();
-            Verification.ValidadePermission(permissions, "Orçamento", tela);
+            frmConsultBudget screen = new frmConsultBudget();
+            Verification.ValidadePermission(permissions, "Orçamento", screen);
+
+            DataTable dt = new DataTable();
+            ItemBudgetDAO dao = new ItemBudgetDAO();
+
+            dt = dao.Consult(int.Parse(screen.dgBudget.CurrentRow.Cells[0].Value.ToString()));
+
+            frmInsertBudget tela = new frmInsertBudget();
+            tela.txtCodBudget.Text = screen.dgBudget.CurrentRow.Cells[0].Value.ToString();
+            tela.mtbDate.Text = screen.dgBudget.CurrentRow.Cells[1].Value.ToString();
+            string payment = screen.dgBudget.CurrentRow.Cells[2].Value.ToString();
+            tela.dgBudget.DataSource = dt;
+            tela.txtEmployee.Text = screen.dgBudget.CurrentRow.Cells[3].Value.ToString();
+            tela.txtClient.Text = screen.dgBudget.CurrentRow.Cells[4].Value.ToString();
+            tela.txtSubtotal.Text = screen.dgBudget.CurrentRow.Cells[5].Value.ToString();
+            tela.txtTotal.Text = screen.dgBudget.CurrentRow.Cells[5].Value.ToString();
+            tela.txtObs.Text = screen.dgBudget.CurrentRow.Cells[6].Value.ToString();
+
+            if (payment == "Vista")
+            {
+                tela.rbSpot.Checked = true;
+            }
+            else
+            {
+                tela.rbTerm.Checked = true;
+            }
+
+            tela.ShowDialog();
+
             tela.Close();
         }
         #endregion
@@ -50,9 +78,43 @@ namespace Holerite.br.pro.VIEW
         #region ConsultClient
         private void consultarToolStripMenuItem_Click(object sender, EventArgs e)
         { 
-            frmConsultarClient tela = new frmConsultarClient();
-            Verification.ValidadePermission(permissions, "Cliente", tela);
-            tela.Close();
+            frmConsultarClient screen = new frmConsultarClient();
+            Verification.ValidadePermission(permissions, "Cliente", screen);
+
+            frmClient tela = new frmClient();
+            MODEL.Client obj = new MODEL.Client();
+
+            obj.Cod = int.Parse(screen.dgClient.CurrentRow.Cells[0].Value.ToString());
+            obj.Name = screen.dgClient.CurrentRow.Cells[1].Value.ToString();
+            obj.CPF = screen.dgClient.CurrentRow.Cells[2].Value.ToString();
+            obj.Email = screen.dgClient.CurrentRow.Cells[3].Value.ToString();
+            obj.TelephoneNumber = screen.dgClient.CurrentRow.Cells[4].Value.ToString();
+            obj.PhoneNumber = screen.dgClient.CurrentRow.Cells[5].Value.ToString();
+            obj.CEP = screen.dgClient.CurrentRow.Cells[6].Value.ToString();
+            obj.State = screen.dgClient.CurrentRow.Cells[7].Value.ToString();
+            obj.City = screen.dgClient.CurrentRow.Cells[8].Value.ToString();
+            obj.Neighborhood = screen.dgClient.CurrentRow.Cells[9].Value.ToString();
+            obj.Street = screen.dgClient.CurrentRow.Cells[10].Value.ToString();
+            obj.HomeNumber = int.Parse(screen.dgClient.CurrentRow.Cells[11].Value.ToString());
+            obj.Complement = screen.dgClient.CurrentRow.Cells[12].Value.ToString();
+
+            tela.txtCod.Text = obj.Cod.ToString();
+            tela.txtName.Text = obj.Name.ToString();
+            tela.mtbCPF.Text = obj.CPF.ToString();
+            tela.txtEmail.Text = obj.Email.ToString();
+            tela.mtbTelephoneNumber.Text = obj.TelephoneNumber.ToString();
+            tela.mtbPhoneNumber.Text = obj.PhoneNumber.ToString();
+            tela.cbUF.Text = obj.State.ToString();
+            tela.txtCity.Text = obj.City.ToString();
+            tela.txtNeighborhood.Text = obj.Neighborhood.ToString();
+            tela.txtStreet.Text = obj.Street.ToString();
+            tela.txtHomeNumber.Text = obj.HomeNumber.ToString();
+            tela.mtbCEP.Text = obj.CEP.ToString();
+            tela.txtComplement.Text = obj.Complement.ToString();
+
+            tela.ShowDialog();
+
+            screen.Close();
         }
         #endregion
 
@@ -94,9 +156,9 @@ namespace Holerite.br.pro.VIEW
             tela.txtHomeNumber.Text = screen.dgEmployee.CurrentRow.Cells[16].Value.ToString();
             tela.txtComplement.Text = screen.dgEmployee.CurrentRow.Cells[17].Value.ToString();
             tela.txtFunction.Text = screen.dgEmployee.CurrentRow.Cells[18].Value.ToString();
+            screen.Close();
             tela.ShowDialog();
             tela.Close();
-            screen.Close();
         }
         #endregion
 
@@ -131,9 +193,32 @@ namespace Holerite.br.pro.VIEW
         #region ConsultService
         private void consultarToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            frmConsultService tela = new frmConsultService();
-            Verification.ValidadePermission(permissions, "Serviço", tela);
-            tela.Close();
+            frmConsultService screen = new frmConsultService();
+            Verification.ValidadePermission(permissions, "Serviço", screen);
+
+            Severce obj = new Severce();
+            EmployeeDAO dao = new EmployeeDAO();
+            frmInsertService tela = new frmInsertService();
+
+            obj.Cod = int.Parse(screen.dgSeverce.CurrentRow.Cells[0].Value.ToString());
+            obj.ShortDescription = screen.dgSeverce.CurrentRow.Cells[2].Value.ToString();
+            obj.FullDescription = screen.dgSeverce.CurrentRow.Cells[3].Value.ToString();
+            obj.UM = screen.dgSeverce.CurrentRow.Cells[4].Value.ToString();
+            obj.SpotPrice = float.Parse(screen.dgSeverce.CurrentRow.Cells[5].Value.ToString());
+            obj.TermPrice = float.Parse(screen.dgSeverce.CurrentRow.Cells[6].Value.ToString());
+            obj.Observation = screen.dgSeverce.CurrentRow.Cells[7].Value.ToString();
+
+            tela.txtCod.Text = obj.Cod.ToString();
+            tela.cbEmployee.Text = screen.dgSeverce.CurrentRow.Cells[1].Value.ToString();
+            tela.txtFullDescription.Text = obj.FullDescription.ToString();
+            tela.txtShortDescription.Text = obj.ShortDescription.ToString();
+            tela.cbUM.Text = obj.UM.ToString();
+            tela.txtSpotPrice.Text = obj.SpotPrice.ToString();
+            tela.txtTerm.Text = obj.TermPrice.ToString();
+
+            tela.ShowDialog();
+
+            screen.Close();
         }
         #endregion
 

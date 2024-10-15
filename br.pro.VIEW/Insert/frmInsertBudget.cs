@@ -31,26 +31,6 @@ namespace Holerite.br.pro.VIEW.Insert
         #region Load
         private void frmInsertBudget_Load(object sender, EventArgs e)
         {
-            EmployeeDAO daoE = new EmployeeDAO();
-            ClientDAO dao = new ClientDAO();
-
-            if (txtCodBudget.Text == String.Empty)
-            {
-                cbEmployee.DataSource = daoE.Consult();
-                cbClient.DataSource = dao.Consult();
-            }
-            
-            cbEmployee.DisplayMember = "Nome";
-            cbEmployee.ValueMember = "Código";
-
-            cbClient.DisplayMember = "Nome";
-            cbClient.ValueMember = "Código";
-
-            ServiceDAO daoS = new ServiceDAO();
-            cbService.DataSource = daoS.Consult();
-            cbService.DisplayMember = "Descrição resumida";
-            cbService.ValueMember = "Código";
-
             mtbDate.Text = DateTime.Now.ToShortDateString();
         }
         #endregion
@@ -71,7 +51,7 @@ namespace Holerite.br.pro.VIEW.Insert
             {
                 Severce ser = new Severce();
                 ser.Cod = int.Parse(txtCodService.Text);
-                ser.ShortDescription = cbService.Text;
+                ser.ShortDescription = txtService.Text;
                 ser.SpotPrice = float.Parse(txtSpot.Text);
                 int amount = int.Parse(txtAmount.Text);
                 float subtotal = Verification.ToCheck(float.Parse(txtSpot.Text), txtUM.Text, int.Parse(txtAmount.Text));
@@ -99,7 +79,7 @@ namespace Holerite.br.pro.VIEW.Insert
                     dt = (DataTable)dgBudget.DataSource;
                     DataRow novaLinha = dt.NewRow();
                     novaLinha["Código"] = ser.Cod;
-                    novaLinha["Descrição Resumida"] = cbService.Text;
+                    novaLinha["Descrição Resumida"] = txtService.Text;
                     novaLinha["Preço"] = ser.SpotPrice;
                     novaLinha["Quantidade"] = txtAmount.Text;
                     novaLinha["SubTotal"] = subtotal;
@@ -114,7 +94,7 @@ namespace Holerite.br.pro.VIEW.Insert
             {
                 Severce ser = new Severce();
                 ser.Cod = int.Parse(txtCodService.Text);
-                ser.ShortDescription = cbService.Text;
+                ser.ShortDescription = txtService.Text;
                 ser.TermPrice = float.Parse(txtTerm.Text);
                 int amount = int.Parse(txtAmount.Text);
                 float subtotal = Verification.ToCheck(ser.TermPrice, txtUM.Text, int.Parse(txtAmount.Text));
@@ -141,7 +121,7 @@ namespace Holerite.br.pro.VIEW.Insert
                     dt = (DataTable)dgBudget.DataSource;
                     DataRow novaLinha = dt.NewRow();
                     novaLinha["Código"] = ser.Cod;
-                    novaLinha["Descrição Resumida"] = cbService.Text;
+                    novaLinha["Descrição Resumida"] = txtService.Text;
                     novaLinha["Preço"] = ser.TermPrice;
                     novaLinha["Quantidade"] = txtAmount.Text;
                     novaLinha["SubTotal"] = subtotal;
@@ -179,10 +159,14 @@ namespace Holerite.br.pro.VIEW.Insert
         private void btnInsert_Click(object sender, EventArgs e)
         {
             string payment = rbSpot.Checked ? "Vista" : "Prazo";
+
+            Employee emp = new EmployeeDAO().GetSearch(txtEmployee.Text);
+            DataTable client = new ClientDAO().Search(txtClient.Text);
+
             Budget bud = new Budget()
             {
-                CodEmp = int.Parse(cbEmployee.SelectedValue.ToString()),
-                CodClient = int.Parse(cbClient.SelectedValue.ToString()),
+                CodEmp = int.Parse(emp.Cod.ToString()),
+                CodClient = int.Parse(client.Columns["Código"].ToString()),
                 Payment = payment,
                 Subtotal = float.Parse(txtSubtotal.Text),
                 Total = float.Parse(txtTotal.Text),
@@ -204,40 +188,6 @@ namespace Holerite.br.pro.VIEW.Insert
                 this.Hide();
                 frmConsultBudget tela = new frmConsultBudget();
                 tela.ShowDialog();
-            }
-        }
-        #endregion
-
-        #region txtCodService_keypress
-        private void txtCodService_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if(e.KeyChar == 13)
-            {
-                ServiceDAO dao = new ServiceDAO();
-                Severce obj = dao.Search(int.Parse(txtCodService.Text));
-
-                txtCodService.Text = obj.Cod.ToString();
-                cbService.Text = obj.ShortDescription;
-                txtUM.Text = obj.UM;
-                txtSpot.Text = obj.SpotPrice.ToString();
-                txtTerm.Text = obj.TermPrice.ToString();
-            }
-        }
-        #endregion
-
-        #region cbService_keypress
-        private void cbService_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 13)
-            {
-                ServiceDAO dao = new ServiceDAO();
-                Severce obj = dao.GetSeverce(cbService.Text);
-
-                txtCodService.Text = obj.Cod.ToString();
-                cbService.Text = obj.ShortDescription;
-                txtSpot.Text = obj.SpotPrice.ToString();
-                txtTerm.Text = obj.TermPrice.ToString();
-                txtUM.Text = obj.UM;
             }
         }
         #endregion
@@ -402,10 +352,13 @@ namespace Holerite.br.pro.VIEW.Insert
                 res = "Prazo";
             }
 
+            Employee emp = new EmployeeDAO().GetSearch(txtEmployee.Text);
+            DataTable client = new ClientDAO().Search(txtClient.Text);
+
             Budget obj = new Budget()
             {
-                CodEmp = int.Parse(cbEmployee.SelectedValue.ToString()),
-                CodClient = int.Parse(cbClient.SelectedValue.ToString()),
+                CodEmp = int.Parse(emp.Cod.ToString()),
+                CodClient = int.Parse(client.Columns["Código"].ToString()),
                 Payment = res,
                 Subtotal = float.Parse(txtSubtotal.Text),
                 Total = float.Parse(txtTotal.Text),
@@ -415,7 +368,7 @@ namespace Holerite.br.pro.VIEW.Insert
 
             new BudgetDAO().Insert(obj);
             
-            PrintOut.PrintOutBudget(dgBudget,cbClient.Text,DateTime.Parse(mtbDate.Text), txtObs.Text);
+            PrintOut.PrintOutBudget(dgBudget,txtClient.Text,DateTime.Parse(mtbDate.Text), txtObs.Text);
 
             PrintOut.ToRecord(dgBudget, obj);
 
@@ -438,6 +391,46 @@ namespace Holerite.br.pro.VIEW.Insert
         private void btnClean_Click(object sender, EventArgs e)
         {
             Verification.Clean(this);
+        }
+        #endregion
+
+        #region btnConsultEmployee_click
+        private void btnConsultEmployee_Click(object sender, EventArgs e)
+        {
+            frmConsultEmployee screen = new frmConsultEmployee();
+            screen.ShowDialog();
+
+            string nameEmployee = screen.dgEmployee.CurrentRow.Cells[2].Value.ToString();
+
+            txtEmployee.Text = nameEmployee;
+        }
+        #endregion
+
+        #region btnConsultClient_Click
+        private void btnConsultClient_Click(object sender, EventArgs e)
+        {
+            frmConsultarClient screen = new frmConsultarClient();
+            screen.ShowDialog();
+
+            string nameClient = screen.dgClient.CurrentRow.Cells[1].Value.ToString();
+            txtClient.Text = nameClient;
+            screen.Close();
+        }
+        #endregion
+
+        #region btnConsultService_Click
+        private void btnConsultService_Click(object sender, EventArgs e)
+        {
+            frmConsultService screen = new frmConsultService();
+            screen.ShowDialog();
+            DataGridView dt = screen.dgSeverce;
+            txtCodService.Text = dt.CurrentRow.Cells[0].Value.ToString();
+            txtService.Text = dt.CurrentRow.Cells[2].Value.ToString();
+            txtUM.Text = dt.CurrentRow.Cells[4].Value.ToString();
+            txtSpot.Text = dt.CurrentRow.Cells[5].Value.ToString();
+            txtTerm.Text = dt.CurrentRow.Cells[6].Value.ToString();
+            txtAmount.Focus();
+            screen.Close();
         }
         #endregion
     }

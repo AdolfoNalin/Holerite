@@ -61,33 +61,7 @@ namespace Holerite.br.pro.VIEW.Consult
         #region dgBudget_CellClick
         private void dgBudget_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataTable dt = new DataTable();
-            ItemBudgetDAO dao = new ItemBudgetDAO();
-
-            dt = dao.Consult(int.Parse(dgBudget.CurrentRow.Cells[0].Value.ToString()));
-
-            frmInsertBudget tela = new frmInsertBudget();
-            tela.txtCodBudget.Text = dgBudget.CurrentRow.Cells[0].Value.ToString();
-            tela.mtbDate.Text = dgBudget.CurrentRow.Cells[1].Value.ToString();
-            string payment = dgBudget.CurrentRow.Cells[2].Value.ToString();
-            tela.dgBudget.DataSource = dt;
-            tela.cbEmployee.Text = dgBudget.CurrentRow.Cells[3].Value.ToString();
-            tela.cbClient.Text = dgBudget.CurrentRow.Cells[4].Value.ToString();
-            tela.txtSubtotal.Text = dgBudget.CurrentRow.Cells[5].Value.ToString();
-            tela.txtTotal.Text = dgBudget.CurrentRow.Cells[5].Value.ToString();
-            tela.txtObs.Text = dgBudget.CurrentRow.Cells[6].Value.ToString();
-
-            if (payment == "Vista")
-            {
-                tela.rbSpot.Checked = true;
-            }
-            else
-            {
-                tela.rbTerm.Checked = true;
-            }
-
             this.Hide();
-            tela.ShowDialog();
         }
         #endregion
     }

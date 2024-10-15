@@ -44,7 +44,6 @@
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.lblSubtotal = new System.Windows.Forms.Label();
             this.txtSubtotal = new System.Windows.Forms.TextBox();
-            this.cbEmployee = new System.Windows.Forms.ComboBox();
             this.btnInsert = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnPrintOut = new System.Windows.Forms.Button();
@@ -58,12 +57,16 @@
             this.lblData = new System.Windows.Forms.Label();
             this.lbl = new System.Windows.Forms.Label();
             this.txtCodBudget = new System.Windows.Forms.TextBox();
-            this.cbService = new System.Windows.Forms.ComboBox();
-            this.cbClient = new System.Windows.Forms.ComboBox();
             this.lblOBS = new System.Windows.Forms.Label();
             this.txtObs = new System.Windows.Forms.TextBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnClean = new System.Windows.Forms.Button();
+            this.btnConsultEmployee = new System.Windows.Forms.Button();
+            this.btnConsultClient = new System.Windows.Forms.Button();
+            this.txtEmployee = new System.Windows.Forms.TextBox();
+            this.txtClient = new System.Windows.Forms.TextBox();
+            this.txtService = new System.Windows.Forms.TextBox();
+            this.btnConsultService = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudget)).BeginInit();
             this.SuspendLayout();
             // 
@@ -214,14 +217,6 @@
             this.txtSubtotal.Size = new System.Drawing.Size(71, 20);
             this.txtSubtotal.TabIndex = 17;
             // 
-            // cbEmployee
-            // 
-            this.cbEmployee.FormattingEnabled = true;
-            this.cbEmployee.Location = new System.Drawing.Point(100, 59);
-            this.cbEmployee.Name = "cbEmployee";
-            this.cbEmployee.Size = new System.Drawing.Size(261, 21);
-            this.cbEmployee.TabIndex = 2;
-            // 
             // btnInsert
             // 
             this.btnInsert.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -263,14 +258,13 @@
             this.lblCod.Size = new System.Drawing.Size(29, 13);
             this.lblCod.TabIndex = 28;
             this.lblCod.Text = "Cod:";
-            // 
+            //
             // txtCodService
             // 
             this.txtCodService.Location = new System.Drawing.Point(362, 162);
             this.txtCodService.Name = "txtCodService";
             this.txtCodService.Size = new System.Drawing.Size(32, 20);
             this.txtCodService.TabIndex = 27;
-            this.txtCodService.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodService_KeyPress);
             // 
             // lblUM
             // 
@@ -340,23 +334,6 @@
             this.txtCodBudget.Size = new System.Drawing.Size(58, 20);
             this.txtCodBudget.TabIndex = 35;
             // 
-            // cbService
-            // 
-            this.cbService.FormattingEnabled = true;
-            this.cbService.Location = new System.Drawing.Point(100, 161);
-            this.cbService.Name = "cbService";
-            this.cbService.Size = new System.Drawing.Size(202, 21);
-            this.cbService.TabIndex = 37;
-            this.cbService.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbService_KeyPress);
-            // 
-            // cbClient
-            // 
-            this.cbClient.FormattingEnabled = true;
-            this.cbClient.Location = new System.Drawing.Point(100, 96);
-            this.cbClient.Name = "cbClient";
-            this.cbClient.Size = new System.Drawing.Size(261, 21);
-            this.cbClient.TabIndex = 38;
-            // 
             // lblOBS
             // 
             this.lblOBS.AutoSize = true;
@@ -396,17 +373,71 @@
             this.btnClean.UseVisualStyleBackColor = true;
             this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
             // 
+            // btnConsultEmployee
+            // 
+            this.btnConsultEmployee.AccessibleRole = System.Windows.Forms.AccessibleRole.Alert;
+            this.btnConsultEmployee.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConsultEmployee.Location = new System.Drawing.Point(367, 57);
+            this.btnConsultEmployee.Name = "btnConsultEmployee";
+            this.btnConsultEmployee.Size = new System.Drawing.Size(43, 23);
+            this.btnConsultEmployee.TabIndex = 43;
+            this.btnConsultEmployee.UseVisualStyleBackColor = true;
+            this.btnConsultEmployee.Click += new System.EventHandler(this.btnConsultEmployee_Click);
+            // 
+            // btnConsultClient
+            // 
+            this.btnConsultClient.Location = new System.Drawing.Point(367, 94);
+            this.btnConsultClient.Name = "btnConsultClient";
+            this.btnConsultClient.Size = new System.Drawing.Size(43, 23);
+            this.btnConsultClient.TabIndex = 44;
+            this.btnConsultClient.UseVisualStyleBackColor = true;
+            this.btnConsultClient.Click += new System.EventHandler(this.btnConsultClient_Click);
+            // 
+            // txtEmployee
+            // 
+            this.txtEmployee.Location = new System.Drawing.Point(100, 59);
+            this.txtEmployee.Name = "txtEmployee";
+            this.txtEmployee.Size = new System.Drawing.Size(261, 20);
+            this.txtEmployee.TabIndex = 45;
+            // 
+            // txtClient
+            // 
+            this.txtClient.Location = new System.Drawing.Point(100, 95);
+            this.txtClient.Name = "txtClient";
+            this.txtClient.Size = new System.Drawing.Size(261, 20);
+            this.txtClient.TabIndex = 46;
+            // 
+            // txtService
+            // 
+            this.txtService.Location = new System.Drawing.Point(105, 162);
+            this.txtService.Name = "txtService";
+            this.txtService.Size = new System.Drawing.Size(210, 20);
+            this.txtService.TabIndex = 47;
+            // 
+            // btnConsultService
+            // 
+            this.btnConsultService.Location = new System.Drawing.Point(400, 160);
+            this.btnConsultService.Name = "btnConsultService";
+            this.btnConsultService.Size = new System.Drawing.Size(43, 23);
+            this.btnConsultService.TabIndex = 48;
+            this.btnConsultService.UseVisualStyleBackColor = true;
+            this.btnConsultService.Click += new System.EventHandler(this.btnConsultService_Click);
+            // 
             // frmInsertBudget
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1085, 580);
+            this.Controls.Add(this.btnConsultService);
+            this.Controls.Add(this.txtService);
+            this.Controls.Add(this.txtClient);
+            this.Controls.Add(this.txtEmployee);
+            this.Controls.Add(this.btnConsultClient);
+            this.Controls.Add(this.btnConsultEmployee);
             this.Controls.Add(this.btnClean);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.lblOBS);
             this.Controls.Add(this.txtObs);
-            this.Controls.Add(this.cbClient);
-            this.Controls.Add(this.cbService);
             this.Controls.Add(this.lbl);
             this.Controls.Add(this.txtCodBudget);
             this.Controls.Add(this.lblData);
@@ -434,7 +465,6 @@
             this.Controls.Add(this.rbSpot);
             this.Controls.Add(this.lblSeverce);
             this.Controls.Add(this.lblCliente);
-            this.Controls.Add(this.cbEmployee);
             this.Controls.Add(this.lblFuncionário);
             this.Controls.Add(this.dgBudget);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -476,14 +506,17 @@
         public System.Windows.Forms.RadioButton rbTerm;
         public System.Windows.Forms.TextBox txtTotal;
         public System.Windows.Forms.TextBox txtSubtotal;
-        public System.Windows.Forms.ComboBox cbEmployee;
         public System.Windows.Forms.MaskedTextBox mtbDate;
         public System.Windows.Forms.TextBox txtCodBudget;
-        public System.Windows.Forms.ComboBox cbService;
-        public System.Windows.Forms.ComboBox cbClient;
         public System.Windows.Forms.TextBox txtObs;
         public System.Windows.Forms.DataGridView dgBudget;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnClean;
+        private System.Windows.Forms.Button btnConsultEmployee;
+        private System.Windows.Forms.Button btnConsultClient;
+        public System.Windows.Forms.TextBox txtEmployee;
+        public System.Windows.Forms.TextBox txtClient;
+        public System.Windows.Forms.TextBox txtService;
+        private System.Windows.Forms.Button btnConsultService;
     }
 }

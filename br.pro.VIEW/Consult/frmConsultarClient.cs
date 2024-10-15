@@ -36,39 +36,7 @@ namespace Holerite.br.pro.VIEW.Consult
         /// <param name="e"></param>
         private void dgClient_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            frmClient tela = new frmClient();
-            MODEL.Client obj = new MODEL.Client();
-
-            obj.Cod = int.Parse(dgClient.CurrentRow.Cells[0].Value.ToString());
-            obj.Name = dgClient.CurrentRow.Cells[1].Value.ToString();
-            obj.CPF = dgClient.CurrentRow.Cells[2].Value.ToString();
-            obj.Email = dgClient.CurrentRow.Cells[3].Value.ToString();
-            obj.TelephoneNumber = dgClient.CurrentRow.Cells[4].Value.ToString();
-            obj.PhoneNumber = dgClient.CurrentRow.Cells[5].Value.ToString();
-            obj.CEP = dgClient.CurrentRow.Cells[6].Value.ToString();
-            obj.State = dgClient.CurrentRow.Cells[7].Value.ToString();
-            obj.City = dgClient.CurrentRow.Cells[8].Value.ToString();
-            obj.Neighborhood = dgClient.CurrentRow.Cells[9].Value.ToString();
-            obj.Street = dgClient.CurrentRow.Cells[10].Value.ToString();
-            obj.HomeNumber = int.Parse(dgClient.CurrentRow.Cells[11].Value.ToString());
-            obj.Complement = dgClient.CurrentRow.Cells[12].Value.ToString();
-
-            tela.txtCod.Text = obj.Cod.ToString();
-            tela.txtName.Text = obj.Name.ToString();
-            tela.mtbCPF.Text = obj.CPF.ToString();
-            tela.txtEmail.Text = obj.Email.ToString();
-            tela.mtbTelephoneNumber.Text = obj.TelephoneNumber.ToString();
-            tela.mtbPhoneNumber.Text = obj.PhoneNumber.ToString();
-            tela.cbUF.Text = obj.State.ToString();
-            tela.txtCity.Text = obj.City.ToString();
-            tela.txtNeighborhood.Text = obj.Neighborhood.ToString();
-            tela.txtStreet.Text = obj.Street.ToString();
-            tela.txtHomeNumber.Text = obj.HomeNumber.ToString();
-            tela.mtbCEP.Text = obj.CEP.ToString();
-            tela.txtComplement.Text = obj.Complement.ToString();
-
             this.Hide();
-            tela.ShowDialog();
         }
         #endregion
 

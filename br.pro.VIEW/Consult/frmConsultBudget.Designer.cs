@@ -173,7 +173,6 @@
 
         private System.Windows.Forms.Label lblCod;
         private System.Windows.Forms.TextBox txtCod;
-        private System.Windows.Forms.DataGridView dgBudget;
         private System.Windows.Forms.TextBox txtNameClient;
         private System.Windows.Forms.Label lblNameClient;
         private System.Windows.Forms.Label label1;
@@ -182,5 +181,6 @@
         private System.Windows.Forms.DateTimePicker dtpEnd;
         private System.Windows.Forms.Button btnSeach;
         private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.DataGridView dgBudget;
     }
 }
