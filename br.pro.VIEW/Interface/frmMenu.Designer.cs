@@ -373,6 +373,7 @@
             this.Controls.Add(this.btnConsultBudget);
             this.Controls.Add(this.btnBudget);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMenu";
             this.Text = "Menu";

@@ -1,4 +1,6 @@
-﻿using Holerite.br.pro.VIEW.Consult;
+﻿using Holerite.br.pro.DAO;
+using Holerite.br.pro.MODEL;
+using Holerite.br.pro.VIEW.Consult;
 using Holerite.br.pro.VIEW.Insert;
 using Holerite.br.pro.VIEW.Interface;
 using Holerite.Helpers;
@@ -66,9 +68,35 @@ namespace Holerite.br.pro.VIEW
         #region ConsultEmployee
         private void consultarToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            frmConsultEmployee tela = new frmConsultEmployee();
-            Verification.ValidadePermission(permissions, "Funcionário", tela);
+            frmConsultEmployee screen = new frmConsultEmployee();
+            Verification.ValidadePermission(permissions, "Funcionário", screen);
+
+            string fantasyName = screen.dgEmployee.CurrentRow.Cells[1].Value.ToString();
+            Company com = new CompanyDAO().SearchName(fantasyName);
+
+            frmEmployee tela = new frmEmployee(com.Cod);
+
+            tela.txtCod.Text = screen.dgEmployee.CurrentRow.Cells[0].Value.ToString();
+            tela.txtName.Text = screen.dgEmployee.CurrentRow.Cells[2].Value.ToString();
+            tela.txtUserName.Text = screen.dgEmployee.CurrentRow.Cells[3].Value.ToString();
+            tela.txtPassword.Text = screen.dgEmployee.CurrentRow.Cells[4].Value.ToString();
+            tela.txtPermissions.Text = screen.dgEmployee.CurrentRow.Cells[5].Value.ToString();
+            tela.txtDaily.Text = screen.dgEmployee.CurrentRow.Cells[6].Value.ToString();
+            tela.mtbCPF.Text = screen.dgEmployee.CurrentRow.Cells[7].Value.ToString();
+            tela.txtEmail.Text = screen.dgEmployee.CurrentRow.Cells[8].Value.ToString();
+            tela.mtbPhoneNumber.Text = screen.dgEmployee.CurrentRow.Cells[9].Value.ToString();
+            tela.mtbTelephoneNumber.Text = screen.dgEmployee.CurrentRow.Cells[10].Value.ToString();
+            tela.mtbCEP.Text = screen.dgEmployee.CurrentRow.Cells[11].Value.ToString();
+            tela.cbUF.Text = screen.dgEmployee.CurrentRow.Cells[12].Value.ToString();
+            tela.txtCity.Text = screen.dgEmployee.CurrentRow.Cells[13].Value.ToString();
+            tela.txtNeighborhood.Text = screen.dgEmployee.CurrentRow.Cells[14].Value.ToString();
+            tela.txtStreet.Text = screen.dgEmployee.CurrentRow.Cells[15].Value.ToString();
+            tela.txtHomeNumber.Text = screen.dgEmployee.CurrentRow.Cells[16].Value.ToString();
+            tela.txtComplement.Text = screen.dgEmployee.CurrentRow.Cells[17].Value.ToString();
+            tela.txtFunction.Text = screen.dgEmployee.CurrentRow.Cells[18].Value.ToString();
+            tela.ShowDialog();
             tela.Close();
+            screen.Close();
         }
         #endregion
 
@@ -121,9 +149,25 @@ namespace Holerite.br.pro.VIEW
         #region ConsultProduct
         private void consultaToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            frmConsultProduct tela = new frmConsultProduct();
-            Verification.ValidadePermission(permissions, "Produto", tela);
-            tela.Close();
+            frmConsultProduct screen = new frmConsultProduct();
+            Verification.ValidadePermission(permissions, "Produto", screen);
+
+            frmInsertProduct tela = new frmInsertProduct();
+            Product obj = new Product();
+
+            tela.txtCod.Text = screen.dgProduct.CurrentRow.Cells[0].Value.ToString();
+            tela.txtShortDescription.Text = screen.dgProduct.CurrentRow.Cells[1].Value.ToString();
+            tela.txtFullDescription.Text = screen.dgProduct.CurrentRow.Cells[2].Value.ToString();
+            tela.cbSupplier.Text = screen.dgProduct.CurrentRow.Cells[3].Value.ToString();
+            tela.cbEmployee.Text = screen.dgProduct.CurrentRow.Cells[4].Value.ToString();
+            tela.txtAmount.Text = screen.dgProduct.CurrentRow.Cells[5].Value.ToString();
+            tela.txtSpotPrice.Text = screen.dgProduct.CurrentRow.Cells[6].Value.ToString();
+            tela.txtTermPrice.Text = screen.dgProduct.CurrentRow.Cells[7].Value.ToString();
+            tela.mtbCA.Text = screen.dgProduct.CurrentRow.Cells[8].Value.ToString();
+            tela.txtOBS.Text = screen.dgProduct.CurrentRow.Cells[9].Value.ToString();
+            screen.Close();
+
+            tela.ShowDialog();
         }
         #endregion
 
