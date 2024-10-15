@@ -20,7 +20,7 @@ namespace Holerite
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmEmployee(1));
+            Application.Run(new frmLogin());
         }
     }
 }

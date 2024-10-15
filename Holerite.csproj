@@ -259,12 +259,6 @@
     <Compile Include="br.pro.VIEW\Consult\frmConsultSupplier.Designer.cs">
       <DependentUpon>frmConsultSupplier.cs</DependentUpon>
     </Compile>
-    <Compile Include="br.pro.VIEW\Insert\frmGenerateEPI.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="br.pro.VIEW\Insert\frmGenerateEPI.Designer.cs">
-      <DependentUpon>frmGenerateEPI.cs</DependentUpon>
-    </Compile>
     <Compile Include="br.pro.VIEW\Insert\frmInsertEPI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -276,6 +270,12 @@
     </Compile>
     <Compile Include="br.pro.VIEW\Insert\frmInsertPoint.Designer.cs">
       <DependentUpon>frmInsertPoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Interface\frmGenerateEPI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="br.pro.VIEW\Interface\frmGenerateEPI.Designer.cs">
+      <DependentUpon>frmGenerateEPI.cs</DependentUpon>
     </Compile>
     <Compile Include="br.pro.VIEW\Interface\frmLogin.cs">
       <SubType>Form</SubType>
@@ -380,6 +380,9 @@
     <EmbeddedResource Include="br.pro.VIEW\Consult\frmConsultSupplier.resx">
       <DependentUpon>frmConsultSupplier.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="br.pro.VIEW\Interface\frmGenerateEPI.resx">
+      <DependentUpon>frmGenerateEPI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="br.pro.VIEW\Interface\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -394,9 +397,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="br.pro.VIEW\Insert\frmEmployee.resx">
       <DependentUpon>frmEmployee.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.VIEW\Insert\frmGenerateEPI.resx">
-      <DependentUpon>frmGenerateEPI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="br.pro.VIEW\Insert\frmInsertBudget.resx">
       <DependentUpon>frmInsertBudget.cs</DependentUpon>
@@ -451,6 +451,7 @@
     <Content Include="br.pro.VIEW\Imagens\consult-folder.png" />
     <Content Include="br.pro.VIEW\Imagens\economics.png" />
     <Content Include="br.pro.VIEW\Imagens\employee.png" />
+    <None Include="br.pro.VIEW\Imagens\EPI.png" />
     <Content Include="br.pro.VIEW\Imagens\money-bag.png" />
     <Content Include="br.pro.VIEW\Imagens\Page-Point.png.png" />
     <Content Include="br.pro.VIEW\Imagens\People-supplier.png" />
