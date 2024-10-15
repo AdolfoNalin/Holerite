@@ -168,7 +168,7 @@ namespace Holerite.Helpers
         {
             try
             {
-                _ = permissions.Any(p => p == permission) ? screen.ShowDialog() : MessageBox.Show("Você não pode acessar essa tela", "Erro de Autenticação");
+                _ = permissions.Any(p => p.ToUpper().Contains(permission.ToUpper())) ? screen.ShowDialog() : MessageBox.Show("Você não pode acessar essa tela", "Erro de Autenticação");
             }
             catch (Exception ex)
             {
