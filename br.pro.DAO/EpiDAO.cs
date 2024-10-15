@@ -98,7 +98,7 @@ namespace Holerite.br.pro.DAO
                 string sql = @"SELECT 
                 e.cod AS 'Código',
                 e.date AS 'Data',
-                u.emp_name AS 'Nome do Funcionário',
+                u.name AS 'Nome do Funcionário',
                 e.payment AS 'Forma de pagamento',
                 e.subtotal AS 'Subtotal',
                 e.obs AS 'Observação'
@@ -141,7 +141,7 @@ namespace Holerite.br.pro.DAO
                 string sql = @"SELECT 
                 e.cod AS 'Código',
                 e.date AS 'Data',
-                u.emp_name AS 'Nome do Funcionário',
+                u.name AS 'Nome do Funcionário',
                 e.payment AS 'Forma de pagamento',
                 e.subtotal AS 'Subtotal',
                 e.obs AS 'Observação'
@@ -180,7 +180,7 @@ namespace Holerite.br.pro.DAO
                 string sql = @"SELECT 
                 e.cod AS 'Código',
                 e.date AS 'Data',
-                u.emp_name AS 'Nome do Funcionário',
+                u.name AS 'Nome do Funcionário',
                 e.payment AS 'Forma de pagamento',
                 e.subtotal AS 'Subtotal',
                 e.obs AS 'Observação'
