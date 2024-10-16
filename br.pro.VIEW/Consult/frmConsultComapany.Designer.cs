@@ -97,7 +97,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgCompany;
+        public System.Windows.Forms.DataGridView dgCompany;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnSearch;

@@ -20,43 +20,10 @@ namespace Holerite.br.pro.VIEW.Consult
             InitializeComponent();
         }
 
-        #region
+        #region dgSupplier_DoubleClick
         private void dgSupplier_DoubleClick(object sender, EventArgs e)
         {
-            frmSupplier tela = new frmSupplier();
-            Supplier obj = new Supplier();
-
-            obj.Cod = int.Parse(dgSupplier.CurrentRow.Cells[0].Value.ToString());
-            obj.Name = dgSupplier.CurrentRow.Cells[1].Value.ToString();
-            obj.FantasyName = dgSupplier.CurrentRow.Cells[2].Value.ToString();
-            obj.CPF = dgSupplier.CurrentRow.Cells[3].Value.ToString();
-            obj.Email = dgSupplier.CurrentRow.Cells[4].Value.ToString();
-            obj.TelephoneNumber = dgSupplier.CurrentRow.Cells[5].Value.ToString();
-            obj.PhoneNumber = dgSupplier.CurrentRow.Cells[6].Value.ToString();
-            obj.CEP = dgSupplier.CurrentRow.Cells[7].Value.ToString();
-            obj.State = dgSupplier.CurrentRow.Cells[8].Value.ToString();
-            obj.City = dgSupplier.CurrentRow.Cells[9].Value.ToString();
-            obj.Neighborhood = dgSupplier.CurrentRow.Cells[10].Value.ToString();
-            obj.Street = dgSupplier.CurrentRow.Cells[11].Value.ToString();
-            obj.HomeNumber = int.Parse(dgSupplier.CurrentRow.Cells[12].Value.ToString());
-            obj.Complement = dgSupplier.CurrentRow.Cells[13].Value.ToString();
-
-            tela.txtCod.Text = obj.Cod.ToString();
-            tela.txtName.Text = obj.Name.ToString();
-            tela.mtbCNPJ.Text = obj.CPF.ToString();
-            tela.txtEmail.Text = obj.Email.ToString();
-            tela.mtbTelephoneNumber.Text = obj.TelephoneNumber.ToString();
-            tela.mtbPhoneNumber.Text = obj.PhoneNumber.ToString();
-            tela.cbUF.Text = obj.State.ToString();
-            tela.txtCity.Text = obj.City.ToString();
-            tela.txtNeighborhood.Text = obj.Neighborhood.ToString();
-            tela.txtStreet.Text = obj.Street.ToString();
-            tela.txtHomeNumber.Text = obj.HomeNumber.ToString();
-            tela.mtbCEP.Text = obj.CEP.ToString();
-            tela.txtComplement.Text = obj.Complement.ToString();
-            tela.txtFantasyName.Text = obj.FantasyName.ToString();
-
-            tela.ShowDialog();
+            this.Hide();
         }
         #endregion
 

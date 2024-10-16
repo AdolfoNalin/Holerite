@@ -69,9 +69,9 @@ namespace Holerite.br.pro.VIEW
                 tela.rbTerm.Checked = true;
             }
 
+            tela.Close();
             tela.ShowDialog();
 
-            tela.Close();
         }
         #endregion
 
@@ -112,9 +112,9 @@ namespace Holerite.br.pro.VIEW
             tela.mtbCEP.Text = obj.CEP.ToString();
             tela.txtComplement.Text = obj.Complement.ToString();
 
+            screen.Close();
             tela.ShowDialog();
 
-            screen.Close();
         }
         #endregion
 
@@ -175,9 +175,45 @@ namespace Holerite.br.pro.VIEW
         #region ConsultSupplier
         private void consultaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmConsultSupplier tela = new frmConsultSupplier();
-            Verification.ValidadePermission(permissions, "Fornecedor", tela);
-            tela.Close();
+            frmConsultSupplier screen = new frmConsultSupplier();
+            Verification.ValidadePermission(permissions, "Fornecedor", screen);
+
+            frmSupplier tela = new frmSupplier();
+            Supplier obj = new Supplier();
+
+            obj.Cod = int.Parse(screen.dgSupplier.CurrentRow.Cells[0].Value.ToString());
+            obj.Name = screen.dgSupplier.CurrentRow.Cells[1].Value.ToString();
+            obj.FantasyName = screen.dgSupplier.CurrentRow.Cells[2].Value.ToString();
+            obj.CPF = screen.dgSupplier.CurrentRow.Cells[3].Value.ToString();
+            obj.Email = screen.dgSupplier.CurrentRow.Cells[4].Value.ToString();
+            obj.TelephoneNumber =screen.dgSupplier.CurrentRow.Cells[5].Value.ToString();
+            obj.PhoneNumber = screen.dgSupplier.CurrentRow.Cells[6].Value.ToString();
+            obj.CEP = screen.dgSupplier.CurrentRow.Cells[7].Value.ToString();
+            obj.State = screen.dgSupplier.CurrentRow.Cells[8].Value.ToString();
+            obj.City = screen.dgSupplier.CurrentRow.Cells[9].Value.ToString();
+            obj.Neighborhood = screen.dgSupplier.CurrentRow.Cells[10].Value.ToString();
+            obj.Street = screen.dgSupplier.CurrentRow.Cells[11].Value.ToString();
+            obj.HomeNumber = int.Parse(screen.dgSupplier.CurrentRow.Cells[12].Value.ToString());
+            obj.Complement = screen.dgSupplier.CurrentRow.Cells[13].Value.ToString();
+
+            tela.txtCod.Text = obj.Cod.ToString();
+            tela.txtName.Text = obj.Name.ToString();
+            tela.mtbCNPJ.Text = obj.CPF.ToString();
+            tela.txtEmail.Text = obj.Email.ToString();
+            tela.mtbTelephoneNumber.Text = obj.TelephoneNumber.ToString();
+            tela.mtbPhoneNumber.Text = obj.PhoneNumber.ToString();
+            tela.cbUF.Text = obj.State.ToString();
+            tela.txtCity.Text = obj.City.ToString();
+            tela.txtNeighborhood.Text = obj.Neighborhood.ToString();
+            tela.txtStreet.Text = obj.Street.ToString();
+            tela.txtHomeNumber.Text = obj.HomeNumber.ToString();
+            tela.mtbCEP.Text = obj.CEP.ToString();
+            tela.txtComplement.Text = obj.Complement.ToString();
+            tela.txtFantasyName.Text = obj.FantasyName.ToString();
+
+            screen.Close();
+
+            tela.ShowDialog();
         }
         #endregion
 
@@ -216,9 +252,8 @@ namespace Holerite.br.pro.VIEW
             tela.txtSpotPrice.Text = obj.SpotPrice.ToString();
             tela.txtTerm.Text = obj.TermPrice.ToString();
 
-            tela.ShowDialog();
-
             screen.Close();
+            tela.ShowDialog();
         }
         #endregion
 
@@ -304,7 +339,47 @@ namespace Holerite.br.pro.VIEW
         {
             frmConsultComapany tela = new frmConsultComapany();
             Verification.ValidadePermission(permissions, "Empresa", tela);
+
+            Company obj = new Company()
+            {
+                Cod = int.Parse(tela.dgCompany.CurrentRow.Cells[0].Value.ToString()),
+                Name = tela.dgCompany.CurrentRow.Cells[1].Value.ToString(),
+                FantasyName = tela.dgCompany.CurrentRow.Cells[2].Value.ToString(),
+                CPF = tela.dgCompany.CurrentRow.Cells[3].Value.ToString(),
+                CNPJ = tela.dgCompany.CurrentRow.Cells[4].Value.ToString(),
+                TelephoneNumber = tela.dgCompany.CurrentRow.Cells[5].Value.ToString(),
+                PhoneNumber = tela.dgCompany.CurrentRow.Cells[6].Value.ToString(),
+                Email = tela.dgCompany.CurrentRow.Cells[7].Value.ToString(),
+                CEP = tela.dgCompany.CurrentRow.Cells[8].Value.ToString(),
+                State = tela.dgCompany.CurrentRow.Cells[9].Value.ToString(),
+                City = tela.dgCompany.CurrentRow.Cells[10].Value.ToString(),
+                Neighborhood = tela.dgCompany.CurrentRow.Cells[11].Value.ToString(),
+                Street = tela.dgCompany.CurrentRow.Cells[12].Value.ToString(),
+                HomeNumber = int.Parse(tela.dgCompany.CurrentRow.Cells[13].Value.ToString()),
+                Complement = tela.dgCompany.CurrentRow.Cells[14].Value.ToString(),
+            };
+
+            frmCompany screen = new frmCompany();
+
+            screen.txtCod.Text = obj.Cod.ToString();
+            screen.txtName.Text = obj.Name.ToString();
+            screen.mtbCpf.Text = obj.CPF.ToString();
+            screen.mtbCNPJ.Text = obj.CNPJ.ToString();
+            screen.txtEmail.Text = obj.Email.ToString();
+            screen.cbUF.Text = obj.State.ToString();
+            screen.txtCity.Text = obj.City.ToString();
+            screen.txtNeighborhood.Text = obj.Neighborhood.ToString();
+            screen.txtStreet.Text = obj.Street.ToString();
+            screen.txtHomeNumber.Text = obj.HomeNumber.ToString();
+            screen.txtFantasyName.Text = obj.FantasyName.ToString();
+            screen.mtbCEP.Text = obj.CEP.ToString();
+            screen.txtComplement.Text = obj.Complement.ToString();
+            screen.mtbTelephoneNumber.Text = obj.TelephoneNumber.ToString();
+            screen.mtbPhoneNumber.Text = obj.PhoneNumber.ToString();
+
             tela.Close();
+
+            screen.ShowDialog();
         }
         #endregion
 
